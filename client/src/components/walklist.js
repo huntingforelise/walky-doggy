@@ -4,7 +4,7 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Event from "../../components/Event";
 
-const WalkList = ({ walks }) => {
+const WalkList = ({ future, past }) => {
   // const [events, setEvents] = useState(() => []);
 
   // useEffect(() => {
@@ -38,16 +38,30 @@ const WalkList = ({ walks }) => {
       </Head>
       <h1 className={styles.title}>View Walk History</h1>
       <div id="list">
-        {walks.map((walk) => {
-          return (
-            <Event
-              key={walk._id}
-              walk={walk}
-              onDelete={deleteEvent}
-              formPath="/formuser"
-            />
-          );
-        })}
+        {future &&
+          future.map((walk) => {
+            return (
+              <Event
+                key={walk._id}
+                walk={walk}
+                onDelete={deleteEvent}
+                formPath="/formuser"
+              />
+            );
+          })}
+      </div>
+      <div id="list">
+        {past &&
+          past.map((walk) => {
+            return (
+              <Event
+                key={walk._id}
+                walk={walk}
+                onDelete={deleteEvent}
+                formPath="/formuser"
+              />
+            );
+          })}
       </div>
     </>
   );

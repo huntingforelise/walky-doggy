@@ -14,7 +14,6 @@ export default function App({ Component, pageProps }) {
     WalkService.getWalks().then((walks) => {
       setPastWalks(walks.past);
       setFutureWalks(walks.future);
-      //will also need to render past walks
     });
   }, []);
 
@@ -23,7 +22,7 @@ export default function App({ Component, pageProps }) {
       {/* wrap with provider */}
       <Component {...pageProps} />
       {/* wrap with provider */}
-      <WalkList walks={futureWalks} />
+      <WalkList future={futureWalks} past={pastWalks} />
     </Layout>
   );
 }
