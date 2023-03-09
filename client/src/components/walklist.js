@@ -1,27 +1,8 @@
 import Head from "next/head";
-// import { useState, useEffect } from "react";
-// import Events from "../../../components/Events";
 import styles from "@/styles/Home.module.css";
 import Event from "../../components/Event";
 
 const WalkList = ({ future, past }) => {
-  // const [events, setEvents] = useState(() => []);
-
-  // useEffect(() => {
-  //   const getEvents = async () => {
-  //     const eventsServer = await fetchEvents();
-  //     setEvents(eventsServer);
-  //   };
-  //   getEvents();
-  // }, []);
-
-  // const fetchEvents = async () => {
-  //   const res = await fetch("http://localhost:3001/events/past");
-  //   const data = await res.json();
-
-  //   return data;
-  // };
-
   const deleteEvent = async (_id) => {
     await fetch(`http://localhost:3001/events/${_id}`, {
       method: "DELETE",

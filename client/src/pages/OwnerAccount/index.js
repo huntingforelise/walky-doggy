@@ -15,7 +15,7 @@ const myaccount = () => {
             <Link href="/myaccount/bookawalk">
               <button className={styles.button}>Book a walk</button>
             </Link>
-            <Link href="/myaccount/walklist">
+            <Link href="/myaccount/viewwalks">
               <button className={styles.button}>View My Walk History</button>
             </Link>
           </div>
