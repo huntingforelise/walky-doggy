@@ -8,11 +8,9 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import { env } from "eslint-config-next";
+import originalService from "./../../services/OriginalService";
 
 //mapboxgl.accessToken = process.env.local.MAPBOX_KEY;
-
-
-
 
 const formuser = () => {
   const router = useRouter();
@@ -20,40 +18,24 @@ const formuser = () => {
   const [records, setRecords] = useState([]);
   const [images, setImages] = useState(() => []);
 
-  
-
   /*getting record*/
   useEffect(() => {
     const getRecords = async () => {
-      const eventRecords = await fetchEventRecords();
+      const eventRecords = await originalService.fetchEventRecords(_id);
       setRecords(eventRecords);
     };
     getRecords();
   }, []);
 
-  const fetchEventRecords = async () => {
-    const res = await fetch(`http://localhost:3001/records/${_id}`);
-    const data = await res.json();
-
-    return data;
-  };
-
   /* getting image*/
-
   useEffect(() => {
     const getImages = async () => {
-      const eventImages = await fetchEventImages();
+      const eventImages = await originalService.fetchEventImages(_id);
       setImages(eventImages);
     };
     getImages();
   }, []);
   
-  const fetchEventImages = async () => {
-    const res = await fetch(`http://localhost:3001/images/${_id}`);
-    const data = await res.json();
-
-    return data;
-  };
 
     /**display gps walkpath */
   // const coordinates = [
