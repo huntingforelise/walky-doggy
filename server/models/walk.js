@@ -21,8 +21,8 @@ const walkSchema = new Schema({
     required: true,
   },
   walkerID: String,
-  imageURL: String,
-  coordinates: [Number],
+  imageURL: Array,
+  coordinates: Array,
   didPee: Boolean,
   didPoo: Boolean,
 });
