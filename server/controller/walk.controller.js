@@ -6,8 +6,15 @@ exports.getWalks = async (req, res) => {
     //this is a function for both owners and walkers
     //we might want to include the ownerID or walkerID here, so we can filter the walks before sending them back
     // const ID = req.params.id;
-    const allWalks = await walk.sort({ date: 1 });
-    res.status(200).send(allWalks);
+    const pastWalks = await walk
+      .find({ date: { $lte: new Date().toISOString() } })
+      .sort({ date: 1 });
+    const futureWalks = await walk
+      .find({ date: { $gte: new Date().toISOString() } })
+      .sort({ date: 1 });
+    console.log(pastWalks);
+    console.log(futureWalks);
+    res.status(200).send({ past: pastWalks, future: futureWalks });
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
