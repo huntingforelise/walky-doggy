@@ -13,6 +13,7 @@ app.use(
     name: 'sid',
     saveUninitialized: false,
     resave: false,
+    secret: "not secure!",
     cookie: {
       maxAge: 1000 * 60 * 60, // 1hr
       sameSite: true,
@@ -26,8 +27,8 @@ app.use(router);
 
 app.listen(PORT, (err) => {
   if (err) {
-    console.log(`😞 Sorry, something went wrong! ${err}`); // eslint-disable-line no-console
+    console.log(`😞 Sorry, something went wrong! ${err}`);
   } else {
-    console.log(`🚀 Server is listening on port ${PORT}!`); // eslint-disable-line no-console
+    console.log(`🚀 Server is listening on port ${PORT}!`);
   }
 });
