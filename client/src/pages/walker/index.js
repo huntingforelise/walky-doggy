@@ -3,27 +3,21 @@ import Link from "next/link";
 import Events from "../../../components/Events";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
+import * as WalkService from "../../services/WalkService";
 // import React, { useState, createContext, useContext,useEffect } from "react";
 // const EventContext = createContext(null);
 
 const walker = () => {
-  //const { events, setEvents,useEffect,fetchEvents,deleteEvent } = useContext(EventContext);
-  const [events, setEvents] = useState(() => []);
+  const [pastWalks, setPastWalks] = useState([]);
+  const [futureWalks, setFutureWalks] = useState([]);
 
   useEffect(() => {
-    const getEvents = async () => {
-      const eventsServer = await fetchEvents();
-      setEvents(eventsServer);
-    };
-    getEvents();
+    WalkService.getWalks().then((walks) => {
+      console.log(walks);
+      setPastWalks(walks.past);
+      setFutureWalks(walks.future);
+    });
   }, []);
-
-  const fetchEvents = async () => {
-    const res = await fetch("http://localhost:3001/events");
-    const data = await res.json();
-
-    return data;
-  };
 
   const deleteEvent = async (_id) => {
     await fetch(`http://localhost:3001/events/${_id}`, {
@@ -40,7 +34,7 @@ const walker = () => {
         <title>Walky Doggy | Walker</title>
       </Head>
       <h1 className={styles.title}>Walks Schedule</h1>
-      <Events events={events} onDelete={deleteEvent} formPath="/form/" />
+      <Events events={futureWalks} onDelete={deleteEvent} formPath="/form/" />
     </>
   );
 };

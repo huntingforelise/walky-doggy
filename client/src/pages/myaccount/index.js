@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
 
-const myaccount = () => {
+const OwnerAccount = () => {
   return (
     <>
       <Head>
@@ -25,4 +25,4 @@ const myaccount = () => {
   );
 };
 
-export default myaccount;
+export default OwnerAccount;

@@ -13,6 +13,7 @@ router.post("/login", userController.login);
 router.get("/user/info", authMiddleware, userController.profile);
 router.post("/logout", authMiddleware, userController.logout);
 router.get("/walks", walkController.getWalks);
+router.post("/walk", walkController.postWalk);
 
 // will need to add authMiddleware to these
 router.get("/records/:eventId", recordController.getEventRecords);

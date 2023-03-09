@@ -29,7 +29,7 @@ const AddEvent = ({ onAdd }) => {
           placeholder="your dog's name"
           required
           value={dogName}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => setDogName(e.target.value)}
         />
       </div>
       <div className="form-control">
@@ -52,7 +52,7 @@ const AddEvent = ({ onAdd }) => {
           placeholder="pick up address"
           required
           value={pickUpLocation}
-          onChange={(e) => setVenue(e.target.value)}
+          onChange={(e) => setPickUpLocation(e.target.value)}
         />
       </div>
       <input type="submit" value="BOOK" className="btn-block" />

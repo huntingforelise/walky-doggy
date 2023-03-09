@@ -34,7 +34,15 @@ const viewwalks = () => {
         <title>Walky Doggy | view walks</title>
       </Head>
       <h1 className={styles.title}>View Walk History</h1>
-      <Events walks={pastWalks} onDelete={deleteEvent} formPath="/formuser/" />
+      {pastWalks.length ? (
+        <Events
+          walks={pastWalks}
+          onDelete={deleteEvent}
+          formPath="/formuser/"
+        />
+      ) : (
+        <div>You don't have any past walks yet!</div>
+      )}
     </>
   );
 };

@@ -4,10 +4,10 @@ const mongoose = require("./");
 const Schema = mongoose.Schema;
 
 const walkSchema = new Schema({
-  ownerID: {
-    type: String,
-    required: true,
-  },
+  // ownerID: {
+  //   type: String,
+  //   required: true,
+  // },
   dogName: {
     type: String,
     required: true,

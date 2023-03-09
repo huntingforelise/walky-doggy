@@ -25,12 +25,13 @@ exports.postWalk = async (req, res) => {
   try {
     //this is an owner specific function
     //we will need to send the owner ID as part of req.body
+    console.log(req.body);
     const newWalk = await walk.create(req.body);
-    const ownerID = newWalk.ownerID;
-    const userToBeUpdated = user.findById(ownerID);
-    await user.updateOne(userToBeUpdated, {
-      $addToSet: { scheduledwalks: newWalk._id },
-    });
+    // const ownerID = newWalk.ownerID;
+    // const userToBeUpdated = user.findById(ownerID);
+    // await user.updateOne(userToBeUpdated, {
+    //   $addToSet: { scheduledwalks: newWalk._id },
+    // });
     res.status(201).send(newWalk);
   } catch (error) {
     console.log(error);
