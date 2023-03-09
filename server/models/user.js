@@ -8,7 +8,7 @@ const userSchema = new Schema({
   isWalker: Boolean,
   scheduledWalks: Array,
   subscribedWalks: Array,
-  name: String,
+  username: String,
   email: String,
   password: String,
 });
