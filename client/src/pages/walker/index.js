@@ -1,5 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
+import originalService from "./../../services/OriginalService";
+import WalkList from "../../components/walklist";
 import Events from "../../../components/Events";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
@@ -20,13 +22,9 @@ const walker = () => {
   }, []);
 
   const deleteEvent = async (_id) => {
-    await fetch(`http://localhost:3001/events/${_id}`, {
-      method: "DELETE",
-    }).then(() => {
-      console.log("deleteevent: " + JSON.stringify(deleteEvent));
-      setEvents(events.filter((event) => event._id !== _id));
-    });
-  };
+    await originalService.deleteEvent(_id);
+    setEvents(events.filter((event) => event._id !== _id));
+};
 
   return (
     <>

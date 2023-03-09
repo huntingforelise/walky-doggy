@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { useState ,useEffect} from "react";
 import AddRecord from "../../../components/AddRecord";
+import originalService from "./../../services/OriginalService";
 
 const form = () => {
   const router = useRouter();
@@ -10,21 +11,12 @@ const form = () => {
   /**record */
   const [record, setRecord] = useState(false);
 
-  const fetchRecord = async () => {
-    const res = await fetch(`http://localhost:3001/records/${_id}`);
-    const data = await res.json();
-
-    return data;
+  const fetchRecord = async (_id) => {
+    return await originalService.fetchRecord(_id);
   };
 
   const addRecord = async (record) => {
-    fetch("http://localhost:3001/records", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(record),
-    }).then((result) => console.log("savedRecords: " + JSON.stringify(result)));
+    await originalService.addRecord(record);
   };
 
   /* collect geo location data*/
@@ -40,22 +32,11 @@ const form = () => {
   }, [location]);
 
   const fetchLocation = async () => {
-    const res = await fetch(`http://localhost:3001/locations/${_id}`);
-    const data = await res.json();
-
-    return data;
+    return await originalService.addRecord(_id)
   };
 
   const addLocation = async (location) => {
-    fetch("http://localhost:3001/locations", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(location),
-    }).then((result) =>
-      console.log("savedLocation: " + JSON.stringify(result))
-    );
+    await originalService.addLocation(location);
   };
 
   //const coordinates =[];

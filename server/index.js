@@ -6,8 +6,13 @@ const router = require('./router');
 const PORT = 3001
 const mongoConnection = require('./models/index')
 
+const corsConfig = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+};
+
 app.use(express.json());
-app.use(cors({origin: '*'}));
+app.use(cors(corsConfig));
 app.use(
   session({
     name: 'sid',
@@ -24,6 +29,9 @@ app.use(
 );
 
 app.use(router);
+app.get('*', (req, res) => {
+  res.status(404).send('Sorry, not found 😞');
+});
 
 app.listen(PORT, (err) => {
   if (err) {
