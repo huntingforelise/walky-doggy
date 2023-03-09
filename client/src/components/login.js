@@ -4,7 +4,7 @@ import userService from './../Services/UserService';
 import { useNavigate } from 'react-router-dom';
 
 const initialState = {
-  email: '',
+  username: '',
   password: '',
 };
 
@@ -22,8 +22,8 @@ const Login = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = state;
-    const user = { email, password };
+    const { username, password } = state;
+    const user = { username, password };
     const res = await userService.login(user);
     if (res.error) {
       alert(`${res.message}`);
@@ -38,7 +38,7 @@ const Login = (props) => {
   };
 
   const validateForm = () => {
-    return !state.email || !state.password;
+    return !state.username || !state.password;
   };
 
   return (
@@ -46,9 +46,9 @@ const Login = (props) => {
       <form className="form" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="name@mail.com"
-          name="email"
-          value={state.email}
+          placeholder="username"
+          name="username"
+          value={state.username}
           onChange={handleChange}
           autoComplete="off"
         />

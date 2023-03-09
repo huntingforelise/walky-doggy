@@ -4,10 +4,11 @@ import userService from './../Services/UserService';
 import { useNavigate } from 'react-router-dom';
 
 const initialState = {
-  name: '',
+  username: '',
   email: '',
   password: '',
-  type: ''
+  isOwner: false,
+  isWalker: false
 };
 
 const Register = (props) => {
@@ -22,10 +23,18 @@ const Register = (props) => {
     }));
   };
 
+  const handleCheckChange = (e) => {
+    const { name, checked } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: checked,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { type, name, email, password } = state;
-    const user = { type, name, email, password };
+    const { isOwner, isWalker, username, email, password } = state;
+    const user = { isOwner, isWalker, username, email, password };
     const res = await userService.register(user);
     if (res.error) {
       alert(`${res.message}`);
@@ -38,23 +47,26 @@ const Register = (props) => {
 
   const validateForm = () => {
     return (
-      !state.type || !state.name || !state.email || !state.password
+      (!state.isOwner || !state.isWalker) || !state.username || !state.email || !state.password
     );
   };
 
   return (
     <section>
       <form className="form" onSubmit={handleSubmit}>
-        <select name="userType" value={state.type} onChange={handleChange}>
-          <option value="">Select user type</option>
-          <option value="owner">Dog Owner</option>
-          <option value="walker">Dog Walker</option>
-        </select>
+        <label>
+          <input type="checkbox" name="owner" checked={state.isOwner} onChange={handleCheckChange} />
+          Dog Owner
+        </label>
+        <label>
+          <input type="checkbox" name="walker" checked={state.isWalker} onChange={handleCheckChange} />
+          Dog Walker
+        </label>
         <input
           type="text"
           placeholder="username"
           name="name"
-          value={state.name}
+          value={state.username}
           onChange={handleChange}
           autoComplete="off"
         />
