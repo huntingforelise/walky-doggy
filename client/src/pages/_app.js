@@ -1,19 +1,29 @@
-import '@/styles/globals.css'
-import { EventContextProvider } from '../../components/EventContextProvider'
-import Layout from '../../components/Layout'
+import "@/styles/globals.css";
+// import { EventContextProvider } from "../../components/EventContextProvider";
+import Layout from "../../components/Layout";
+import { useState, useEffect } from "react";
+import * as WalkService from "../services/WalkService";
+import WalkList from "../components/walklist";
 //import context from newly made context file
-//grab react {useState,useEffect} from 'react'
 
 export default function App({ Component, pageProps }) {
- //usestate allevent
+  const [pastWalks, setPastWalks] = useState([]);
+  const [futureWalks, setFutureWalks] = useState([]);
+
+  useEffect(() => {
+    WalkService.getWalks().then((walks) => {
+      setPastWalks(walks.past);
+      setFutureWalks(walks.future);
+      //will also need to render past walks
+    });
+  }, []);
 
   return (
     <Layout>
-   {/* wrap with provider */}
-       <Component {...pageProps} />
-    {/* wrap with provider */}
+      {/* wrap with provider */}
+      <Component {...pageProps} />
+      {/* wrap with provider */}
+      <WalkList walks={futureWalks} />
     </Layout>
-  )
-  
-  
+  );
 }

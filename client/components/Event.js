@@ -1,31 +1,29 @@
-import moment from 'moment'
-import Link from 'next/link';
-import { FaTrash} from "react-icons/fa";
+import moment from "moment";
+import Link from "next/link";
+import { FaTrash } from "react-icons/fa";
 
-
-
-const Event = ({ event, onDelete, formPath}) => {
-
+const Event = ({ walk, onDelete, formPath }) => {
   return (
-    <div className='event-div'>
-      <div id="event-list">
+    <div className="walk-div">
+      <div id="walk-list">
         <div className="left">
-          <div className="event-day-month">{moment(event.date).format('Do[\n]MMM')}</div>
-          <div className="event-outer">
-          <div className="list-title">
-            {event.title}{" "}
-            </div>
+          <div className="walk-day-month">
+            {moment(walk.date).format("Do[\n]MMM")}
+          </div>
+          <div className="walk-outer">
+            <div className="list-title">{walk.dogName} </div>
             <div className="list-date">
-              <p>{moment(event.date).format('hh:mm a - MMMM  Do, YYYY')}</p>
+              <p>{moment(walk.date).format("hh:mm a - MMMM  Do, YYYY")}</p>
             </div>
             <div className="list-venue">
-              <p>{event.venue}</p>
+              <p>{walk.pickUpLocation}</p>
             </div>
           </div>
-          <div className='btn-dev'>
-          <Link href={`${formPath}${event._id}`}><button className='btn' >Click</button></Link>
-          <FaTrash className="dele-btn"
-          onClick={() => onDelete(event._id)}/>
+          <div className="btn-dev">
+            <Link href={`${formPath}${walk._id}`}>
+              <button className="btn">Click</button>
+            </Link>
+            <FaTrash className="dele-btn" onClick={() => onDelete(walk._id)} />
           </div>
         </div>
       </div>
