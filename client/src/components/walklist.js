@@ -1,20 +1,10 @@
-import Head from "next/head";
-import { useState, useEffect } from "react";
-import styles from "@/styles/Home.module.css";
 import Walk from "./Walk";
 import * as WalkService from "../services/WalkService";
 
-const WalkList = (props) => {
-  const path = props.formPath
-  const [pastWalks, setPastWalks] = useState([]);
-  const [futureWalks, setFutureWalks] = useState([]);
-
-  useEffect(() => {
-    WalkService.getWalks().then((walks) => {
-      setPastWalks(walks.past);
-      setFutureWalks(walks.future);
-    });
-  }, []);
+const WalkList = ({ formPath, walks }) => {
+  console.log(formPath);
+  console.log(walks);
+  const path = formPath;
 
   const deleteWalk = async (_id) => {
     await WalkService.deleteWalk(_id);
@@ -24,13 +14,9 @@ const WalkList = (props) => {
 
   return (
     <>
-      <Head>
-        <title>Walky Doggy | view walks</title>
-      </Head>
-      <h1 className={styles.title}>View Walk History</h1>
       <div id="list">
-        {futureWalks &&
-          futureWalks.map((walk) => {
+        {walks &&
+          walks.map((walk) => {
             return (
               <Walk
                 key={walk._id}
@@ -39,12 +25,6 @@ const WalkList = (props) => {
                 formPath={path}
               />
             );
-          })}
-      </div>
-      <div id="list">
-        {pastWalks &&
-          pastWalks.map((walk) => {
-            return <Walk key={walk._id} walk={walk} formPath={path} />;
           })}
       </div>
     </>

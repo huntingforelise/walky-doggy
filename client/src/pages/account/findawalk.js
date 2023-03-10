@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 
-const walker = () => {
+const findawalk = () => {
   const [futureWalks, setFutureWalks] = useState([]);
 
   useEffect(() => {
@@ -30,4 +30,4 @@ const walker = () => {
   );
 };
 
-export default walker;
+export default findawalk;

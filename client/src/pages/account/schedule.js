@@ -1,10 +1,9 @@
-import Head from "next/head";
 import WalkList from "../../components/walklist";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 
-const walker = () => {
+const schedule = () => {
   const [futureWalks, setFutureWalks] = useState([]);
 
   useEffect(() => {
@@ -21,13 +20,10 @@ const walker = () => {
 
   return (
     <>
-      <Head>
-        <title>Walky Doggy | Walker</title>
-      </Head>
       <h1 className={styles.title}>Walks Schedule</h1>
       <WalkList walks={futureWalks} onDelete={deleteWalk} formPath="/form/" />
     </>
   );
 };
 
-export default walker;
+export default schedule;
