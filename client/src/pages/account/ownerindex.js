@@ -15,7 +15,7 @@ const OwnerAccount = () => {
             <Link href="/account/book">
               <button className={styles.button}>Book a walk</button>
             </Link>
-            <Link href="/account/walkhistory">
+            <Link href="/account/ownerhistory">
               <button className={styles.button}>View My Walk History</button>
             </Link>
             <Link href="/account/upcoming">

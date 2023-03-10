@@ -20,7 +20,7 @@ const WalkerAccount = () => {
             <Link href="/account/scheduled">
               <button className={styles.button}>Scheduled Walks</button>
             </Link>
-            <Link href="/account/walkhistory">
+            <Link href="/account/walkerhistory">
               <button className={styles.button}>View My Walk History</button>
             </Link>
           </div>

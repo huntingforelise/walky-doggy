@@ -1,8 +1,9 @@
-import Head from "next/head";
 import * as WalkService from "../../services/WalkService";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Link from "next/link";
+import styles from "@/styles/Home.module.css";
 
 const book = () => {
   const [dogName, setDogName] = useState("");
@@ -23,13 +24,18 @@ const book = () => {
 
   return (
     <>
-      <Head>
-        <title>Walky Doggy | book a walk</title>
-      </Head>
+      <div className="myaccount-div">
+        <Link href="/account/book">
+          <button className={styles.buttonselected}>Book a walk</button>
+        </Link>
+        <Link href="/account/ownerhistory">
+          <button className={styles.button}>View My Walk History</button>
+        </Link>
+        <Link href="/account/upcoming">
+          <button className={styles.button}>Upcoming Walks</button>
+        </Link>
+      </div>
       <form className="add-form" onSubmit={onSubmit}>
-        <div className="form-title">
-          <h1>Book a Walk</h1>
-        </div>
         <div className="form-control">
           <label>DOG NAME</label>
           <input
