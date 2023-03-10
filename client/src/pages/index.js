@@ -29,29 +29,35 @@ export default function Home() {
             height={554.4}
             priority
           />
-          <p className={styles.text}>
-            Give your dogs all the care and comfort they need and assist you in
-            the busy life.
-          </p>
+          <div className="container">
+            <p className={styles.text}>
+              Give your dogs all the care and comfort they need and assist you in
+              the busy life.
+            </p>
+            <div className="login-container">
+              <button
+                className={`btn-login ${currentTab === 'login' ? 'btn-clicked' : ''}`}
+                onClick={() => {
+                  handleTabChange('login');
+                }}
+              >
+                Login
+              </button>
+              <button
+                className={`btn-login ${currentTab === 'register' ? 'btn-clicked' : ''}`}
+                onClick={() => {
+                  handleTabChange('register');
+                }}
+              >
+                Register
+              </button>
+            </div>
+            <div>
+              {currentTab === 'login' ? <Login /> : <Register />}
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-        {currentTab === 'login' ? <Login/> : <Register />}
-      </div>
-      <div className={styles.TabContainer}>
-          <button variant="contained"
-            className={currentTab === 'login' ? styles.ActiveTab : ''}
-            onClick={() => handleTabChange('login')}
-          >
-            Login
-          </button>
-          <button variant="contained"
-            className={currentTab === 'register' ? styles.ActiveTab : ''}
-            onClick={() => handleTabChange('register')}
-          >
-            Register
-          </button>
-        </div>
     </>
   );
 }

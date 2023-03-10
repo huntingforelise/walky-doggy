@@ -53,42 +53,55 @@ const Register = (props) => {
 
   return (
     <section>
-      <form className="form" onSubmit={handleSubmit}>
-        <label>
-          <input type="checkbox" name="owner" checked={state.isOwner} onChange={handleCheckChange} />
-          Dog Owner
-        </label>
-        <label>
-          <input type="checkbox" name="walker" checked={state.isWalker} onChange={handleCheckChange} />
-          Dog Walker
-        </label>
-        <input
-          type="text"
-          placeholder="username"
-          name="name"
-          value={state.username}
-          onChange={handleChange}
-          autoComplete="off"
-        />
-        <input
-          type="text"
-          placeholder="name@mail.com"
-          name="email"
-          value={state.email}
-          onChange={handleChange}
-          autoComplete="off"
-        />
-        <input
-          type="password"
-          placeholder="******"
-          name="password"
-          value={state.password}
-          onChange={handleChange}
-        />
-        <button variant="outlined" className="form-submit" type="submit" disabled={validateForm()}>
-          Register
-        </button>
-      </form>
+      <div className='form-control' style={{textAlign: "center"}}>
+        <form className="add-form" onSubmit={handleSubmit}>
+            <label style={{display: "inline-block", textAlign: "center"}}>
+              Dog Owner
+              <input type="checkbox" name="isOwner" checked={state.isOwner} onChange={handleCheckChange} />
+            </label>
+            <label style={{display: "inline-block"}}>
+              <span>Dog Walker</span>
+              <input type="checkbox" name="isWalker" checked={state.isWalker} onChange={handleCheckChange} />
+            </label>
+            <label>
+              Username
+              <input
+                type="text"
+                placeholder="username"
+                name="username"
+                value={state.username}
+                onChange={handleChange}
+                autoComplete="off"
+              />
+            </label>
+            <label>
+              E-mail
+              <input
+                type="text"
+                placeholder="name@mail.com"
+                name="email"
+                value={state.email}
+                onChange={handleChange}
+                autoComplete="off"
+              />
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                placeholder="******"
+                name="password"
+                value={state.password}
+                onChange={handleChange}
+              />
+            </label>
+            <div className='login-container'>
+              <button className="btn-clicked" type="submit" disabled={validateForm()}>
+                Register
+              </button>
+            </div>
+        </form>
+      </div>
     </section>
   );
 };
