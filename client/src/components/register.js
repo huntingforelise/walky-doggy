@@ -47,7 +47,7 @@ const Register = (props) => {
 
   const validateForm = () => {
     return (
-      (!state.isOwner || !state.isWalker) || !state.username || !state.email || !state.password
+      !(state.isOwner || state.isWalker) || !state.username || !state.email || !state.password
     );
   };
 

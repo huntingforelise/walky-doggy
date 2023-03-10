@@ -1,5 +1,5 @@
 "use strict";
-const user = require("../models/user.js");
+const User = require("../models/user.js");
 
 exports.login = async (req, res) => {
   try {
@@ -7,7 +7,7 @@ exports.login = async (req, res) => {
     if (!username || !password) {
       return res.status(400).send({ res: "Missing fields!", error: true });
     } else {
-      const theUser = await user.find({ username: username });
+      const theUser = await User.find({ username: username });
       if (theUser[0].password === password) {
         req.session.uid = user._id;
         return res.status(201).send({ res: theUser, error: false });
@@ -23,19 +23,20 @@ exports.login = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  const {email, username } = req.body;
-  const userEmail = await user.findOne({ email: email });
-  const userUsername = await user.findOne({ username: username });
-  if (userEmail)
+  const { email, username } = req.body;
+  const userEmail = await User.findOne({ email: email });
+  const userUsername = await User.findOne({ username: username });
+  if (userEmail) {
     return res
       .status(409)
       .send({ error: '409', message: 'User with this E-mail already exists' });
-  if (userUsername)
+  } else if (userUsername) {
      return res
       .status(409)
       .send({ error: '409', message: 'Username already exists' });
+  }
   try {
-    const newUser = new user(...req.body);
+    const newUser = new User({...req.body});
     const user = await newUser.save();
     req.session.uid = user._id;
     res.status(201).send(user);
