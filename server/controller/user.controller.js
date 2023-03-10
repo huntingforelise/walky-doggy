@@ -2,25 +2,28 @@
 const User = require("../models/user.js");
 
 exports.login = async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).send({ res: "Missing fields!", error: true });
+  }
   try {
-    const { username, password } = req.body;
-    if (!username || !password) {
-      return res.status(400).send({ res: "Missing fields!", error: true });
+    const user = await User.findOne({ username: username });
+    if (user.password === password) {
+      req.session.uid = user._id;
+      res.status(200).send(user);
     } else {
-      const theUser = await User.find({ username: username });
-      if (theUser[0].password === password) {
-        req.session.uid = user._id;
-        return res.status(201).send({ res: theUser, error: false });
-      } else if (!theUser || theUser.password !== password) {
-        return res
-          .status(400)
-          .send({ res: "Wrong username and/or password!", error: true });
-      }
+      return res.status(401).send({
+        error: "401",
+        message: "Username or password is incorrect",
+      });
     }
-  } catch (e) {
-    return res.status(500).send({ res: "Internal Server Error!", error: true });
+  } catch (error) {
+    res
+      .status(401)
+      .send({ error: "401", message: "Username or password is incorrect" });
   }
 };
+
 
 exports.create = async (req, res) => {
   const { email, username } = req.body;
@@ -31,12 +34,12 @@ exports.create = async (req, res) => {
       .status(409)
       .send({ error: '409', message: 'User with this E-mail already exists' });
   } else if (userUsername) {
-     return res
+    return res
       .status(409)
       .send({ error: '409', message: 'Username already exists' });
   }
   try {
-    const newUser = new User({...req.body});
+    const newUser = new User({ ...req.body });
     const user = await newUser.save();
     req.session.uid = user._id;
     res.status(201).send(user);

@@ -1,13 +1,16 @@
+import React, { useState } from "react";
+
 import "@/styles/globals.css";
 import Layout from "../../components/Layout";
-//import context from newly made context file
+import { AuthProvider } from '../utils/AuthContext';
 
 export default function App({ Component, pageProps }) {
+
   return (
-    <Layout>
-      {/* wrap with provider */}
-      <Component {...pageProps} />
-      {/* wrap with provider */}
-    </Layout>
+    <AuthProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </AuthProvider>
   );
 }
