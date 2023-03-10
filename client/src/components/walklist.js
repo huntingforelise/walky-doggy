@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Walk from "./Walk";
+import { useState, useEffect } from "react";
 import * as WalkService from "../services/WalkService";
 
 const WalkList = () => {

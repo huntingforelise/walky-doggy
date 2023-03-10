@@ -2,6 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
 
+// this will be merged into index once we have authentication set up
+
 const WalkerAccount = () => {
   return (
     <>
@@ -12,14 +14,14 @@ const WalkerAccount = () => {
         <div>
           <h1 className={styles.title}>Walker</h1>
           <div className="myaccount-div">
-            <Link href="/walker/findawalk">
+            <Link href="/account/findawalk">
               <button className={styles.button}>Find a Walk</button>
             </Link>
-            <Link href="/walker/schedule">
+            <Link href="/account/schedule">
               <button className={styles.button}>Scheduled Walks</button>
             </Link>
-            <Link href="/walker/walklist">
-              <button className={styles.button}>View My Walk History - don't click</button>
+            <Link href="/account/walklist">
+              <button className={styles.button}>View My Walk History</button>
             </Link>
           </div>
         </div>
