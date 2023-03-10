@@ -36,7 +36,7 @@ const viewwalks = () => {
       <h1 className={styles.title}>View Walk History</h1>
       {pastWalks.length ? (
         <Events
-          walks={pastWalks}
+          events={pastWalks}
           onDelete={deleteEvent}
           formPath="/formuser/"
         />
