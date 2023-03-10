@@ -4,13 +4,13 @@ import styles from "@/styles/Home.module.css";
 import Walk from "../../components/Walk";
 import * as WalkService from "../../services/WalkService";
 
-const WalkList = () => {
+const WalkList = (props) => {
+  const path = props.formPath
   const [pastWalks, setPastWalks] = useState([]);
   const [futureWalks, setFutureWalks] = useState([]);
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      console.log(walks);
       setPastWalks(walks.past);
       setFutureWalks(walks.future);
     });
@@ -36,7 +36,7 @@ const WalkList = () => {
                 key={walk._id}
                 walk={walk}
                 onDelete={deleteWalk}
-                formPath="/formuser"
+                formPath={path}
               />
             );
           })}
@@ -44,7 +44,7 @@ const WalkList = () => {
       <div id="list">
         {pastWalks &&
           pastWalks.map((walk) => {
-            return <Walk key={walk._id} walk={walk} formPath="/formuser" />;
+            return <Walk key={walk._id} walk={walk} formPath={path} />;
           })}
       </div>
     </>

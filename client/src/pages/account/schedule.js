@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import WalkList from "../../components/walklist";
+import WalkList from "./walklist";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
