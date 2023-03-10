@@ -19,10 +19,9 @@ const WalkList = () => {
   const deleteWalk = async (_id) => {
     await WalkService.deleteWalk(_id);
     const updatedArray = futureWalks.filter((walk) => walk._id !== _id);
-    console.log(updatedArray);
     setFutureWalks(updatedArray);
-    };
-  
+  };
+
   return (
     <>
       <Head>
@@ -45,13 +44,7 @@ const WalkList = () => {
       <div id="list">
         {pastWalks &&
           pastWalks.map((walk) => {
-            return (
-              <Walk
-                key={walk._id}
-                walk={walk}
-                formPath="/formuser"
-              />
-            );
+            return <Walk key={walk._id} walk={walk} formPath="/formuser" />;
           })}
       </div>
     </>
