@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import AddRecord from "../../../components/AddRecord";
+import AddRecord from "../../../components/updatewalkrecord";
 import * as WalkService from "../../services/WalkService";
 
 const form = () => {

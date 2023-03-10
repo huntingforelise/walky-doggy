@@ -2,12 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import { useState } from "react";
-import Login from "./../components/login";
-import Register from "./../components/register";
-
+import Login from "../components/Login";
+import Register from "../components/Register";
 
 export default function Home() {
-  const [currentTab, setCurrentTab] = useState('login');
+  const [currentTab, setCurrentTab] = useState("login");
 
   const handleTabChange = (tab) => {
     setCurrentTab(tab);
@@ -31,30 +30,32 @@ export default function Home() {
           />
           <div className="container">
             <p className={styles.text}>
-              Give your dogs all the care and comfort they need and assist you in
-              the busy life.
+              Give your dogs all the care and comfort they need and assist you
+              in the busy life.
             </p>
             <div className="login-container">
               <button
-                className={`btn-login ${currentTab === 'login' ? 'btn-clicked' : ''}`}
+                className={`btn-login ${
+                  currentTab === "login" ? "btn-clicked" : ""
+                }`}
                 onClick={() => {
-                  handleTabChange('login');
+                  handleTabChange("login");
                 }}
               >
                 Login
               </button>
               <button
-                className={`btn-login ${currentTab === 'register' ? 'btn-clicked' : ''}`}
+                className={`btn-login ${
+                  currentTab === "register" ? "btn-clicked" : ""
+                }`}
                 onClick={() => {
-                  handleTabChange('register');
+                  handleTabChange("register");
                 }}
               >
                 Register
               </button>
             </div>
-            <div>
-              {currentTab === 'login' ? <Login /> : <Register />}
-            </div>
+            <div>{currentTab === "login" ? <Login /> : <Register />}</div>
           </div>
         </div>
       </div>
