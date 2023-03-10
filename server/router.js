@@ -1,12 +1,10 @@
 const router = require("express").Router();
 const authMiddleware = require("./middlewares/auth");
 const userController = require("./controller/user.controller");
-// const eventController = require("./controller/event.controller");
 // const imageController = require("./controller/image.controller");
 // const locationController = require("./controller/location.controller");
-// const recordController = require("./controller/record.controller");
 const walkController = require("./controller/walk.controller");
-const { check, validationResult } = require("express-validator");
+// const { check, validationResult } = require("express-validator");
 
 router.post("/register", userController.create);
 router.post("/login", userController.login);
@@ -29,9 +27,6 @@ router.delete("/walk/:id", walkController.deleteWalk);
 // router.get("/locations/:eventId", locationController.getEventLocations);
 // router.post("/locations", locationController.postLocation);
 
-// router.get("/events", eventController.getEvents);
-// router.get("/events/past/", eventController.getPastEvents);
-// router.delete("/events/:id", eventController.deleteEvent);
 // router.post(
 //   "/events",
 //   [
