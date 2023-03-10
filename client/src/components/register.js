@@ -14,6 +14,7 @@ const initialState = {
 const Register = (props) => {
   const router = useRouter();
   const [state, setState] = useState(initialState);
+  const {setIsAuthenticated} = props;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +41,7 @@ const Register = (props) => {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      props.setIsAuthenticated(true);
+      setIsAuthenticated(true);
       auth.login(() => router.push("/account"));
     }
   };

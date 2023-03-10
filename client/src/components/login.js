@@ -11,6 +11,7 @@ const initialState = {
 const Login = (props) => {
   const router = useRouter();
   const [state, setState] = useState(initialState);
+  const { setIsAuthenticated } = props;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +32,7 @@ const Login = (props) => {
     } else {
       const userInfo = await userService.getUserInfo();
       const userId = userInfo._id;
-      props.setIsAuthenticated(true);
+      setIsAuthenticated(true)
       localStorage.setItem("userId", userId);
       auth.login(() => router.push(`/account`));
     }
