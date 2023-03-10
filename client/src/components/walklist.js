@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
-import Walk from "../../components/Walk";
-import * as WalkService from "../../services/WalkService";
+import Walk from "./Walk";
+import * as WalkService from "../services/WalkService";
 
 const WalkList = (props) => {
   const path = props.formPath
