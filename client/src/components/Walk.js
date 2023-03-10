@@ -2,7 +2,7 @@ import moment from "moment";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 
-const Event = ({ walk, onDelete, formPath }) => {
+const Walk = ({ walk, onDelete, formPath }) => {
   return (
     walk && (
       <div className="walk-div">
@@ -36,4 +36,4 @@ const Event = ({ walk, onDelete, formPath }) => {
   );
 };
 
-export default Event;
+export default Walk;

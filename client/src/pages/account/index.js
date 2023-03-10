@@ -6,16 +6,16 @@ const OwnerAccount = () => {
   return (
     <>
       <Head>
-        <title>Walky Doggy | My Account</title>
+        <title>Walky Doggy | Owner</title>
       </Head>
       <div>
         <div>
-          <h1 className={styles.title}>My Account</h1>
+          <h1 className={styles.title}>Owner</h1>
           <div className="myaccount-div">
-            <Link href="/myaccount/bookawalk">
+            <Link href="/account/bookawalk">
               <button className={styles.button}>Book a walk</button>
             </Link>
-            <Link href="/myaccount/viewwalks">
+            <Link href="/account/walklist">
               <button className={styles.button}>View My Walk History</button>
             </Link>
           </div>

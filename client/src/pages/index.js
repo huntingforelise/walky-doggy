@@ -1,8 +1,18 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
+import { useState } from "react";
+import Login from "./../components/login";
+import Register from "./../components/register";
+
 
 export default function Home() {
+  const [currentTab, setCurrentTab] = useState('login');
+
+  const handleTabChange = (tab) => {
+    setCurrentTab(tab);
+  };
+
   return (
     <>
       <Head>
@@ -25,6 +35,23 @@ export default function Home() {
           </p>
         </div>
       </div>
+      <div>
+        {currentTab === 'login' ? <Login/> : <Register />}
+      </div>
+      <div className={styles.TabContainer}>
+          <button variant="contained"
+            className={currentTab === 'login' ? styles.ActiveTab : ''}
+            onClick={() => handleTabChange('login')}
+          >
+            Login
+          </button>
+          <button variant="contained"
+            className={currentTab === 'register' ? styles.ActiveTab : ''}
+            onClick={() => handleTabChange('register')}
+          >
+            Register
+          </button>
+        </div>
     </>
   );
 }

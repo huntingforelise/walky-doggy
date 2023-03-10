@@ -1,16 +1,16 @@
-import Event from "./Event";
+// refactor into walklist.js - this will render a list of walks
 
-const Events = ({ events, onDelete, formPath }) => {
-  //const events = useContext(EventContext)
+import Walk from "../src/components/Walk";
+
+const Events = ({ walks, onDelete, formPath }) => {
   return (
     <div id="list">
-      {events &&
-        events.map((event, index) => {
+      {walks &&
+        walks.map((walk, index) => {
           return (
-            <Event
+            <Walk
               key={index}
-              walk={event}
-              // events={events}
+              walk={walk}
               onDelete={onDelete}
               formPath={formPath}
             />

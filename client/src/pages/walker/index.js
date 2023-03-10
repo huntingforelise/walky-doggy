@@ -1,40 +1,31 @@
 import Head from "next/head";
 import Link from "next/link";
-import originalService from "./../../services/OriginalService";
-import WalkList from "../../components/walklist";
-import Events from "../../../components/Events";
-import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
-import * as WalkService from "../../services/WalkService";
-// import React, { useState, createContext, useContext,useEffect } from "react";
-// const EventContext = createContext(null);
 
-const walker = () => {
-  const [pastWalks, setPastWalks] = useState([]);
-  const [futureWalks, setFutureWalks] = useState([]);
-
-  useEffect(() => {
-    WalkService.getWalks().then((walks) => {
-      console.log(walks);
-      setPastWalks(walks.past);
-      setFutureWalks(walks.future);
-    });
-  }, []);
-
-  const deleteEvent = async (_id) => {
-    await originalService.deleteEvent(_id);
-    setEvents(events.filter((event) => event._id !== _id));
-};
-
+const WalkerAccount = () => {
   return (
     <>
       <Head>
         <title>Walky Doggy | Walker</title>
       </Head>
-      <h1 className={styles.title}>Walks Schedule</h1>
-      <Events events={futureWalks} onDelete={deleteEvent} formPath="/form/" />
+      <div>
+        <div>
+          <h1 className={styles.title}>Walker</h1>
+          <div className="myaccount-div">
+            <Link href="/walker/findawalk">
+              <button className={styles.button}>Find a Walk</button>
+            </Link>
+            <Link href="/walker/schedule">
+              <button className={styles.button}>Scheduled Walks</button>
+            </Link>
+            <Link href="/walker/walklist">
+              <button className={styles.button}>View My Walk History - don't click</button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
 
-export default walker;
+export default WalkerAccount;

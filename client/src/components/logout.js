@@ -25,7 +25,7 @@ const Logout = (props) => {
       <h2>Are you sure you want to log out?</h2>
       <button variant="contained" className="confirm-btn"
         onClick={() => {
-          navigate(`/events`);
+          navigate(`/account`);
         }}>No</button>
       <button variant="contained" color="error" className="confirm-btn" onClick={() => handleClick()}>
         Yes

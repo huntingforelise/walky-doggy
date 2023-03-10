@@ -1,7 +1,8 @@
 import Head from "next/head";
+import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
-import Walk from "./Walk";
-import * as WalkService from "../services/WalkService";
+import Walk from "../../components/Walk";
+import * as WalkService from "../../services/WalkService";
 
 const WalkList = () => {
   const [pastWalks, setPastWalks] = useState([]);
@@ -10,7 +11,6 @@ const WalkList = () => {
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
       console.log(walks);
-      console.log("this is walklist within components")
       setPastWalks(walks.past);
       setFutureWalks(walks.future);
     });

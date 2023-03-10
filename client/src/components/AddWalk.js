@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const AddEvent = ({ onAdd }) => {
+const AddWalk = ({ onAdd }) => {
   const [dogName, setDogName] = useState("");
   const [date, setDate] = useState("");
   const [pickUpLocation, setPickUpLocation] = useState("");
@@ -60,4 +60,4 @@ const AddEvent = ({ onAdd }) => {
   );
 };
 
-export default AddEvent;
+export default AddWalk;

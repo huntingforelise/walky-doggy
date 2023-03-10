@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import auth from './../utils/auth';
 import userService from './../Services/UserService';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 const initialState = {
   username: '',
@@ -12,7 +12,7 @@ const initialState = {
 };
 
 const Register = (props) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [state, setState] = useState(initialState);
 
   const handleChange = (e) => {
@@ -41,7 +41,7 @@ const Register = (props) => {
       setState(initialState);
     } else {
       props.setIsAuthenticated(true);
-      auth.login(() => navigate('/events')); // do we need a home/landing/profile page?
+      auth.login(() => router.push('/account'));
     }
   };
 

@@ -1,23 +1,18 @@
 import { useState } from "react";
 
-
 const AddRecord = ({ onAdd, eventId }) => {
   const [pee, setPee] = useState(false);
   const [poo, setPoo] = useState(false);
 
-
   const onSubmit = (e) => {
-    console.log("_id: " + eventId);
     e.preventDefault();
-    onAdd({ "eventId": eventId,pee,poo });
+    onAdd({ "eventId": eventId, pee, poo });
     setPee(false);
     setPoo(false);
   };
 
   return (
-   
      <form className="add-form" onSubmit={onSubmit}>
-
       <div className="submit-form-title">
         <h1>POO/PEE RECORD</h1>
       </div>
@@ -49,7 +44,6 @@ const AddRecord = ({ onAdd, eventId }) => {
       </div>
       </div>
     </form> 
-    
   );
 };
 

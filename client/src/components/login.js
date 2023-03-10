@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import auth from './../utils/auth';
 import userService from './../Services/UserService';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 const initialState = {
   username: '',
@@ -9,9 +9,9 @@ const initialState = {
 };
 
 const Login = (props) => {
-
-  let navigate = useNavigate();
+  const router = useRouter();
   const [state, setState] = useState(initialState);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState((prevState) => ({
@@ -33,7 +33,7 @@ const Login = (props) => {
       const userId = userInfo._id;
       props.setIsAuthenticated(true);
       localStorage.setItem('userId', userId);
-      auth.login(() => navigate(`/events`)); // do we need a home/landing/profile page?
+      auth.login(() => router.push(`/account`));
     }
   };
 
@@ -43,7 +43,7 @@ const Login = (props) => {
 
   return (
     <section>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="add-form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="username"

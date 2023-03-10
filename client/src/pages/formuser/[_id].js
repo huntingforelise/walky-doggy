@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
-//import { useState, useEffect,useRef } from "react";
 import styles from "@/styles/Home.module.css";
 import Image from "next/image";
 //import mapboxgl from "mapbox-gl";
@@ -13,6 +12,7 @@ import originalService from "./../../services/OriginalService";
 //mapboxgl.accessToken = process.env.local.MAPBOX_KEY;
 
 const formuser = () => {
+  console.log("this is within formuser")
   const router = useRouter();
   const { _id } = router.query;
   const [records, setRecords] = useState([]);
@@ -136,7 +136,7 @@ const formuser = () => {
       </div>
 
       <div className="walk-path-outer">
-        {/* <div id="map"></div> */}
+        <div id="map"></div>
         <div className="walk-path">
         <div>
               <div ref={mapContainer} className="map-container" />
