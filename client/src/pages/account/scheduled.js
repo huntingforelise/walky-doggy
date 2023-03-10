@@ -1,14 +1,15 @@
-import WalkList from "@/components/Walklist";
+import WalkList from "../../components/Walklist";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 
-const walkhistory = () => {
-  const [pastWalks, setPastWalks] = useState([]);
+//this only exists for the walker
+const scheduled = () => {
+  const [futureWalks, setFutureWalks] = useState([]);
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      setPastWalks(walks.past);
+      setFutureWalks(walks.future);
     });
   }, []);
 
@@ -20,11 +21,10 @@ const walkhistory = () => {
 
   return (
     <>
-      <h1 className={styles.title}>View Walk History</h1>
-      <WalkList walks={pastWalks} formPath="/formuser/" onDelete={deleteWalk} />
-      ;
+      <h1 className={styles.title}>Walks Schedule</h1>
+      <WalkList walks={futureWalks} onDelete={deleteWalk} formPath="/form/" />
     </>
   );
 };
 
-export default walkhistory;
+export default scheduled;

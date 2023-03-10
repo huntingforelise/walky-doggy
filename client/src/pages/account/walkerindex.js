@@ -14,10 +14,10 @@ const WalkerAccount = () => {
         <div>
           <h1 className={styles.title}>Walker</h1>
           <div className="myaccount-div">
-            <Link href="/account/findawalk">
+            <Link href="/account/find">
               <button className={styles.button}>Find a Walk</button>
             </Link>
-            <Link href="/account/schedule">
+            <Link href="/account/scheduled">
               <button className={styles.button}>Scheduled Walks</button>
             </Link>
             <Link href="/account/walkhistory">

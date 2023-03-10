@@ -1,17 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); 
-
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size:20px;
+  font-size: 20px;
 }
 
-
-
 body {
-  background: linear-gradient(to right,#dce0e2 0%, #838587 100%);
+  background: linear-gradient(to right, #dce0e2 0%, #838587 100%);
   color: #333;
   font-family: "Urbanist";
 }
@@ -57,7 +54,6 @@ footer {
   border-radius: 5px;
 }
 
-
 .btn-block {
   display: block;
   width: 100%;
@@ -71,12 +67,12 @@ footer {
   font-size: 25px;
 }
 
-h1{
+h1 {
   text-align: center;
   font-size: 35px;
 }
 
-label{
+label {
   font-size: 20px;
   font-weight: 800;
 }
@@ -100,14 +96,13 @@ label{
   padding: 3px 7px;
   font-size: 17px;
 }
-  /*walker's event list*/
-*/
-#list{
+/*walker's event list*/
+*/ #list {
   display: flex;
   align-content: center;
 }
 
-.events-container{
+.events-container {
   margin: 30px auto;
   overflow: auto;
   border-radius: 5px;
@@ -127,81 +122,75 @@ label{
   border-radius: 5px;
 }
 
-
-.list-title{
+.list-title {
   font-size: 25px;
 }
 
 .list-date,
-.list-venue{
+.list-venue {
   font-size: 4px;
-  font-weight:lighter;
+  font-weight: lighter;
   color: rgb(73, 72, 74);
   text-align: center;
 }
 
-.event-div{
+.event-div {
   display: flex;
   justify-content: center;
 }
 
-.date-month{
+.date-month {
   font-size: 35px;
   font-weight: 700;
 }
 
-.event-day-month{
+.event-day-month {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   width: 80px;
   height: 110px;
   background-color: #292928;
   color: #f4f4f4;
   text-align: center;
   font-size: 25px;
-
-  
 }
 
-h1{
+h1 {
   font-size: 25px;
 }
 
-h3{
+h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-h6{
+h6 {
   text-align: left;
 }
 
 .first-day,
-.first-venue{
+.first-venue {
   font-size: 5px;
-  font-weight:lighter;
+  font-weight: lighter;
   color: #f4f4f4;
   text-align: center;
-
 }
-
 
 .left {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   gap: 15px;
   border-radius: 5px;
 }
- 
 
 .btn {
   display: block;
-  width: 70px;
-  padding: 4px; 
+  width: 100px;
+  padding: 4px;
   margin: 2px auto;
   background: rgb(73, 72, 74);
   border-radius: 10px;
@@ -217,12 +206,11 @@ h6{
   color: white;
 }
 
-.btn-dev{
+.btn-dev {
   display: flex;
-  
 }
 
-.dele-btn{
+.dele-btn {
   font-size: 40px;
   margin-right: 10px;
   margin-left: 3px;
@@ -233,47 +221,45 @@ h6{
   font-size: 1em;
   padding: 1em;
   border: none;
-  border-radius: .5em;
-} */
-
-
- .button {
+  border-radius: 0.5em;
+}
+*/ .button {
   color: white;
   font-size: 1em;
   background-color: rgb(73, 72, 74);
-  padding: .5em .8em;
+  padding: 0.5em 0.8em;
   border: none;
-  border-radius: .2em;
-} 
+  border-radius: 0.2em;
+}
 
 .upload-container {
   display: grid;
   grid-template-rows: 1fr auto;
   padding: 0 2rem;
   margin: 0 auto;
-}  
+}
 /**home page*/
-.pic-home{
+.pic-home {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
-.pichome{
+.pichome {
   border-radius: 15px;
   border: 5px solid rgb(73, 72, 74);
 }
 
 /**my account home*/
-.myaccount-div{
+.myaccount-div {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
 /**walker-record form*/
 
-.addform{
+.addform {
   width: 400px;
   height: 200px;
   margin: 5px auto;
@@ -282,18 +268,15 @@ h6{
   border-radius: 5px;
 }
 
-
-.submit-div{
+.submit-div {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-
 }
 
-.submit-form-control{
-margin: 5px;
-align-content: center;
-
+.submit-form-control {
+  margin: 5px;
+  align-content: center;
 }
 .submit-form-control label {
   display: inline-block;
@@ -302,23 +285,22 @@ align-content: center;
   border-left: 20px;
 }
 
-.adjustfont{
+.adjustfont {
   font-size: 24px;
   font-weight: 600;
 }
 
-.submit-form-control input{
+.submit-form-control input {
   width: 30px;
   height: 30px;
- }
-
-.submit-form-title{
-margin-bottom: 10px;
-margin-top: 5px;
-
 }
 
-.btn-record{
+.submit-form-title {
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.btn-record {
   color: white;
   font-size: 20px;
   background-color: rgb(73, 72, 74);
@@ -329,9 +311,9 @@ margin-top: 5px;
   border-radius: 10px;
 }
 
-.gpsbutton{
+.gpsbutton {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   border: 4px solid rgb(73, 72, 74);
   border-radius: 5px;
@@ -339,69 +321,67 @@ margin-top: 5px;
   height: 100px;
 }
 
-.gpslabel{
+.gpslabel {
   display: inline-block;
   margin-right: 100px;
   margin-left: 20px;
   border-left: 20px;
 }
 
-.gpsouter{
+.gpsouter {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-
 }
 
-.upload-container-outer{
+.upload-container-outer {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   margin-top: 5px;
 }
 
-.upload-container{
+.upload-container {
   border: 4px solid rgb(73, 72, 74);
   border-radius: 5px;
   width: 400px;
   height: 100px;
 }
 
-.uploadlabel{
+.uploadlabel {
   margin-bottom: 5px;
 }
 
 /**myaccount-formuser-form*/
 
-.record-div-outer{
+.record-div-outer {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
-.record-div{
+.record-div {
   font-size: 30px;
 }
 
-.record-label{
+.record-label {
   display: inline-block;
   margin-right: 30px;
   margin-left: 20px;
   border-left: 20px;
-
 }
 
-.walk-path-outer{
+.walk-path-outer {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.imgs-container{
+.imgs-container {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -409,8 +389,7 @@ ul {
   list-style-type: none;
 }
 
-
-.map-header{
+.map-header {
   text-align: center;
 }
 
@@ -419,14 +398,14 @@ ul {
 .map-container {
   width: 600px;
   height: 400px;
-  }
-  
+}
+
 .login-container {
   display: flex;
   justify-content: center;
 }
 
-.btn-login{
+.btn-login {
   color: white;
   font-size: 20px;
   background-color: rgb(120, 119, 121);

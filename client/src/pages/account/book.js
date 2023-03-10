@@ -4,7 +4,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const bookawalk = () => {
+const book = () => {
   const [dogName, setDogName] = useState("");
   const [date, setDate] = useState("");
   const [pickUpLocation, setPickUpLocation] = useState("");
@@ -70,4 +70,4 @@ const bookawalk = () => {
   );
 };
 
-export default bookawalk;
+export default book;

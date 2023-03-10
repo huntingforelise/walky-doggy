@@ -12,13 +12,13 @@ const OwnerAccount = () => {
         <div>
           <h1 className={styles.title}>Owner</h1>
           <div className="myaccount-div">
-            <Link href="/account/bookawalk">
+            <Link href="/account/book">
               <button className={styles.button}>Book a walk</button>
             </Link>
             <Link href="/account/walkhistory">
               <button className={styles.button}>View My Walk History</button>
             </Link>
-            <Link href="/account/schedule">
+            <Link href="/account/upcoming">
               <button className={styles.button}>Upcoming Walks</button>
             </Link>
           </div>
