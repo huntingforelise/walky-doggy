@@ -43,7 +43,9 @@ const Login = (props) => {
 
   return (
     <section>
+      <div className='form-control' style={{textAlign: "center"}}>
       <form className="add-form" onSubmit={handleSubmit}>
+        <label>Username</label>
         <input
           type="text"
           placeholder="username"
@@ -52,6 +54,7 @@ const Login = (props) => {
           onChange={handleChange}
           autoComplete="off"
         />
+        <label>Password</label>
         <input
           type="password"
           placeholder="******"
@@ -59,10 +62,12 @@ const Login = (props) => {
           value={state.password}
           onChange={handleChange}
         />
-        <button variant="outlined" className="form-submit" type="submit" disabled={validateForm()}>
+        <p></p>
+        <button className="btn-clicked" type="submit" disabled={validateForm()}>
           Login
         </button>
       </form>
+      </div>
     </section>
   );
 };
