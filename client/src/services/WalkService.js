@@ -37,7 +37,8 @@ export const updateWalkRecord = (record) => {
     .catch((err) => console.log(err));
 };
 
-export const updateWalkImage = async (data, id) => {
+export const updateWalkImage = async (link, id) => {
+  console.log(link);
   const ID = id;
   return fetch(`${BASE_URL}/walk/${ID}/image`, {
     method: "PUT",
@@ -46,7 +47,7 @@ export const updateWalkImage = async (data, id) => {
     },
     credentials: "include",
     mode: "cors",
-    body: JSON.stringify(data.secure_url),
+    body: JSON.stringify(link),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
