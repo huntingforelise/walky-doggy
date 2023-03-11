@@ -1,16 +1,21 @@
-import WalkList from "../../components/Walklist";
+import WalkList from "@/components/Walklist";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
-//this only exists for the walker
-const scheduled = () => {
-  const [futureWalks, setFutureWalks] = useState([]);
+const walkerhistory = () => {
+  const [pastWalks, setPastWalks] = useState([]);
+  const userId = localStorage.getItem("userId");
+  const router = useRouter();
+  const query = router.query;
+
+  console.log(query);
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      setFutureWalks(walks.future);
+      setPastWalks(walks.past);
     });
   }, []);
 
@@ -27,15 +32,18 @@ const scheduled = () => {
           <button className={styles.button}>Find a Walk</button>
         </Link>
         <Link href="/account/scheduled">
-          <button className={styles.buttonselected}>Scheduled Walks</button>
+          <button className={styles.button}>Scheduled Walks</button>
         </Link>
         <Link href="/account/walkerhistory">
-          <button className={styles.button}>View My Walk History</button>
+          <button className={styles.buttonselected}>
+            View My Walk History
+          </button>
         </Link>
       </div>
-      <WalkList walks={futureWalks} onDelete={deleteWalk} formPath="/form/" />
+      <WalkList walks={pastWalks} formPath="/formuser/" onDelete={deleteWalk} />
+      ;
     </>
   );
 };
 
-export default scheduled;
+export default walkerhistory;

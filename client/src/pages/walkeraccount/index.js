@@ -5,6 +5,8 @@ import styles from "@/styles/Home.module.css";
 // this will be merged into index once we have authentication set up
 
 const WalkerAccount = () => {
+  const userId = localStorage.getItem("userId");
+
   return (
     <>
       <Head>

@@ -7,8 +7,8 @@ const walkController = require("./controller/walk.controller");
 
 router.post("/register", userController.create);
 router.post("/login", userController.login);
-router.get("/user/info", authMiddleware, userController.profile);
-router.post("/logout", authMiddleware, userController.logout);
+router.get("/user/:user/info", userController.profile);
+router.post("/logout", userController.logout);
 
 router.get("/walks", walkController.getWalks);
 router.post("/walk", walkController.postWalk);

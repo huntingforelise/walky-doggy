@@ -9,6 +9,8 @@ const book = () => {
   const [dogName, setDogName] = useState("");
   const [date, setDate] = useState("");
   const [pickUpLocation, setPickUpLocation] = useState("");
+  const userId = localStorage.getItem("userId");
+  console.log("book a walk: " + userId);
 
   const postWalk = (walk) => {
     WalkService.postWalk(walk);

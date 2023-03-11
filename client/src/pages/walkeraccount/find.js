@@ -7,6 +7,7 @@ import Link from "next/link";
 
 const find = () => {
   const [futureWalks, setFutureWalks] = useState([]);
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {

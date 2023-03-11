@@ -14,7 +14,6 @@ const initialState = {
 const Register = (props) => {
   const router = useRouter();
   const [state, setState] = useState(initialState);
-  const {setIsAuthenticated} = props;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,12 +36,15 @@ const Register = (props) => {
     const { isOwner, isWalker, username, email, password } = state;
     const user = { isOwner, isWalker, username, email, password };
     const res = await userService.register(user);
+    console.log(res);
     if (res.error) {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      setIsAuthenticated(true);
-      auth.login(() => router.push("/account"));
+      localStorage.setItem("userId", userId);
+      if (res.isOwner) {
+        auth.login(() => router.push("/owneraccount"));
+      } else auth.login(() => router.push("/walkeraccount"));
     }
   };
 

@@ -11,7 +11,6 @@ const initialState = {
 const Login = (props) => {
   const router = useRouter();
   const [state, setState] = useState(initialState);
-  const { setIsAuthenticated } = props;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,16 +24,21 @@ const Login = (props) => {
     e.preventDefault();
     const { username, password } = state;
     const user = { username, password };
-    const res = await userService.login(user);
-    if (res.error) {
+    const output = await userService.login(user);
+    if (output.error) {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      const userInfo = await userService.getUserInfo();
-      const userId = userInfo._id;
-      setIsAuthenticated(true)
-      localStorage.setItem("userId", userId);
-      auth.login(() => router.push(`/account`));
+      // console.log("username", output.res.username);
+      const userInfo = await userService.getUserInfo(output.res.username);
+      console.log("loginpage:", userInfo.res);
+      const username = userInfo.res.username;
+      console.log(userInfo.res.isOwner);
+      console.log(username);
+      localStorage.setItem("username", username);
+      if (userInfo.res.isOwner) {
+        auth.login(() => router.push("/owneraccount"));
+      } else auth.login(() => router.push("/walkeraccount"));
     }
   };
 

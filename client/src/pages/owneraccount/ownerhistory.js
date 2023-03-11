@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const ownerhistory = () => {
   const [pastWalks, setPastWalks] = useState([]);
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {

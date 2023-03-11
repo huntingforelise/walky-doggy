@@ -10,7 +10,8 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ username: username });
     if (user.password === password) {
       req.session.uid = user._id;
-      res.status(200).send(user);
+      res.status(200).send({ res: user, error: false });
+      console.log("login user result:" + user);
     } else {
       return res.status(401).send({
         error: "401",
@@ -20,10 +21,9 @@ exports.login = async (req, res) => {
   } catch (error) {
     res
       .status(401)
-      .send({ error: "401", message: "Username or password is incorrect" });
+      .send({ res: "Username or password is incorrect", error: true });
   }
 };
-
 
 exports.create = async (req, res) => {
   const { email, username } = req.body;
@@ -32,11 +32,11 @@ exports.create = async (req, res) => {
   if (userEmail) {
     return res
       .status(409)
-      .send({ error: '409', message: 'User with this E-mail already exists' });
+      .send({ error: "409", message: "User with this E-mail already exists" });
   } else if (userUsername) {
     return res
       .status(409)
-      .send({ error: '409', message: 'Username already exists' });
+      .send({ error: "409", message: "Username already exists" });
   }
   try {
     const newUser = new User({ ...req.body });
@@ -44,15 +44,22 @@ exports.create = async (req, res) => {
     req.session.uid = user._id;
     res.status(201).send(user);
   } catch (error) {
-    res.status(400).send({ error, message: 'Could not create user' });
+    res.status(400).send({ error, message: "Could not create user" });
   }
 };
 
 exports.profile = async (req, res) => {
   try {
-    res.status(200).send(req.user);
-  } catch {
-    res.status(404).send({ error, message: 'User not found' });
+    const username = req.params.user;
+    console.log("req params: " + username);
+    // const username = req.body.username;
+    // console.log(username);
+    const findUser = await User.findOne({ username: username });
+    console.log("did i find the user", findUser);
+    res.status(200).send({ res: findUser, error: false });
+  } catch (e) {
+    console.log(e);
+    res.status(404).send({ res: "User not found", error: true });
   }
 };
 
@@ -61,10 +68,10 @@ exports.logout = (req, res) => {
     if (error) {
       res
         .status(500)
-        .send({ error, message: 'Could not log out, please try again' });
+        .send({ error, message: "Could not log out, please try again" });
     } else {
-      res.clearCookie('sid');
-      res.status(200).send({ message: 'Logout successful' });
+      res.clearCookie("sid");
+      res.status(200).send({ message: "Logout successful" });
     }
   });
 };

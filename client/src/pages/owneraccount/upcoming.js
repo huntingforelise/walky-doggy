@@ -7,6 +7,7 @@ import Link from "next/link";
 //this only exists for the owner
 const upcoming = () => {
   const [futureWalks, setFutureWalks] = useState([]);
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
