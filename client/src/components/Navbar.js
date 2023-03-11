@@ -14,8 +14,8 @@ const Navbar = () => {
         />
       </div>
       <Link href="/">Home</Link>
-      <Link href="/account">Owner</Link>
-      <Link href="/account/walkerindex">Walker</Link>
+      <Link href="/owneraccount/index">Owner</Link>
+      <Link href="/walkeraccount/index">Walker</Link>
     </nav>
   );
 };

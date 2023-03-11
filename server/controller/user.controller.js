@@ -14,14 +14,14 @@ exports.login = async (req, res) => {
       console.log("login user result:" + user);
     } else {
       return res.status(401).send({
-        error: "401",
+        error: true,
         message: "Username or password is incorrect",
       });
     }
   } catch (error) {
     res
       .status(401)
-      .send({ res: "Username or password is incorrect", error: true });
+      .send({ message: "Username or password is incorrect", error: true });
   }
 };
 
@@ -32,11 +32,11 @@ exports.create = async (req, res) => {
   if (userEmail) {
     return res
       .status(409)
-      .send({ error: "409", message: "User with this E-mail already exists" });
+      .send({ error: true, message: "User with this E-mail already exists" });
   } else if (userUsername) {
     return res
       .status(409)
-      .send({ error: "409", message: "Username already exists" });
+      .send({ error: true, message: "Username already exists" });
   }
   try {
     const newUser = new User({ ...req.body });
@@ -44,7 +44,7 @@ exports.create = async (req, res) => {
     req.session.uid = user._id;
     res.status(201).send(user);
   } catch (error) {
-    res.status(400).send({ error, message: "Could not create user" });
+    res.status(400).send({ error : true, message: "Could not create user" });
   }
 };
 
@@ -59,7 +59,7 @@ exports.profile = async (req, res) => {
     res.status(200).send({ res: findUser, error: false });
   } catch (e) {
     console.log(e);
-    res.status(404).send({ res: "User not found", error: true });
+    res.status(404).send({ message: "User not found", error: true });
   }
 };
 
@@ -68,10 +68,10 @@ exports.logout = (req, res) => {
     if (error) {
       res
         .status(500)
-        .send({ error, message: "Could not log out, please try again" });
+        .send({ error : true, message: "Could not log out, please try again" });
     } else {
       res.clearCookie("sid");
-      res.status(200).send({ message: "Logout successful" });
+      res.status(200).send({ error: false, message: "Logout successful" });
     }
   });
 };

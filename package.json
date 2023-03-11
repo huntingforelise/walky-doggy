@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/yiyingko/walky-doggy#readme",
   "dependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "react-toastify": "^9.1.1"
   }
 }

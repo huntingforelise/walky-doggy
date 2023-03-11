@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import auth from "../utils/auth";
 import userService from "../Services/UserService";
 import { useRouter } from "next/router";
+import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
   username: "",
@@ -37,11 +40,18 @@ const Register = (props) => {
     const user = { isOwner, isWalker, username, email, password };
     const res = await userService.register(user);
     console.log(res);
+    const errorToast = () => toast(res.message);
     if (res.error) {
-      alert(`${res.message}`);
+      errorToast()
       setState(initialState);
     } else {
+      // localStorage.setItem("userId", res.userId);
+      const userId = res._id;
+      const isOwner = res.isOwner;
+      const isWalker = res.isWalker;
       localStorage.setItem("userId", userId);
+      localStorage.setItem("isOwner", isOwner);
+      localStorage.setItem("isWalker", isWalker);
       if (res.isOwner) {
         auth.login(() => router.push("/owneraccount"));
       } else auth.login(() => router.push("/walkeraccount"));
@@ -121,6 +131,7 @@ const Register = (props) => {
             </button>
           </div>
         </form>
+        <ToastContainer/>
       </div>
     </section>
   );

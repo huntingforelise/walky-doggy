@@ -9,8 +9,8 @@ const book = () => {
   const [dogName, setDogName] = useState("");
   const [date, setDate] = useState("");
   const [pickUpLocation, setPickUpLocation] = useState("");
-  const userId = localStorage.getItem("userId");
-  console.log("book a walk: " + userId);
+  const ownerID = localStorage.getItem("userId");
+  console.log("book a walk: " + ownerID);
 
   const postWalk = (walk) => {
     WalkService.postWalk(walk);
@@ -18,7 +18,7 @@ const book = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    postWalk({ dogName, date, pickUpLocation });
+    postWalk({ ownerID, dogName, date, pickUpLocation });
     setDogName("");
     setDate("");
     setPickUpLocation("");

@@ -26,19 +26,19 @@ const Login = (props) => {
     const user = { username, password };
     const output = await userService.login(user);
     if (output.error) {
-      alert(`${res.message}`);
+      alert(`${output.message}`);
       setState(initialState);
     } else {
-      // console.log("username", output.res.username);
       const userInfo = await userService.getUserInfo(output.res.username);
-      console.log("loginpage:", userInfo.res);
-      const username = userInfo.res.username;
-      console.log(userInfo.res.isOwner);
-      console.log(username);
-      localStorage.setItem("username", username);
-      if (userInfo.res.isOwner) {
-        auth.login(() => router.push("/owneraccount"));
-      } else auth.login(() => router.push("/walkeraccount"));
+      const userId = userInfo.res._id;
+      const isOwner = userInfo.res.isOwner;
+      const isWalker = userInfo.res.isWalker;
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("isOwner", isOwner);
+      localStorage.setItem("isWalker", isWalker);
+      if (isOw) {
+        router.push("/owneraccount")
+      } else router.push("/walkeraccount");
     }
   };
 

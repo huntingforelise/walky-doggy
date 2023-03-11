@@ -2,10 +2,14 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
 
-// this will be merged into index once we have authentication set up
-
 const WalkerAccount = () => {
-  const userId = localStorage.getItem("userId");
+  const [walkerId, setWalkerId] = useState("");
+  
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    console.log("walkeraccount: " + userId);
+    if (userId) setWalkerId(userId);
+  }, []);
 
   return (
     <>
@@ -16,13 +20,13 @@ const WalkerAccount = () => {
         <div>
           <h1 className={styles.title}>Walker</h1>
           <div className="myaccount-div">
-            <Link href="/account/find">
+            <Link href={{pathname: "/account/find", query: walkerId}}>
               <button className={styles.button}>Find a Walk</button>
             </Link>
-            <Link href="/account/scheduled">
+            <Link href={{pathname: "/account/scheduled", query: walkerId}}>
               <button className={styles.button}>Scheduled Walks</button>
             </Link>
-            <Link href="/account/walkerhistory">
+            <Link href={{pathname: "/account/walkerhistory", query: walkerId}}>
               <button className={styles.button}>View My Walk History</button>
             </Link>
           </div>

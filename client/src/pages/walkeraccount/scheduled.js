@@ -4,7 +4,6 @@ import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 import Link from "next/link";
 
-//this only exists for the walker
 const scheduled = () => {
   const [futureWalks, setFutureWalks] = useState([]);
   const userId = localStorage.getItem("userId");

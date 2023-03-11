@@ -3,7 +3,6 @@ const authMiddleware = require("./middlewares/auth");
 const userController = require("./controller/user.controller");
 // const locationController = require("./controller/location.controller");
 const walkController = require("./controller/walk.controller");
-// const { check, validationResult } = require("express-validator");
 
 router.post("/register", userController.create);
 router.post("/login", userController.login);
@@ -22,25 +21,5 @@ router.delete("/walk/:id", walkController.deleteWalk);
 // router.get("/locations/:eventId", locationController.getEventLocations);
 // router.post("/locations", locationController.postLocation);
 
-// router.post(
-//   "/events",
-//   [
-//     check("title").notEmpty().trim().withMessage("Event title cannot be empty"),
-//     check("date").notEmpty().isISO8601().withMessage("Incorrect date").toDate(),
-//     check("venue").notEmpty().trim().withMessage("Venue cannot be empty"),
-//   ],
-//   (req, res, next) => {
-//     const error = validationResult(req).formatWith(({ msg }) => msg);
-
-//     const hasError = !error.isEmpty();
-
-//     if (hasError) {
-//       res.status(400).json({ error: error.array() });
-//     } else {
-//       next();
-//     }
-//   },
-//   eventController.postEvent
-// );
 
 module.exports = router;
