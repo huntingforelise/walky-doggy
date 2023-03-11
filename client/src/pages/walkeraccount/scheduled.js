@@ -6,11 +6,13 @@ import Link from "next/link";
 
 const scheduled = () => {
   const [futureWalks, setFutureWalks] = useState([]);
-  const userId = localStorage.getItem("userId");
+  const walkerID = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      setFutureWalks(walks.future);
+      const filteredWalks = walks.future.filter((walk) => walk.walkerID === walkerID);
+      console.log(walks.future)
+      setFutureWalks(filteredWalks);
     });
   }, []);
 
@@ -23,13 +25,13 @@ const scheduled = () => {
   return (
     <>
       <div className="myaccount-div">
-        <Link href="/account/find">
+        <Link href="/walkeraccount/find">
           <button className={styles.button}>Find a Walk</button>
         </Link>
-        <Link href="/account/scheduled">
+        <Link href="/walkeraccount/scheduled">
           <button className={styles.buttonselected}>Scheduled Walks</button>
         </Link>
-        <Link href="/account/walkerhistory">
+        <Link href="/walkeraccount/walkerhistory">
           <button className={styles.button}>View My Walk History</button>
         </Link>
       </div>

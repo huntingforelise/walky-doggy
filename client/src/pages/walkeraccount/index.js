@@ -3,13 +3,7 @@ import Link from "next/link";
 import styles from "@/styles/Home.module.css";
 
 const WalkerAccount = () => {
-  const [walkerId, setWalkerId] = useState("");
-  
-  useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    console.log("walkeraccount: " + userId);
-    if (userId) setWalkerId(userId);
-  }, []);
+  const walkerID = localStorage.getItem("userId");
 
   return (
     <>
@@ -20,13 +14,13 @@ const WalkerAccount = () => {
         <div>
           <h1 className={styles.title}>Walker</h1>
           <div className="myaccount-div">
-            <Link href={{pathname: "/account/find", query: walkerId}}>
+            <Link href={{pathname: "/walkeraccount/find"}}>
               <button className={styles.button}>Find a Walk</button>
             </Link>
-            <Link href={{pathname: "/account/scheduled", query: walkerId}}>
+            <Link href={{pathname: "/walkeraccount/scheduled"}}>
               <button className={styles.button}>Scheduled Walks</button>
             </Link>
-            <Link href={{pathname: "/account/walkerhistory", query: walkerId}}>
+            <Link href={{pathname: "/walkeraccount/walkerhistory"}}>
               <button className={styles.button}>View My Walk History</button>
             </Link>
           </div>

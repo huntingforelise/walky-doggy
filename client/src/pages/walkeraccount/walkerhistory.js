@@ -2,22 +2,19 @@ import WalkList from "@/components/Walklist";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 const walkerhistory = () => {
   const [pastWalks, setPastWalks] = useState([]);
-  const userId = localStorage.getItem("userId");
-  const router = useRouter();
-  const query = router.query;
-
-  console.log(query);
+  const walkerID = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      setPastWalks(walks.past);
+      const filteredWalks = walks.past.filter((walk) => walk.walkerID === walkerID);
+      setPastWalks(filteredWalks);
     });
   }, []);
+  
 
   const deleteWalk = async (_id) => {
     await WalkService.deleteWalk(_id);
@@ -28,13 +25,13 @@ const walkerhistory = () => {
   return (
     <>
       <div className="myaccount-div">
-        <Link href="/account/find">
+        <Link href="/walkeraccount/find">
           <button className={styles.button}>Find a Walk</button>
         </Link>
-        <Link href="/account/scheduled">
+        <Link href="/walkeraccount/scheduled">
           <button className={styles.button}>Scheduled Walks</button>
         </Link>
-        <Link href="/account/walkerhistory">
+        <Link href="/walkeraccount/walkerhistory">
           <button className={styles.buttonselected}>
             View My Walk History
           </button>
