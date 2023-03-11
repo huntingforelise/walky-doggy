@@ -1,17 +1,7 @@
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
-import { useState, useEffect } from "react";
 
 const OwnerAccount = () => {
-  const [ownerId, setOwnerId] = useState("");
-
-  useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    const isOwner = localStorage.getItem("isOwner");
-    console.log("owneraccount: " + userId + isOwner);
-    if (userId) setOwnerId(userId);
-  }, []);
-
   return (
     <>
       <div>
