@@ -7,6 +7,7 @@ import Link from "next/link";
 
 const find = () => {
   const [futureWalks, setFutureWalks] = useState([]);
+  const walkerID = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
@@ -15,6 +16,9 @@ const find = () => {
     });
   }, []);
   
+  const joinWalk = async (_id, walkerID) => {
+    await WalkService.joinWalk(_id, walkerID);
+  };
 
   return (
     <>
@@ -29,7 +33,7 @@ const find = () => {
           <button className={styles.button}>View My Walk History</button>
         </Link>
       </div>
-      <WalkList walks={futureWalks} findWalks={true}/>
+      <WalkList walks={futureWalks} onJoin={joinWalk} findWalks={true}/>
     </>
   );
 };

@@ -12,6 +12,7 @@ router.post("/logout", userController.logout);
 router.get("/walks", walkController.getWalks);
 router.post("/walk", walkController.postWalk);
 router.put("/walk/:id", walkController.updateWalkRecord);
+router.put("/joinwalk/:id", walkController.joinWalk);
 router.put("/walk/:id/image", walkController.updateWalkImage);
 router.put("/walk/:id/location", walkController.updateWalkLocation);
 router.delete("/walk/:id", walkController.deleteWalk);

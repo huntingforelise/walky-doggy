@@ -2,7 +2,8 @@ import moment from "moment";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 
-const Walk = ({ walk, onDelete, formPath, findWalks, isOwner }) => {
+const Walk = ({ walk, onDelete, formPath, findWalks, isOwner, onJoin}) => {
+
   return (
     walk && (
       <div className="walk-div">
@@ -22,7 +23,7 @@ const Walk = ({ walk, onDelete, formPath, findWalks, isOwner }) => {
             </div>
             {findWalks ? (
               <div className="btn-dev">
-                <button className="btn">Walk this doggy!</button>
+                <button className="btn" onClick={() => onJoin(walk._id)}>Walk this doggy!</button>
               </div>
             ) : isOwner ? (
               <>

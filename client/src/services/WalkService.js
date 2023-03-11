@@ -18,6 +18,19 @@ export const postWalk = (body) => {
     .catch((err) => console.log(err));
 };
 
+export const joinWalk = (_id, walkerID) => {
+  return fetch(`${BASE_URL}/joinwalk/${_id}`, {
+    method: "PUT",
+    body: JSON.stringify(record),
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(walkerID),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
 export const updateWalkRecord = (record) => {
   const ID = record.eventId;
   return fetch(`${BASE_URL}/walk/${ID}`, {

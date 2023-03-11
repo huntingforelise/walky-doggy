@@ -47,6 +47,22 @@ exports.deleteWalk = async (req, res) => {
   }
 };
 
+exports.joinWalk = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const walkerID = req.body.walkerID
+    const walkToBeUpdated = await walk.findById(ID);
+    await walk.updateOne(walkToBeUpdated, {
+      walkerID: walkerID,
+    });
+    const updatedWalk = await walk.findById(ID);
+    res.status(200).send(updatedWalk);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+};
+
 //we could also include another function that makes it possible for a walker to unsubscribe, this would be a PUT
 
 exports.updateWalkRecord = async (req, res) => {
