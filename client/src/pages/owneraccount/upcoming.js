@@ -4,14 +4,20 @@ import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 import Link from "next/link";
 
-//this only exists for the owner
 const upcoming = () => {
   const [futureWalks, setFutureWalks] = useState([]);
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      setFutureWalks(walks.future);
+      console.log(walks.future);
+      const filteredWalks = [];
+      for (const walk of walks.future) {
+        if (walk.ownerID === userId) {
+          filteredWalks.push(walk);
+        }
+      }
+      setFutureWalks(filteredWalks);
     });
   }, []);
 
@@ -24,13 +30,13 @@ const upcoming = () => {
   return (
     <>
       <div className="myaccount-div">
-        <Link href="/account/book">
+        <Link href="/owneraccount/book">
           <button className={styles.button}>Book a walk</button>
         </Link>
-        <Link href="/account/ownerhistory">
+        <Link href="/owneraccount/ownerhistory">
           <button className={styles.button}>View My Walk History</button>
         </Link>
-        <Link href="/account/upcoming">
+        <Link href="/owneraccount/upcoming">
           <button className={styles.buttonselected}>Upcoming Walks</button>
         </Link>
       </div>

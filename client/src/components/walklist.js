@@ -1,12 +1,15 @@
 import Walk from "./Walk";
 import * as WalkService from "../services/WalkService";
+import { useState } from "react";
 
-const WalkList = ({ formPath, walks, findWalks, isOwner }) => {
-  const deleteWalk = async (_id) => {
-    await WalkService.deleteWalk(_id);
-    const updatedArray = futureWalks.filter((walk) => walk._id !== _id);
-    setFutureWalks(updatedArray);
-  };
+const WalkList = ({ formPath, onDelete, walks, findWalks, isOwner }) => {
+  // const [newWalks, setNewWalks] = useState([]);
+
+  // const deleteWalk = async (_id) => {
+  //   await WalkService.deleteWalk(_id);
+  //   const updatedArray = walks.filter((walk) => walk._id !== _id);
+  //   setNewWalks(updatedArray);
+  // };
 
   return (
     <>
@@ -17,7 +20,7 @@ const WalkList = ({ formPath, walks, findWalks, isOwner }) => {
               <Walk
                 key={walk._id}
                 walk={walk}
-                onDelete={deleteWalk}
+                onDelete={onDelete}
                 formPath={formPath}
                 findWalks={findWalks}
                 isOwner={isOwner}

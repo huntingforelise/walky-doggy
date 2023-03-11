@@ -28,7 +28,8 @@ exports.postWalk = async (req, res) => {
     // await user.updateOne(userToBeUpdated, {
     //   $addToSet: { scheduledwalks: newWalk._id },
     // });
-    res.status(201).send(newWalk);
+    res.status(201).send({ res: newWalk, error: false });
+    console.log(newWalk);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

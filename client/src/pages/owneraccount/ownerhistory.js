@@ -10,28 +10,34 @@ const ownerhistory = () => {
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      setPastWalks(walks.past);
+      const filteredWalks = [];
+      for (const walk of walks.past) {
+        if (walk.ownerID === userId) {
+          filteredWalks.push(walk);
+        }
+      }
+      setPastWalks(filteredWalks);
     });
   }, []);
 
   const deleteWalk = async (_id) => {
     await WalkService.deleteWalk(_id);
-    const updatedArray = futureWalks.filter((walk) => walk._id !== _id);
-    setFutureWalks(updatedArray);
+    const updatedArray = pastWalks.filter((walk) => walk._id !== _id);
+    setPastWalks(updatedArray);
   };
 
   return (
     <>
       <div className="myaccount-div">
-        <Link href="/account/book">
+        <Link href="/owneraccount/book">
           <button className={styles.button}>Book a walk</button>
         </Link>
-        <Link href="/account/ownerhistory">
+        <Link href="/owneraccount/ownerhistory">
           <button className={styles.buttonselected}>
             View My Walk History
           </button>
         </Link>
-        <Link href="/account/upcoming">
+        <Link href="/owneraccount/upcoming">
           <button className={styles.button}>Upcoming Walks</button>
         </Link>
       </div>
