@@ -1,22 +1,18 @@
 import React from "react";
-import auth from "../utils/auth";
 import userService from "../Services/UserService";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 
-const Logout = (props) => {
-  let navigate = useNavigate();
-  const userId = localStorage.getItem("userId");
+const Logout = () => {
+  const router = useRouter();
+  const isOwner = localStorage.getItem("isOwner");
+  console.log(isOwner)
 
   const handleClick = () => {
     userService.logout();
-    handleAuth();
-  };
-
-  const handleAuth = () => {
-    if (props.setIsAuthenticated) {
-      props.setIsAuthenticated(false);
-    }
-    auth.logout(() => navigate("/"));
+    localStorage.setItem("userId", "");
+    localStorage.setItem("isOwner", "");
+    localStorage.setItem("isWalker", "");
+    router.push("/");
   };
 
   return (
@@ -26,7 +22,11 @@ const Logout = (props) => {
         variant="contained"
         className="confirm-btn"
         onClick={() => {
-          navigate(`/account`);
+          if (isOwner === "true") {
+            router.push("/owneraccount");
+          } else {
+            router.push("/walkeraccount");
+          }
         }}
       >
         No

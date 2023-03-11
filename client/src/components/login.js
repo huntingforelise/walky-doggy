@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import auth from "../utils/auth";
 import userService from "../Services/UserService";
 import { useRouter } from "next/router";
 
@@ -8,7 +7,7 @@ const initialState = {
   password: "",
 };
 
-const Login = (props) => {
+const Login = () => {
   const router = useRouter();
   const [state, setState] = useState(initialState);
 
