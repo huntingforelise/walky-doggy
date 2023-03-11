@@ -10,16 +10,17 @@ const walkerhistory = () => {
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      const filteredWalks = walks.past.filter((walk) => walk.walkerID === walkerID);
+      const filteredWalks = walks.past.filter(
+        (walk) => walk.walkerID === walkerID
+      );
       setPastWalks(filteredWalks);
     });
   }, []);
-  
 
   const deleteWalk = async (_id) => {
     await WalkService.deleteWalk(_id);
-    const updatedArray = futureWalks.filter((walk) => walk._id !== _id);
-    setFutureWalks(updatedArray);
+    const updatedArray = pastWalks.filter((walk) => walk._id !== _id);
+    setPastWalks(updatedArray);
   };
 
   return (
