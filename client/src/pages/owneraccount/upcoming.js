@@ -10,7 +10,6 @@ const upcoming = () => {
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      console.log(walks.future);
       const filteredWalks = [];
       for (const walk of walks.future) {
         if (walk.ownerID === userId) {
@@ -40,7 +39,12 @@ const upcoming = () => {
           <button className={styles.buttonselected}>Upcoming Walks</button>
         </Link>
       </div>
-      <WalkList walks={futureWalks} onDelete={deleteWalk} formPath="/form/" />
+      <WalkList
+        walks={futureWalks}
+        onDelete={deleteWalk}
+        formPath="/form/"
+        ownerUpcoming={true}
+      />
     </>
   );
 };

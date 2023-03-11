@@ -2,7 +2,14 @@ import moment from "moment";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 
-const Walk = ({ walk, onDelete, formPath, findWalks, isOwner }) => {
+const Walk = ({
+  walk,
+  onDelete,
+  formPath,
+  findWalks,
+  ownerHistory,
+  ownerUpcoming,
+}) => {
   return (
     walk && (
       <div className="walk-div">
@@ -24,7 +31,7 @@ const Walk = ({ walk, onDelete, formPath, findWalks, isOwner }) => {
               <div className="btn-dev">
                 <button className="btn">Walk this doggy!</button>
               </div>
-            ) : isOwner ? (
+            ) : ownerHistory ? (
               <>
                 <div className="btn-dev">
                   <Link href={`${formPath}${walk._id}`}>
@@ -36,6 +43,11 @@ const Walk = ({ walk, onDelete, formPath, findWalks, isOwner }) => {
                   />
                 </div>
               </>
+            ) : ownerUpcoming ? (
+              <FaTrash
+                className="dele-btn"
+                onClick={() => onDelete(walk._id)}
+              />
             ) : (
               <>
                 <div className="btn-dev">

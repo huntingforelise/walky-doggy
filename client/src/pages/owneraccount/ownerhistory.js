@@ -41,8 +41,12 @@ const ownerhistory = () => {
           <button className={styles.button}>Upcoming Walks</button>
         </Link>
       </div>
-      <WalkList walks={pastWalks} formPath="/formuser/" onDelete={deleteWalk} />
-      ;
+      <WalkList
+        walks={pastWalks}
+        formPath="/formuser/"
+        onDelete={deleteWalk}
+        ownerHistory={true}
+      />
     </>
   );
 };

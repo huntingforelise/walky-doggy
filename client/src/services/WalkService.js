@@ -1,5 +1,11 @@
 const BASE_URL = "http://localhost:3001";
 
+export const getWalk = (id) =>
+  fetch(`${BASE_URL}/walk/${id}`)
+    .then((res) => (res.status <= 400 ? res : Promise.reject(res)))
+    .then((res) => res.json())
+    .catch((err) => err);
+
 export const getWalks = () =>
   fetch(`${BASE_URL}/walks`)
     .then((res) => (res.status <= 400 ? res : Promise.reject(res)))
@@ -46,8 +52,8 @@ export const updateWalkImage = async (data, id) => {
     .catch((err) => console.log(err));
 };
 
-export const deleteWalk = (_id) => {
-  return fetch(`${BASE_URL}/walk/${_id}`, {
+export const deleteWalk = (id) => {
+  return fetch(`${BASE_URL}/walk/${id}`, {
     method: "DELETE",
     credentials: "include",
     mode: "cors",
@@ -57,16 +63,16 @@ export const deleteWalk = (_id) => {
     .catch((err) => console.log(err));
 };
 
-export const updateWalkLocation = (location, id) => {
-  console.log("walkservice", location);
-  const ID = id;
-  return fetch(`${BASE_URL}/walk/${ID}/location`, {
-    method: "PUT",
-    credentials: "include",
-    mode: "cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(location),
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
-};
+// export const updateWalkLocation = (location, id) => {
+//   console.log("walkservice", location);
+//   const ID = id;
+//   return fetch(`${BASE_URL}/walk/${ID}/location`, {
+//     method: "PUT",
+//     credentials: "include",
+//     mode: "cors",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(location),
+//   })
+//     .then((res) => res.json())
+//     .catch((err) => console.log(err));
+// };

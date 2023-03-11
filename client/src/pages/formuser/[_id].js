@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import mapboxgl from "mapbox-gl";
+// import mapboxgl from "mapbox-gl";
 import React, { useRef, useEffect, useState } from "react";
+import * as WalkService from "../../services/WalkService";
 // import "./mapbox-gl/dist/mapbox-gl.css";
 
 //mapboxgl.accessToken = process.env.local.MAPBOX_KEY;
@@ -11,6 +11,11 @@ const formuser = () => {
   console.log("this is within formuser");
   const router = useRouter();
   const { _id } = router.query;
+  const [walkRecord, setWalkRecord] = useState({});
+
+  useEffect(() => {
+    WalkService.getWalk(_id).then((walk) => setWalkRecord(walk));
+  }, []);
 
   // /**fetch location */
   // const [coordinates, setCoordinates] = useState({});
@@ -76,20 +81,18 @@ const formuser = () => {
 
   return (
     <>
-      <Head>
-        <title>Walky Doggy | view walk</title>
-      </Head>
-      <p>walk: {_id}</p>
       <h1 className={styles.title}>Walk Record</h1>
-
       <div className="record-div-outer">
-        <div className="record-div">
-          <label>POO: {records[0]?.poo.toString()} </label>
-          <label>PEE: {records[0]?.pee.toString()} </label>
-        </div>
+        {walkRecord.poo !== undefined && walkRecord.pee !== undefined ? (
+          <div className="record-div">
+            <label>POO: {walkRecord.poo} </label>
+            <label>PEE: {walkRecord.pee} </label>
+          </div>
+        ) : (
+          "We unfortunately don't have any pee or poo data yet!"
+        )}
       </div>
-
-      <div className="walk-path-outer">
+      {/* <div className="walk-path-outer">
         <div className="walk-path">
           <div>
             <h2 className="h2-walk">Walk Path</h2>
@@ -98,10 +101,10 @@ const formuser = () => {
             </div>
           </div>
           {/* <Image src="/mock-gps-path.png" width="420" height="280" /> */}
-        </div>
-      </div>
+      {/* </div>
+      </div> */}
 
-      <div className="imgs-container">
+      {/* <div className="imgs-container">
         {images.map((image) => {
           return (
             <div>
@@ -113,7 +116,7 @@ const formuser = () => {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </>
   );
 };

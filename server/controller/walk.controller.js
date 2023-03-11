@@ -1,9 +1,20 @@
 const walk = require("../models/walk");
-const user = require("../models/user.js");
+// const user = require("../models/user.js");
+
+exports.getWalk = async (req, res) => {
+  try {
+    const ID = req.params.id;
+    const walk = await walk.findById(ID);
+    console.log(walk);
+    res.status(200).send(walk);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+};
 
 exports.getWalks = async (req, res) => {
   try {
-    //this is a function for both owners and walkers
     const pastWalks = await walk
       .find({ date: { $lte: new Date().toISOString() } })
       .sort({ date: 1 });
@@ -20,7 +31,6 @@ exports.getWalks = async (req, res) => {
 exports.postWalk = async (req, res) => {
   try {
     //this is an owner specific function
-    //we will need to send the owner ID as part of req.body
     console.log(req.body);
     const newWalk = await walk.create(req.body);
     // const ownerID = newWalk.ownerID;
@@ -86,21 +96,21 @@ exports.updateWalkImage = async (req, res) => {
   }
 };
 
-exports.updateWalkLocation = async (req, res) => {
-  //this is a walker only function
-  console.log("controller", req.body);
-  try {
-    const ID = req.params.id;
-    const walkToBeUpdated = await walk.findById(ID);
-    await walk.updateOne(walkToBeUpdated, { coordinates: req.body });
-    const updatedWalk = await walk.findById(ID);
-    console.log(updatedWalk);
-    res.status(200).send(updatedWalk);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-};
+// exports.updateWalkLocation = async (req, res) => {
+//   //this is a walker only function
+//   console.log("controller", req.body);
+//   try {
+//     const ID = req.params.id;
+//     const walkToBeUpdated = await walk.findById(ID);
+//     await walk.updateOne(walkToBeUpdated, { coordinates: req.body });
+//     const updatedWalk = await walk.findById(ID);
+//     console.log(updatedWalk);
+//     res.status(200).send(updatedWalk);
+//   } catch (error) {
+//     console.log(error);
+//     res.sendStatus(500);
+//   }
+// };
 
 // I will complete this once we've got the rest working
 // exports.deleteImage = async (req, res) => {
