@@ -7,28 +7,29 @@ import Link from "next/link";
 
 const find = () => {
   const [futureWalks, setFutureWalks] = useState([]);
-  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      setFutureWalks(walks.future);
+      const unassignedWalks = walks.future.filter((walk) => !walk.walkerID);
+      setFutureWalks(unassignedWalks);
     });
   }, []);
+  
 
   return (
     <>
       <div className="myaccount-div">
-        <Link href="/account/find">
+        <Link href="/walkeraccount/find">
           <button className={styles.buttonselected}>Find a Walk</button>
         </Link>
-        <Link href="/account/scheduled">
+        <Link href="/walkeraccount/scheduled">
           <button className={styles.button}>Scheduled Walks</button>
         </Link>
-        <Link href="/account/walkerhistory">
+        <Link href="/walkeraccount/walkerhistory">
           <button className={styles.button}>View My Walk History</button>
         </Link>
       </div>
-      <WalkList walks={futureWalks} findWalks={true} />
+      <WalkList walks={futureWalks} findWalks={true}/>
     </>
   );
 };

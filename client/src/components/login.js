@@ -36,7 +36,7 @@ const Login = (props) => {
       localStorage.setItem("userId", userId);
       localStorage.setItem("isOwner", isOwner);
       localStorage.setItem("isWalker", isWalker);
-      if (isOw) {
+      if (isOwner) {
         router.push("/owneraccount")
       } else router.push("/walkeraccount");
     }
