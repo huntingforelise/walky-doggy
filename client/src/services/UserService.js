@@ -15,26 +15,15 @@ userService.register = (user) => {
 };
 
 userService.login = (user) => {
-  return (
-    fetch(`${BASE_URL}/login`, {
-      method: "POST",
-      credentials: "include",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    })
-      // .then(async (res) => {
-      //   if (!res.ok) {
-      //     throw new Error("Network response was not ok");
-      //   }
-      //   const json = await res.json();
-      //   console.log("user service res:", json);
-      //   return json;
-      // })
-      // .then((res) => console.log(res))
-      .then((res) => res.json())
-      .catch((err) => console.log(err))
-  );
+  return fetch(`${BASE_URL}/login`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
 };
 
 userService.getUserInfo = (id) => {
@@ -43,7 +32,6 @@ userService.getUserInfo = (id) => {
     credentials: "include",
     mode: "cors",
     headers: { "Content-Type": "application/json" },
-    // body: JSON.stringify(username),
   })
     .then(async (res) => {
       if (!res.ok) {

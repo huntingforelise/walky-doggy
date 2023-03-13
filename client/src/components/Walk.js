@@ -9,6 +9,7 @@ const Walk = ({
   findWalks,
   ownerHistory,
   ownerUpcoming,
+  onJoin,
 }) => {
   return (
     walk && (
@@ -29,7 +30,9 @@ const Walk = ({
             </div>
             {findWalks ? (
               <div className="btn-dev">
-                <button className="btn">Walk this doggy!</button>
+                <button className="btn" onClick={() => onJoin(walk._id)}>
+                  Walk this doggy!
+                </button>
               </div>
             ) : ownerHistory ? (
               <>

@@ -24,6 +24,20 @@ export const postWalk = (body) => {
     .catch((err) => console.log(err));
 };
 
+export const joinWalk = (id, walkerID) => {
+  // console.log(id);
+  // console.log("in joinwalk", walkerID);
+  return fetch(`${BASE_URL}/joinwalk/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ walkerID }),
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
 export const updateWalkRecord = (record) => {
   const ID = record.eventId;
   return fetch(`${BASE_URL}/walk/${ID}`, {
@@ -40,14 +54,15 @@ export const updateWalkRecord = (record) => {
 export const updateWalkImage = async (link, id) => {
   console.log(link);
   const ID = id;
+  const URL = data.secure_url;
   return fetch(`${BASE_URL}/walk/${ID}/image`, {
     method: "PUT",
+    body: JSON.stringify({ URL }),
     headers: {
       "Content-type": "application/json",
     },
     credentials: "include",
     mode: "cors",
-    body: JSON.stringify(link),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));

@@ -57,6 +57,27 @@ exports.deleteWalk = async (req, res) => {
   }
 };
 
+exports.joinWalk = async (req, res) => {
+  try {
+    console.log(req);
+    const ID = req.params.id;
+    const { walkerID } = req.body;
+    console.log(ID);
+    console.log(walkerID);
+    const walkToBeUpdated = await walk.findById(ID);
+    console.log(walkToBeUpdated);
+    await walk.updateOne(walkToBeUpdated, {
+      walkerID: walkerID,
+    });
+    const updatedWalk = await walk.findById(ID);
+    console.log(updatedWalk);
+    res.status(200).send({ res: updatedWalk, error: false });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ res: "Internal server error", error: true });
+  }
+};
+
 //we could also include another function that makes it possible for a walker to unsubscribe, this would be a PUT
 
 exports.updateWalkRecord = async (req, res) => {
@@ -81,9 +102,10 @@ exports.updateWalkImage = async (req, res) => {
   console.log(req.body);
   try {
     const ID = req.params.id;
+    const URL = req.body.URL;
     const walkToBeUpdated = await walk.findById(ID);
     const arrayToBeUpdated = walkToBeUpdated.imageURL;
-    const updatedArray = [...arrayToBeUpdated, req.body];
+    const updatedArray = [...arrayToBeUpdated, URL];
     await walk.updateOne(walkToBeUpdated, {
       $addToSet: { imageURL: updatedArray },
     });

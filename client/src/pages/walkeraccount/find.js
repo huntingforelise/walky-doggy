@@ -1,4 +1,3 @@
-import Head from "next/head";
 import WalkList from "../../components/Walklist";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
@@ -7,6 +6,8 @@ import Link from "next/link";
 
 const find = () => {
   const [futureWalks, setFutureWalks] = useState([]);
+  const walkerID = localStorage.getItem("userId");
+  console.log(walkerID);
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
@@ -14,7 +15,13 @@ const find = () => {
       setFutureWalks(unassignedWalks);
     });
   }, []);
-  
+
+  const joinWalk = async (walkId) => {
+    console.log("walkId", walkId);
+    console.log("walkerId", walkerID);
+    const output = await WalkService.joinWalk(walkId, walkerID);
+    console.log(output);
+  };
 
   return (
     <>
@@ -29,7 +36,7 @@ const find = () => {
           <button className={styles.button}>View My Walk History</button>
         </Link>
       </div>
-      <WalkList walks={futureWalks} findWalks={true}/>
+      <WalkList walks={futureWalks} onJoin={joinWalk} findWalks={true} />
     </>
   );
 };

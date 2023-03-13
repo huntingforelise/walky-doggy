@@ -22,6 +22,7 @@ const WalkList = ({
                 findWalks={findWalks}
                 ownerHistory={ownerHistory}
                 ownerUpcoming={ownerUpcoming}
+                onJoin={onJoin}
               />
             );
           })}
