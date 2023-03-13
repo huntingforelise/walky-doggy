@@ -1,21 +1,21 @@
-const express = require('express');
-const session = require('express-session');
+const express = require("express");
+const session = require("express-session");
 const app = express();
-const cors = require('cors')
-const router = require('./router');
-const PORT = 3001
-const mongoConnection = require('./models/index')
+const cors = require("cors");
+const router = require("./router");
+const PORT = 3001;
+const mongoConnection = require("./models/index");
 
 const corsConfig = {
-  origin: 'http://localhost:3000',
+  origin: "http://localhost:3000",
   credentials: true,
 };
 
-app.use(express.json());
 app.use(cors(corsConfig));
+app.use(express.json());
 app.use(
   session({
-    name: 'sid',
+    name: "sid",
     saveUninitialized: false,
     resave: false,
     secret: "not secure!",
@@ -29,8 +29,8 @@ app.use(
 );
 
 app.use(router);
-app.get('*', (req, res) => {
-  res.status(404).send('Sorry, not found 😞');
+app.get("*", (req, res) => {
+  res.status(404).send("Sorry, not found 😞");
 });
 
 app.listen(PORT, (err) => {

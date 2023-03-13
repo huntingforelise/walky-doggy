@@ -24,6 +24,7 @@ const Login = () => {
     const { username, password } = state;
     const user = { username, password };
     const output = await userService.login(user);
+
     if (output.error) {
       alert(`${output.message}`);
       setState(initialState);

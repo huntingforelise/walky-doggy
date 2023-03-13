@@ -49,17 +49,22 @@ exports.deleteWalk = async (req, res) => {
 
 exports.joinWalk = async (req, res) => {
   try {
-    const _id = req.params.id;
-    const walkerID = req.body.walkerID
+    console.log(req);
+    const ID = req.params.id;
+    const { walkerID } = req.body;
+    console.log(ID);
+    console.log(walkerID);
     const walkToBeUpdated = await walk.findById(ID);
+    console.log(walkToBeUpdated);
     await walk.updateOne(walkToBeUpdated, {
       walkerID: walkerID,
     });
     const updatedWalk = await walk.findById(ID);
-    res.status(200).send(updatedWalk);
+    console.log(updatedWalk);
+    res.status(200).send({ res: updatedWalk, error: false });
   } catch (error) {
     console.log(error);
-    res.sendStatus(500);
+    res.status(500).send({ res: "Internal server error", error: true });
   }
 };
 
@@ -87,9 +92,10 @@ exports.updateWalkImage = async (req, res) => {
   console.log(req.body);
   try {
     const ID = req.params.id;
+    const URL = req.body.URL;
     const walkToBeUpdated = await walk.findById(ID);
     const arrayToBeUpdated = walkToBeUpdated.imageURL;
-    const updatedArray = [...arrayToBeUpdated, req.body];
+    const updatedArray = [...arrayToBeUpdated, URL];
     await walk.updateOne(walkToBeUpdated, {
       $addToSet: { imageURL: updatedArray },
     });

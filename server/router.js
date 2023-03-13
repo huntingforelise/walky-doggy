@@ -22,5 +22,4 @@ router.delete("/walk/:id", walkController.deleteWalk);
 // router.get("/locations/:eventId", locationController.getEventLocations);
 // router.post("/locations", locationController.postLocation);
 
-
 module.exports = router;

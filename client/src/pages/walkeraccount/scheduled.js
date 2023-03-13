@@ -10,8 +10,9 @@ const scheduled = () => {
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      const filteredWalks = walks.future.filter((walk) => walk.walkerID === walkerID);
-      console.log(walks.future)
+      const filteredWalks = walks.future.filter(
+        (walk) => walk.walkerID === walkerID
+      );
       setFutureWalks(filteredWalks);
     });
   }, []);
