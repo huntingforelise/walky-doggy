@@ -11,7 +11,6 @@ exports.login = async (req, res) => {
     if (user.password === password) {
       req.session.uid = user._id;
       res.status(200).send({ res: user, error: false });
-      console.log("login user result:" + user);
     } else {
       return res.status(401).send({
         error: true,
@@ -31,8 +30,8 @@ exports.create = async (req, res) => {
   const userUsername = await User.findOne({ username: username });
   if (userEmail) {
     return res
-      .status(409)
-      .send({ error: true, message: "User with this E-mail already exists" });
+    .status(409)
+    .send({ error: true, message: "User with this E-mail already exists" });  
   } else if (userUsername) {
     return res
       .status(409)
@@ -52,14 +51,15 @@ exports.profile = async (req, res) => {
   try {
     const username = req.params.user;
     console.log("req params: " + username);
-    // const username = req.body.username;
-    // console.log(username);
     const findUser = await User.findOne({ username: username });
-    console.log("did i find the user", findUser);
-    res.status(200).send({ res: findUser, error: false });
-  } catch (e) {
-    console.log(e);
-    res.status(404).send({ message: "User not found", error: true });
+    if (findUser) {
+      res.status(200).send({ res: findUser, error: false });
+    } else {
+      res.status(404).send({ message: "User not found", error: true });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Server error", error: true });
   }
 };
 
