@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
-import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import * as WalkService from "../../services/WalkService";
 import UpdateWalkRecord from "../../../components/UpdateWalkRecord";
 
@@ -9,9 +8,6 @@ const form = () => {
   const router = useRouter();
   const { _id } = router.query;
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
-  // const [imageSrc, setImageSrc] = useState("");
-  // const [uploadData, setUploadData] = useState();
   // const [location, setLocation] = useState([]);
 
   const addRecord = async (record) => {
@@ -20,9 +16,9 @@ const form = () => {
   };
 
   const addImage = async (url, id) => {
-    console.log("url in add image", url);
     const output = await WalkService.updateWalkImage(url, id);
     console.log(output);
+    //need to display a success message!
   };
 
   // const addLocation = async (location, id) => {
@@ -60,39 +56,6 @@ const form = () => {
 
   // const stopTracking = () => {
   //   return;
-  // };
-
-  // const handleOnChange = (changeEvent) => {
-  //   const reader = new FileReader();
-  //   reader.onload = function (onLoadEvent) {
-  //     setImageSrc(onLoadEvent.target.result);
-  //     setUploadData(undefined);
-  //   };
-  //   reader.readAsDataURL(changeEvent.target.files[0]);
-  // };
-
-  // const handleOnSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const form = event.currentTarget;
-  //   console.log();
-  //   const fileInput = Array.from(form.elements).find(
-  //     ({ name }) => name === "file"
-  //   );
-  //   const formData = new FormData();
-  //   for (const file of fileInput.files) {
-  //     formData.append("file", file);
-  //   }
-  //   formData.append("upload_preset", "geixym3t");
-  //   const data = await fetch(
-  //     "https://api.cloudinary.com/v1_1/dljhj1szz/image/upload",
-  //     { method: "POST", body: JSON.stringify(formData) }
-  //   ).then((res) => res.json());
-
-  //   // setImageSrc(data.secure_url);
-  //   setUploadData(data);
-  //   console.log(data.secure_url);
-  //   console.log("event: " + _id);
-  //   addImage(data.secure_url, _id);
   // };
 
   const uploadImage = () => {
@@ -144,9 +107,6 @@ const form = () => {
               onChange={(e) => setImage(e.target.files[0])}
             ></input>
             <button onClick={uploadImage}>Upload</button>
-          </div>
-          <div>
-            <img src={url} />
           </div>
         </div>
       </div>

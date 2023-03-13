@@ -7,7 +7,6 @@ import Link from "next/link";
 const find = () => {
   const [futureWalks, setFutureWalks] = useState([]);
   const walkerID = localStorage.getItem("userId");
-  console.log(walkerID);
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
@@ -17,8 +16,6 @@ const find = () => {
   }, []);
 
   const joinWalk = async (walkId) => {
-    console.log("walkId", walkId);
-    console.log("walkerId", walkerID);
     const output = await WalkService.joinWalk(walkId, walkerID);
     console.log(output);
   };

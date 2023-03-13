@@ -7,6 +7,7 @@ const WalkList = ({
   findWalks,
   ownerHistory,
   ownerUpcoming,
+  onJoin,
 }) => {
   return (
     <>

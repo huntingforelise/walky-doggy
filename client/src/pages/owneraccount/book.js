@@ -13,7 +13,6 @@ const book = () => {
   const [date, setDate] = useState("");
   const [pickUpLocation, setPickUpLocation] = useState("");
   const ownerID = localStorage.getItem("userId");
-  console.log("book a walk: " + ownerID);
 
   const postWalk = async (walk) => {
     const output = await WalkService.postWalk(walk);

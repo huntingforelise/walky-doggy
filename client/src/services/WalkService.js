@@ -25,8 +25,6 @@ export const postWalk = (body) => {
 };
 
 export const joinWalk = (id, walkerID) => {
-  // console.log(id);
-  // console.log("in joinwalk", walkerID);
   return fetch(`${BASE_URL}/joinwalk/${id}`, {
     method: "PUT",
     body: JSON.stringify({ walkerID }),
@@ -52,9 +50,8 @@ export const updateWalkRecord = (record) => {
 };
 
 export const updateWalkImage = async (link, id) => {
-  console.log(link);
   const ID = id;
-  const URL = data.secure_url;
+  const URL = link;
   return fetch(`${BASE_URL}/walk/${ID}/image`, {
     method: "PUT",
     body: JSON.stringify({ URL }),

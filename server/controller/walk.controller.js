@@ -104,10 +104,8 @@ exports.updateWalkImage = async (req, res) => {
     const ID = req.params.id;
     const URL = req.body.URL;
     const walkToBeUpdated = await walk.findById(ID);
-    const arrayToBeUpdated = walkToBeUpdated.imageURL;
-    const updatedArray = [...arrayToBeUpdated, URL];
     await walk.updateOne(walkToBeUpdated, {
-      $addToSet: { imageURL: updatedArray },
+      $addToSet: { imageURL: URL },
     });
     const updatedWalk = await walk.findById(ID);
     console.log(updatedWalk);
