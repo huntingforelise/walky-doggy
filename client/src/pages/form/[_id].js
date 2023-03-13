@@ -1,16 +1,25 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import * as WalkService from "../../services/WalkService";
-import UpdateWalkRecord from "../../../components/UpdateWalkRecord";
 
 const form = () => {
-  console.log("this is within form");
   const router = useRouter();
   const { _id } = router.query;
   const [image, setImage] = useState("");
+  const [pee, setPee] = useState(false);
+  const [poo, setPoo] = useState(false);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addRecord({ eventId: _id, pee, poo });
+    setPee(false);
+    setPoo(false);
+    router.push("/walkeraccount")
+  };
   // const [location, setLocation] = useState([]);
 
   const addRecord = async (record) => {
+    console.log(record)
     await WalkService.updateWalkRecord(record);
     //there needs to be a successmessage
   };
@@ -75,7 +84,38 @@ const form = () => {
   return (
     <>
       <div className="addform">
-        <UpdateWalkRecord onAdd={addRecord} eventId={_id} />
+      <form className="add-form" onSubmit={onSubmit}>
+      <div className="submit-form-title">
+        <h1>POO/PEE RECORD</h1>
+      </div>
+      <div>
+        <div>
+          <div className="submit-form-control">
+            <label className="adjustfont">PEE</label>
+            <input
+              type="checkbox"
+              name="pee"
+              value={pee}
+              onChange={(e) => setPee(e.target.checked)}
+            />
+          </div>
+          <div>
+            <div className="submit-form-control">
+              <label>POO</label>
+              <input
+                type="checkbox"
+                name="poo"
+                value={poo}
+                onChange={(e) => setPoo(e.target.checked)}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="submit-div">
+          <input type="submit" value="Submit" className="btn-record" />
+        </div>
+      </div>
+    </form>
       </div>
 
       {/* <div className="gpsouter">
