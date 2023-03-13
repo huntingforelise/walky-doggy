@@ -14,7 +14,7 @@ const initialState = {
   isWalker: false,
 };
 
-const Register = (props) => {
+const Register = () => {
   const router = useRouter();
   const [state, setState] = useState(initialState);
 
@@ -42,7 +42,7 @@ const Register = (props) => {
     console.log(res);
     const errorToast = () => toast(res.message);
     if (res.error) {
-      errorToast()
+      errorToast();
       setState(initialState);
     } else {
       // localStorage.setItem("userId", res.userId);
@@ -131,7 +131,7 @@ const Register = (props) => {
             </button>
           </div>
         </form>
-        <ToastContainer/>
+        <ToastContainer />
       </div>
     </section>
   );

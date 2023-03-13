@@ -64,7 +64,13 @@ export default function Home() {
                 Register
               </button>
             </div>
-            <div>{currentTab === "login" ? <Login setIsAuthenticated={setIsAuthenticated}/> : <Register setIsAuthenticated={setIsAuthenticated}/>}</div>
+            <div>
+              {currentTab === "login" ? (
+                <Login setIsAuthenticated={setIsAuthenticated} />
+              ) : (
+                <Register setIsAuthenticated={setIsAuthenticated} />
+              )}
+            </div>
           </div>
         </div>
       </div>
