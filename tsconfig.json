@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "preserve",
+    "allowJs": true,
+    "moduleResolution": "node"
+  },
+  "include": ["./client/src/**/*"],
+  "exclude": ["./server/node_modules", "./client/node_modules", "./dist"]
+}
