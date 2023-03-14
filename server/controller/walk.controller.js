@@ -1,5 +1,4 @@
 const walk = require("../models/walk");
-// const user = require("../models/user.js");
 
 exports.getWalk = async (req, res) => {
   try {
