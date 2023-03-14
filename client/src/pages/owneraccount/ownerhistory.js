@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ownerhistory = () => {
   const [pastWalks, setPastWalks] = useState([]);
@@ -10,25 +12,29 @@ const ownerhistory = () => {
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      const filteredWalks = [];
-      for (const walk of walks.past) {
-        if (walk.ownerID === userId) {
-          filteredWalks.push(walk);
-        }
-      }
+      const filteredWalks = walks.past.filter(
+        (walk) => walk.ownerID === userId
+      );
       setPastWalks(filteredWalks);
     });
   }, []);
 
   const deleteWalk = async (_id) => {
-    await WalkService.deleteWalk(_id);
-    const updatedArray = pastWalks.filter((walk) => walk._id !== _id);
-    setPastWalks(updatedArray);
+    const output = await WalkService.deleteWalk(_id);
+    if (!output.error) {
+      const successToast = () => toast(output.res);
+      successToast();
+      const updatedArray = pastWalks.filter((walk) => walk._id !== _id);
+      setPastWalks(updatedArray);
+    } else {
+      const errorToast = () => toast(output.res);
+      errorToast();
+    }
   };
 
   return (
     <>
-      <div className="myaccount-div">
+      <div className="myaccount">
         <Link href="/owneraccount/book">
           <button className={styles.button}>Book a walk</button>
         </Link>

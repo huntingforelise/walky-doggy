@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import * as WalkService from "../../services/WalkService";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const form = () => {
   const router = useRouter();
@@ -14,20 +16,30 @@ const form = () => {
     addRecord({ eventId: _id, pee, poo });
     setPee(false);
     setPoo(false);
-    router.push("/walkeraccount")
+    router.push("/walkeraccount");
   };
   // const [location, setLocation] = useState([]);
 
   const addRecord = async (record) => {
-    console.log(record)
-    await WalkService.updateWalkRecord(record);
-    //there needs to be a successmessage
+    const output = await WalkService.updateWalkRecord(record);
+    if (!output.error) {
+      const successToast = () => toast("Thanks for updating this walky!");
+      successToast();
+    } else {
+      const errorToast = () => toast(output.res);
+      errorToast();
+    }
   };
 
   const addImage = async (url, id) => {
     const output = await WalkService.updateWalkImage(url, id);
-    console.log(output);
-    //need to display a success message!
+    if (!output.error) {
+      const successToast = () => toast("Thanks for updating this walky!");
+      successToast();
+    } else {
+      const errorToast = () => toast(output.res);
+      errorToast();
+    }
   };
 
   // const addLocation = async (location, id) => {
@@ -84,38 +96,38 @@ const form = () => {
   return (
     <>
       <div className="addform">
-      <form className="add-form" onSubmit={onSubmit}>
-      <div className="submit-form-title">
-        <h1>POO/PEE RECORD</h1>
-      </div>
-      <div>
-        <div>
-          <div className="submit-form-control">
-            <label className="adjustfont">PEE</label>
-            <input
-              type="checkbox"
-              name="pee"
-              value={pee}
-              onChange={(e) => setPee(e.target.checked)}
-            />
+        <form className="add-form" onSubmit={onSubmit}>
+          <div className="submit-form-title">
+            <h1>POO/PEE RECORD</h1>
           </div>
           <div>
-            <div className="submit-form-control">
-              <label>POO</label>
-              <input
-                type="checkbox"
-                name="poo"
-                value={poo}
-                onChange={(e) => setPoo(e.target.checked)}
-              />
+            <div>
+              <div className="submit-form-control">
+                <label className="adjustfont">PEE</label>
+                <input
+                  type="checkbox"
+                  name="pee"
+                  value={pee}
+                  onChange={(e) => setPee(e.target.checked)}
+                />
+              </div>
+              <div>
+                <div className="submit-form-control">
+                  <label>POO</label>
+                  <input
+                    type="checkbox"
+                    name="poo"
+                    value={poo}
+                    onChange={(e) => setPoo(e.target.checked)}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="submit-div">
+              <input type="submit" value="Submit" className="btn-record" />
             </div>
           </div>
-        </div>
-        <div className="submit-div">
-          <input type="submit" value="Submit" className="btn-record" />
-        </div>
-      </div>
-    </form>
+        </form>
       </div>
 
       {/* <div className="gpsouter">

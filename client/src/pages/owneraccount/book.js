@@ -4,7 +4,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
-import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,8 +18,9 @@ const book = () => {
     if (!output.error) {
       const successToast = () => toast("Your walky has been booked!");
       successToast();
-      console.log(output.res);
-      //need error handling
+    } else {
+      const errorToast = () => toast(output.res);
+      errorToast();
     }
   };
 
@@ -34,7 +34,7 @@ const book = () => {
 
   return (
     <>
-      <div className="myaccount-div">
+      <div className="myaccount">
         <Link href="/owneraccount/book">
           <button className={styles.buttonselected}>Book a walk</button>
         </Link>
@@ -82,7 +82,6 @@ const book = () => {
         </div>
         <input type="submit" value="BOOK" className="btn-block" />
       </form>
-      <ToastContainer />
     </>
   );
 };

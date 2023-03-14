@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const find = () => {
   const [futureWalks, setFutureWalks] = useState([]);
@@ -17,13 +19,20 @@ const find = () => {
 
   const joinWalk = async (walkId) => {
     const output = await WalkService.joinWalk(walkId, walkerID);
-    console.log(output);
-    //we need a success message here!
+    if (!output.error) {
+      const successToast = () => toast("Wahoo! You'll walky this doggy!");
+      successToast();
+      // const unassignedWalks = futureWalks.filter((walk) => !walk.walkerID);
+      // setFutureWalks(unassignedWalks);
+    } else {
+      const errorToast = () => toast(output.res);
+      errorToast();
+    }
   };
 
   return (
     <>
-      <div className="myaccount-div">
+      <div className="myaccount">
         <Link href="/walkeraccount/find">
           <button className={styles.buttonselected}>Find a Walk</button>
         </Link>

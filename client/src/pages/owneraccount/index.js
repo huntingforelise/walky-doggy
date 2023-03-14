@@ -5,7 +5,7 @@ const OwnerAccount = () => {
   return (
     <div>
       <h1 className={styles.title}>Owner</h1>
-      <div className="myaccount-div">
+      <div className="myaccount">
         <Link href="/owneraccount/book">
           <button className={styles.button}>Book a walk</button>
         </Link>

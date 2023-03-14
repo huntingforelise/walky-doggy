@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const scheduled = () => {
   const [futureWalks, setFutureWalks] = useState([]);
@@ -18,14 +20,21 @@ const scheduled = () => {
   }, []);
 
   const deleteWalk = async (_id) => {
-    await WalkService.deleteWalk(_id);
-    const updatedArray = futureWalks.filter((walk) => walk._id !== _id);
-    setFutureWalks(updatedArray);
+    const output = await WalkService.deleteWalk(_id);
+    if (!output.error) {
+      const successToast = () => toast(output.res);
+      successToast();
+      const updatedArray = futureWalks.filter((walk) => walk._id !== _id);
+      setFutureWalks(updatedArray);
+    } else {
+      const errorToast = () => toast(output.res);
+      errorToast();
+    }
   };
 
   return (
     <>
-      <div className="myaccount-div">
+      <div className="myaccount">
         <Link href="/walkeraccount/find">
           <button className={styles.button}>Find a Walk</button>
         </Link>

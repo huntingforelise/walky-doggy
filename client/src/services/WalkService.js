@@ -72,7 +72,7 @@ export const deleteWalk = (id) => {
     mode: "cors",
     headers: { "Content-Type": "application/json" },
   })
-    .then((res) => res)
+    .then((res) => res.json())
     .catch((err) => console.log(err));
 };
 

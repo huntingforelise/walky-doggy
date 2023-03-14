@@ -31,18 +31,21 @@ exports.postWalk = async (req, res) => {
     const newWalk = await walk.create(req.body);
     res.status(201).send({ res: newWalk, error: false });
   } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
+    res.status(500).send({ res: "Internal server error", error: true });
   }
 };
 
 exports.deleteWalk = async (req, res) => {
   try {
-    await walk.deleteOne({ _id: req.params.id });
-    res.sendStatus(200);
+    const output = await walk.deleteOne({ _id: req.params.id });
+    if (output.deletedCount === 1) {
+      res
+        .status(200)
+        .send({ res: "Your walky has been deleted", error: false });
+    }
   } catch (error) {
     console.log(error);
-    res.sendStatus(500);
+    res.status(500).send({ res: "Internal server error", error: true });
   }
 };
 
@@ -63,17 +66,16 @@ exports.joinWalk = async (req, res) => {
 //we could also include another function that makes it possible for a walker to unsubscribe, this would be a PUT
 
 exports.updateWalkRecord = async (req, res) => {
-  //this is a walker only function
   try {
     const ID = req.params.id;
     const walkToBeUpdated = await walk.findByIdAndUpdate(ID, {
       didPee: req.body.pee,
       didPoo: req.body.poo,
     });
-    res.status(200).send(walkToBeUpdated);
+    res.status(200).send({ res: walkToBeUpdated, error: false });
   } catch (error) {
     console.log(error);
-    res.sendStatus(500);
+    res.status(500).send({ res: "Internal server error", error: true });
   }
 };
 
@@ -84,10 +86,10 @@ exports.updateWalkImage = async (req, res) => {
     const walkToBeUpdated = await walk.findByIdAndUpdate(ID, {
       $addToSet: { imageURL: URL },
     });
-    res.status(200).send(walkToBeUpdated);
+    res.status(200).send({ res: walkToBeUpdated, error: false });
   } catch (error) {
     console.log(error);
-    res.sendStatus(500);
+    res.status(500).send({ res: "Internal server error", error: true });
   }
 };
 
