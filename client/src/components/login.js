@@ -50,7 +50,7 @@ const Login = () => {
     <section>
       <div className="form-control" style={{ textAlign: "center" }}>
         <form className="add-form" onSubmit={handleSubmit}>
-          <label>Username</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             placeholder="username"
@@ -59,7 +59,7 @@ const Login = () => {
             onChange={handleChange}
             autoComplete="off"
           />
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             placeholder="******"
@@ -72,7 +72,7 @@ const Login = () => {
             className="btn-clicked"
             type="submit"
             disabled={validateForm()}
-            // data-testid="loginbutton"
+            data-testid="loginbutton"
           >
             Login
           </button>
