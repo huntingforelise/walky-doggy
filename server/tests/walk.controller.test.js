@@ -1,10 +1,9 @@
 const walk = require("../models/walk");
-const controller = require("./walk.controller");
+const controller = require("../controller/walk.controller");
 const mongoose = require("mongoose");
 const conf = require("../config");
 
 describe("Walk Controller", () => {
-
   beforeAll(async () => {
     const url = `${conf.mongoUrl}:${conf.mongoPort}/${conf.testDbName}`;
     if (mongoose.connection.readyState === 0) {
@@ -17,7 +16,7 @@ describe("Walk Controller", () => {
   });
 
   afterAll(async () => {
-    if (process.env.NODE_ENV === 'test') {
+    if (process.env.NODE_ENV === "test") {
       await mongoose.connection.dropDatabase();
       await mongoose.connection.close();
     }
@@ -146,8 +145,7 @@ describe("Walk Controller", () => {
 
       walk.findById = jest.fn().mockResolvedValueOnce(mockWalk);
       walk.updateOne = jest.fn();
-      walk.updateOne = jest.fn();
-      await walk.updateOne({ _id: mockWalk._id }, {
+      await walk.updateOne(mockWalk, {
         didPee: mockRequest.body.didPee,
         didPoo: mockRequest.body.didPoo,
       });
@@ -183,12 +181,13 @@ describe("Walk Controller", () => {
         sendStatus: jest.fn(),
       };
 
-      walk.findById = jest.fn().mockRejectedValueOnce(new Error("Database error"));
+      walk.findById = jest
+        .fn()
+        .mockRejectedValueOnce(new Error("Database error"));
 
       await controller.updateWalkRecord(mockRequest, mockResponse);
 
       expect(mockResponse.sendStatus).toHaveBeenCalledWith(500);
     });
   });
-
 });
