@@ -52,6 +52,7 @@ const Login = () => {
         <form className="add-form" onSubmit={handleSubmit}>
           <label htmlFor="username">Username</label>
           <input
+            id="username"
             type="text"
             placeholder="username"
             name="username"
@@ -61,6 +62,7 @@ const Login = () => {
           />
           <label htmlFor="password">Password</label>
           <input
+            id="password"
             type="password"
             placeholder="******"
             name="password"
@@ -72,7 +74,6 @@ const Login = () => {
             className="btn-clicked"
             type="submit"
             disabled={validateForm()}
-            data-testid="loginbutton"
           >
             Login
           </button>
