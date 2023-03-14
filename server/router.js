@@ -2,7 +2,7 @@ const router = require("express").Router();
 const authMiddleware = require("./middlewares/auth");
 const userController = require("./controller/user.controller");
 // const locationController = require("./controller/location.controller");
-const walkController = require("./controller/walk.controller");
+const walkController = require("./tests/walk.controller");
 
 router.post("/register", userController.create);
 router.post("/login", userController.login);

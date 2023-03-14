@@ -3,9 +3,8 @@ const walk = require("../models/walk");
 exports.getWalk = async (req, res) => {
   try {
     const ID = req.params.id;
-    const walk = await walk.findById(ID);
-    console.log(walk);
-    res.status(200).send(walk);
+    const walkInstance = await walk.findById(ID);
+    res.status(200).send(walkInstance);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -29,16 +28,8 @@ exports.getWalks = async (req, res) => {
 
 exports.postWalk = async (req, res) => {
   try {
-    //this is an owner specific function
-    console.log(req.body);
     const newWalk = await walk.create(req.body);
-    // const ownerID = newWalk.ownerID;
-    // const userToBeUpdated = user.findById(ownerID);
-    // await user.updateOne(userToBeUpdated, {
-    //   $addToSet: { scheduledwalks: newWalk._id },
-    // });
     res.status(201).send({ res: newWalk, error: false });
-    console.log(newWalk);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -47,7 +38,6 @@ exports.postWalk = async (req, res) => {
 
 exports.deleteWalk = async (req, res) => {
   try {
-    //this is an owner specific function
     await walk.deleteOne({ _id: req.params.id });
     res.sendStatus(200);
   } catch (error) {
@@ -58,18 +48,13 @@ exports.deleteWalk = async (req, res) => {
 
 exports.joinWalk = async (req, res) => {
   try {
-    console.log(req);
     const ID = req.params.id;
     const { walkerID } = req.body;
-    console.log(ID);
-    console.log(walkerID);
     const walkToBeUpdated = await walk.findById(ID);
-    console.log(walkToBeUpdated);
     await walk.updateOne(walkToBeUpdated, {
       walkerID: walkerID,
     });
     const updatedWalk = await walk.findById(ID);
-    console.log(updatedWalk);
     res.status(200).send({ res: updatedWalk, error: false });
   } catch (error) {
     console.log(error);
@@ -97,8 +82,6 @@ exports.updateWalkRecord = async (req, res) => {
 };
 
 exports.updateWalkImage = async (req, res) => {
-  //this is a walker only function
-  console.log(req.body);
   try {
     const ID = req.params.id;
     const URL = req.body.URL;
@@ -107,7 +90,6 @@ exports.updateWalkImage = async (req, res) => {
       $addToSet: { imageURL: URL },
     });
     const updatedWalk = await walk.findById(ID);
-    console.log(updatedWalk);
     res.status(200).send(updatedWalk);
   } catch (error) {
     console.log(error);
