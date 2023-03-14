@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const Logout = () => {
   const router = useRouter();
   const isOwner = localStorage.getItem("isOwner");
-  console.log(isOwner)
+  console.log(isOwner);
 
   const handleClick = () => {
     userService.logout();
@@ -35,7 +35,7 @@ const Logout = () => {
         variant="contained"
         color="error"
         className="confirm-btn"
-        onClick={() => handleClick()}
+        onClick={handleClick}
       >
         Yes
       </button>

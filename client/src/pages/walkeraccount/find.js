@@ -18,6 +18,7 @@ const find = () => {
   const joinWalk = async (walkId) => {
     const output = await WalkService.joinWalk(walkId, walkerID);
     console.log(output);
+    //we need a success message here!
   };
 
   return (

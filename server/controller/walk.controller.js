@@ -50,12 +50,10 @@ exports.joinWalk = async (req, res) => {
   try {
     const ID = req.params.id;
     const { walkerID } = req.body;
-    const walkToBeUpdated = await walk.findById(ID);
-    await walk.updateOne(walkToBeUpdated, {
+    const walkToBeUpdated = await walk.findByIdAndUpdate(ID, {
       walkerID: walkerID,
     });
-    const updatedWalk = await walk.findById(ID);
-    res.status(200).send({ res: updatedWalk, error: false });
+    res.status(200).send({ res: walkToBeUpdated, error: false });
   } catch (error) {
     console.log(error);
     res.status(500).send({ res: "Internal server error", error: true });
@@ -68,13 +66,11 @@ exports.updateWalkRecord = async (req, res) => {
   //this is a walker only function
   try {
     const ID = req.params.id;
-    const walkToBeUpdated = await walk.findById(ID);
-    await walk.updateOne(walkToBeUpdated, {
+    const walkToBeUpdated = await walk.findByIdAndUpdate(ID, {
       didPee: req.body.pee,
       didPoo: req.body.poo,
     });
-    const updatedWalk = await walk.findById(ID);
-    res.status(200).send(updatedWalk);
+    res.status(200).send(walkToBeUpdated);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -85,12 +81,10 @@ exports.updateWalkImage = async (req, res) => {
   try {
     const ID = req.params.id;
     const URL = req.body.URL;
-    const walkToBeUpdated = await walk.findById(ID);
-    await walk.updateOne(walkToBeUpdated, {
+    const walkToBeUpdated = await walk.findByIdAndUpdate(ID, {
       $addToSet: { imageURL: URL },
     });
-    const updatedWalk = await walk.findById(ID);
-    res.status(200).send(updatedWalk);
+    res.status(200).send(walkToBeUpdated);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

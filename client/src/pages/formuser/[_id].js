@@ -8,7 +8,6 @@ import * as WalkService from "../../services/WalkService";
 //mapboxgl.accessToken = process.env.local.MAPBOX_KEY;
 
 const formuser = () => {
-  console.log("this is within formuser");
   const router = useRouter();
   const { _id } = router.query;
   const [walkRecord, setWalkRecord] = useState({});
@@ -81,7 +80,7 @@ const formuser = () => {
 
   return (
     <>
-      <h1 className={styles.title}>Walk Record</h1>
+      <h2 className={styles.title}>Walk Record</h2>
       <div className="record-div-outer">
         {walkRecord.poo !== undefined && walkRecord.pee !== undefined ? (
           <div className="record-div">
