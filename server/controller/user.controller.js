@@ -30,8 +30,8 @@ exports.create = async (req, res) => {
   const userUsername = await User.findOne({ username: username });
   if (userEmail) {
     return res
-    .status(409)
-    .send({ error: true, message: "User with this E-mail already exists" });  
+      .status(409)
+      .send({ error: true, message: "User with this E-mail already exists" });
   } else if (userUsername) {
     return res
       .status(409)
@@ -43,7 +43,7 @@ exports.create = async (req, res) => {
     req.session.uid = user._id;
     res.status(201).send(user);
   } catch (error) {
-    res.status(400).send({ error : true, message: "Could not create user" });
+    res.status(400).send({ error: true, message: "Could not create user" });
   }
 };
 
@@ -68,7 +68,7 @@ exports.logout = (req, res) => {
     if (error) {
       res
         .status(500)
-        .send({ error : true, message: "Could not log out, please try again" });
+        .send({ error: true, message: "Could not log out, please try again" });
     } else {
       res.clearCookie("sid");
       res.status(200).send({ error: false, message: "Logout successful" });

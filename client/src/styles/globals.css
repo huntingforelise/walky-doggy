@@ -251,7 +251,7 @@ h6 {
 }
 
 /**my account home*/
-.myaccount-div {
+.myaccount {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -11,22 +11,22 @@ describe("User Controller Tests", () => {
   let request;
 
   beforeAll(async () => {
-    const url = `${conf.mongoUrl}:${conf.mongoPort}/${conf.testDbName}`;
-    if (mongoose.connection.readyState === 0) {
-      mongoose.connect(url, { useNewUrlParser: true });
-    }
     app = express();
     app.use(express.json());
     app.use(router);
     request = supertest(app);
-  });  
+    const url = `${conf.mongoUrl}:${conf.mongoPort}/${conf.testDbName}`;
+    if (mongoose.connection.readyState === 0) {
+      mongoose.connect(url, { useNewUrlParser: true });
+    }
+  });
 
   afterEach(async () => {
     await User.deleteMany({});
   });
 
   afterAll(async () => {
-    if (process.env.NODE_ENV === 'test') {
+    if (process.env.NODE_ENV === "test") {
       await mongoose.connection.dropDatabase();
       await mongoose.connection.close();
     }
@@ -50,27 +50,34 @@ describe("User Controller Tests", () => {
     });
 
     it("logs in a user with correct credentials", async () => {
-      const user = new User({ username: "testuser", password: "testpassword" });
+      const user = new User({
+        username: "testuser",
+        password: "testpassword",
+        isOwner: true,
+        email: "test@test.com",
+      });
       await user.save();
       const response = await request
         .post("/login")
         .send({ username: "testuser", password: "testpassword" });
-      expect(response.status).toEqual(200);
+      expect(response.statusCode).toEqual(200);
       expect(response.body.error).toEqual(false);
       expect(response.body.res.username).toEqual("testuser");
     });
-  })
+  });
 
   describe("POST /register", () => {
     it("returns a 409 error if email already exists", async () => {
       const user = new User({ email: "test@test.com", username: "testuser" });
       await user.save();
       const response = await request
-      .post("/register")
-      .send({ email: "test@test.com", username: "newuser" });    
+        .post("/register")
+        .send({ email: "test@test.com", username: "newuser" });
       expect(response.status).toEqual(409);
       expect(response.body.error).toEqual(true);
-      expect(response.body.message).toEqual("User with this E-mail already exists");
+      expect(response.body.message).toEqual(
+        "User with this E-mail already exists"
+      );
     });
 
     it("returns a 409 error if username already exists", async () => {
@@ -85,12 +92,15 @@ describe("User Controller Tests", () => {
     });
 
     it("creates a new user with valid inputs", async () => {
-      const response = await request
-        .post("/register")
-        .send({ email: "test@test.com", username: "testuser" });
+      const response = await request.post("/register").send({
+        email: "test@test.com",
+        username: "testuser",
+        password: "testpassword",
+        isOwner: true,
+      });
       expect(response.status).toEqual(201);
       expect(response.body.email).toEqual("test@test.com");
       expect(response.body.username).toEqual("testuser");
     });
   });
-})
+});

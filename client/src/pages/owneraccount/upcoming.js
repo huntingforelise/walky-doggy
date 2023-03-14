@@ -10,12 +10,9 @@ const upcoming = () => {
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      const filteredWalks = [];
-      for (const walk of walks.future) {
-        if (walk.ownerID === userId) {
-          filteredWalks.push(walk);
-        }
-      }
+      const filteredWalks = walks.future.filter(
+        (walk) => walk.walkerID === walkerID
+      );
       setFutureWalks(filteredWalks);
     });
   }, []);
@@ -28,7 +25,7 @@ const upcoming = () => {
 
   return (
     <>
-      <div className="myaccount-div">
+      <div className="myaccount">
         <Link href="/owneraccount/book">
           <button className={styles.button}>Book a walk</button>
         </Link>

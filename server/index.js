@@ -1,13 +1,13 @@
+const config = require("./config");
 const express = require("express");
 const session = require("express-session");
 const app = express();
 const cors = require("cors");
 const router = require("./router");
-const PORT = 3001;
 const mongoConnection = require("./models/index");
 
 const corsConfig = {
-  origin: "http://localhost:3000",
+  origin: config.corsOrigin,
   credentials: true,
 };
 
@@ -33,10 +33,10 @@ app.get("*", (req, res) => {
   res.status(404).send("Sorry, not found 😞");
 });
 
-app.listen(PORT, (err) => {
+app.listen(config.PORT, (err) => {
   if (err) {
     console.log(`😞 Sorry, something went wrong! ${err}`);
   } else {
-    console.log(`🚀 Server is listening on port ${PORT}!`);
+    console.log(`🚀 Server is listening on port ${config.PORT}!`);
   }
 });
