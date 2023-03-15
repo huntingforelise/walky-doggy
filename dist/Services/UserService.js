@@ -35,63 +35,105 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var BASE_URL = "http://localhost:3001";
-var userService = {};
-userService.register = function (user) {
-    return fetch("".concat(BASE_URL, "/register"), {
-        method: "POST",
-        credentials: "include",
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-    })
-        .then(function (res) { return res.json(); })
-        .catch(function (err) { return console.log(err); });
-};
-userService.login = function (user) {
-    return fetch("".concat(BASE_URL, "/login"), {
-        method: "POST",
-        credentials: "include",
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-    })
-        .then(function (res) { return res.json(); })
-        .catch(function (err) { return console.log(err); });
-};
-userService.getUserInfo = function (id) {
-    return fetch("".concat(BASE_URL, "/user/").concat(id, "/info"), {
-        method: "GET",
-        credentials: "include",
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-    })
-        .then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
-        var json;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    if (!res.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return [4 /*yield*/, res.json()];
-                case 1:
-                    json = _a.sent();
-                    console.log("get user info res:", json);
-                    return [2 /*return*/, json];
-            }
-        });
-    }); })
-        .catch(function (err) { return console.log(err); });
-};
-userService.logout = function () {
-    return fetch("".concat(BASE_URL, "/logout"), {
-        method: "POST",
-        credentials: "include",
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-    })
-        .then(function (res) { return res.json(); })
-        .catch(function (err) { return console.log(err); });
-};
-export default userService;
+export var register = function (user) { return __awaiter(void 0, void 0, void 0, function () {
+    var res, err_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                return [4 /*yield*/, fetch("".concat(BASE_URL, "/register"), {
+                        method: "POST",
+                        credentials: "include",
+                        mode: "cors",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(user)
+                    })];
+            case 1:
+                res = _a.sent();
+                return [4 /*yield*/, res.json()];
+            case 2: return [2 /*return*/, _a.sent()];
+            case 3:
+                err_1 = _a.sent();
+                return [2 /*return*/, console.log(err_1)];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+export var login = function (user) { return __awaiter(void 0, void 0, void 0, function () {
+    var res, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                return [4 /*yield*/, fetch("".concat(BASE_URL, "/login"), {
+                        method: "POST",
+                        credentials: "include",
+                        mode: "cors",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(user)
+                    })];
+            case 1:
+                res = _a.sent();
+                return [4 /*yield*/, res.json()];
+            case 2: return [2 /*return*/, _a.sent()];
+            case 3:
+                err_2 = _a.sent();
+                return [2 /*return*/, console.log(err_2)];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+export var getUserInfo = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+    var res, json, err_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 4, , 5]);
+                return [4 /*yield*/, fetch("".concat(BASE_URL, "/user/").concat(id, "/info"), {
+                        method: "GET",
+                        credentials: "include",
+                        mode: "cors",
+                        headers: { "Content-Type": "application/json" }
+                    })];
+            case 1:
+                res = _a.sent();
+                if (!res.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return [4 /*yield*/, res.json()];
+            case 2:
+                json = _a.sent();
+                console.log("get user info res:", json);
+                return [4 /*yield*/, json];
+            case 3: return [2 /*return*/, _a.sent()];
+            case 4:
+                err_3 = _a.sent();
+                return [2 /*return*/, console.log(err_3)];
+            case 5: return [2 /*return*/];
+        }
+    });
+}); };
+export var logout = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var res, err_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                return [4 /*yield*/, fetch("".concat(BASE_URL, "/logout"), {
+                        method: "POST",
+                        credentials: "include",
+                        mode: "cors",
+                        headers: { "Content-Type": "application/json" }
+                    })];
+            case 1:
+                res = _a.sent();
+                return [4 /*yield*/, res.json()];
+            case 2: return [2 /*return*/, _a.sent()];
+            case 3:
+                err_4 = _a.sent();
+                return [2 /*return*/, console.log(err_4)];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
 //# sourceMappingURL=UserService.js.map

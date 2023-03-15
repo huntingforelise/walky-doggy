@@ -1,10 +1,9 @@
 import React from "react";
-import userService from "../Services/UserService";
+import * as userService from "../Services/UserService";
 import { useRouter } from "next/router";
 var Logout = function () {
     var router = useRouter();
     var isOwner = localStorage.getItem("isOwner");
-    console.log(isOwner);
     var handleClick = function () {
         userService.logout();
         localStorage.setItem("userId", "");
@@ -14,7 +13,9 @@ var Logout = function () {
     };
     return (<div>
       <h2>Are you sure you want to log out?</h2>
-      <button variant="contained" className="confirm-btn" onClick={function () {
+      <button 
+    // variant="contained"
+    className="confirm-btn" onClick={function () {
             if (isOwner === "true") {
                 router.push("/owneraccount");
             }
@@ -24,7 +25,9 @@ var Logout = function () {
         }}>
         No
       </button>
-      <button variant="contained" color="error" className="confirm-btn" onClick={handleClick}>
+      <button 
+    // variant="contained"
+    color="error" className="confirm-btn" onClick={handleClick}>
         Yes
       </button>
     </div>);

@@ -4,9 +4,9 @@ type WalkProps = {
   walks: Walk[];
   onDelete: (id: string) => void;
   formPath: string;
-  findWalks: Boolean;
-  ownerHistory: Boolean;
-  ownerUpcoming: Boolean;
+  findWalks: boolean;
+  ownerHistory: boolean;
+  ownerUpcoming: boolean;
   onJoin: (id: string) => void;
 };
 

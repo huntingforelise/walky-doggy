@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import auth from "../utils/auth";
-import userService from "../Services/UserService";
+import * as userService from "../Services/UserService";
 import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";

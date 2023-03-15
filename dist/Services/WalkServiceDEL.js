@@ -109,7 +109,7 @@ export var deleteWalk = function (id) {
         .then(function (res) { return res.json(); })
         .catch(function (err) { return console.log(err); });
 };
-// export const updateWalkLocation = (location: object, id: number): Promise<any> => {
+// export const updateWalkLocation = (location, id) => {
 //   console.log("walkservice", location);
 //   const ID = id;
 //   return fetch(`${BASE_URL}/walk/${ID}/location`, {
@@ -122,4 +122,4 @@ export var deleteWalk = function (id) {
 //     .then((res) => res.json())
 //     .catch((err) => console.log(err));
 // };
-//# sourceMappingURL=WalkService.js.map
+//# sourceMappingURL=WalkServiceDEL.js.map

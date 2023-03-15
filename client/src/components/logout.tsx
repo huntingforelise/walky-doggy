@@ -1,11 +1,10 @@
 import React from "react";
-import userService from "../Services/UserService";
+import * as userService from "../Services/UserService";
 import { useRouter } from "next/router";
 
 const Logout = () => {
   const router = useRouter();
   const isOwner = localStorage.getItem("isOwner");
-  console.log(isOwner);
 
   const handleClick = () => {
     userService.logout();
@@ -19,7 +18,7 @@ const Logout = () => {
     <div>
       <h2>Are you sure you want to log out?</h2>
       <button
-        variant="contained"
+        // variant="contained"
         className="confirm-btn"
         onClick={() => {
           if (isOwner === "true") {
@@ -32,7 +31,7 @@ const Logout = () => {
         No
       </button>
       <button
-        variant="contained"
+        // variant="contained"
         color="error"
         className="confirm-btn"
         onClick={handleClick}

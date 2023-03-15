@@ -8,20 +8,20 @@ type Walk = {
   dogName: string;
   date: Date;
   pickUpLocation: string;
-  walkerID: String;
+  walkerID: string;
   imageURL: string[];
   coordinates: number[];
-  didPee: Boolean;
-  didPoo: Boolean;
+  didPee: boolean;
+  didPoo: boolean;
 };
 
 type WalkProps = {
   walk: Walk;
   onDelete: (id: string) => void;
   formPath: string;
-  findWalks: Boolean;
-  ownerHistory: Boolean;
-  ownerUpcoming: Boolean;
+  findWalks: boolean;
+  ownerHistory: boolean;
+  ownerUpcoming: boolean;
   onJoin: (id: string) => void;
 };
 

@@ -35,33 +35,57 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var BASE_URL = "http://localhost:3001";
-export var getWalk = function (id) {
-    return fetch("".concat(BASE_URL, "/walk/").concat(id))
-        .then(function (res) { return (res.status <= 400 ? res : Promise.reject(res)); })
-        .then(function (res) { return res.json(); })
-        .catch(function (err) { return err; });
-};
-export var getWalks = function () {
-    return fetch("".concat(BASE_URL, "/walks"))
-        .then(function (res) { return (res.status <= 400 ? res : Promise.reject(res)); })
-        .then(function (res) { return res.json(); })
-        .catch(function (err) { return err; });
-};
-export var postWalk = function (body) {
-    return fetch("".concat(BASE_URL, "/walk"), {
+var userService = {};
+userService.register = function (user) {
+    return fetch("".concat(BASE_URL, "/register"), {
         method: "POST",
-        body: JSON.stringify(body),
         credentials: "include",
         mode: "cors",
-        headers: { "Content-type": "application/json; charset=UTF-8" },
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
     })
         .then(function (res) { return res.json(); })
         .catch(function (err) { return console.log(err); });
 };
-export var joinWalk = function (id, walkerID) {
-    return fetch("".concat(BASE_URL, "/joinwalk/").concat(id), {
-        method: "PUT",
-        body: JSON.stringify({ walkerID: walkerID }),
+userService.login = function (user) {
+    return fetch("".concat(BASE_URL, "/login"), {
+        method: "POST",
+        credentials: "include",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+    })
+        .then(function (res) { return res.json(); })
+        .catch(function (err) { return console.log(err); });
+};
+userService.getUserInfo = function (id) {
+    return fetch("".concat(BASE_URL, "/user/").concat(id, "/info"), {
+        method: "GET",
+        credentials: "include",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+    })
+        .then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
+        var json;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!res.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return [4 /*yield*/, res.json()];
+                case 1:
+                    json = _a.sent();
+                    console.log("get user info res:", json);
+                    return [2 /*return*/, json];
+            }
+        });
+    }); })
+        .catch(function (err) { return console.log(err); });
+};
+userService.logout = function () {
+    return fetch("".concat(BASE_URL, "/logout"), {
+        method: "POST",
         credentials: "include",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
@@ -69,57 +93,5 @@ export var joinWalk = function (id, walkerID) {
         .then(function (res) { return res.json(); })
         .catch(function (err) { return console.log(err); });
 };
-export var updateWalkRecord = function (record) {
-    var ID = record.eventId;
-    return fetch("".concat(BASE_URL, "/walk/").concat(ID), {
-        method: "PUT",
-        body: JSON.stringify(record),
-        credentials: "include",
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-    })
-        .then(function (res) { return res.json(); })
-        .catch(function (err) { return console.log(err); });
-};
-export var updateWalkImage = function (link, id) { return __awaiter(void 0, void 0, void 0, function () {
-    var ID, URL;
-    return __generator(this, function (_a) {
-        ID = id;
-        URL = link;
-        return [2 /*return*/, fetch("".concat(BASE_URL, "/walk/").concat(ID, "/image"), {
-                method: "PUT",
-                body: JSON.stringify({ URL: URL }),
-                headers: {
-                    "Content-type": "application/json",
-                },
-                credentials: "include",
-                mode: "cors",
-            })
-                .then(function (res) { return res.json(); })
-                .catch(function (err) { return console.log(err); })];
-    });
-}); };
-export var deleteWalk = function (id) {
-    return fetch("".concat(BASE_URL, "/walk/").concat(id), {
-        method: "DELETE",
-        credentials: "include",
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-    })
-        .then(function (res) { return res.json(); })
-        .catch(function (err) { return console.log(err); });
-};
-// export const updateWalkLocation = (location: object, id: number): Promise<any> => {
-//   console.log("walkservice", location);
-//   const ID = id;
-//   return fetch(`${BASE_URL}/walk/${ID}/location`, {
-//     method: "PUT",
-//     credentials: "include",
-//     mode: "cors",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(location),
-//   })
-//     .then((res) => res.json())
-//     .catch((err) => console.log(err));
-// };
-//# sourceMappingURL=WalkService.js.map
+export default userService;
+//# sourceMappingURL=UserServiceDEL.js.map
