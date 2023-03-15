@@ -2,12 +2,12 @@ import Walk from "./Walk";
 
 type WalkProps = {
   walks: Walk[];
-  onDelete: (id: string) => void;
-  formPath: string;
-  findWalks: boolean;
-  ownerHistory: boolean;
-  ownerUpcoming: boolean;
-  onJoin: (id: string) => void;
+  onDelete?: (id: string) => Promise<void>;
+  formPath?: string;
+  findWalks?: boolean;
+  ownerHistory?: boolean;
+  ownerUpcoming?: boolean;
+  onJoin?: (id: string) => Promise<void>;
 };
 
 const WalkList = ({

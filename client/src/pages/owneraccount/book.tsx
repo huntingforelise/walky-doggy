@@ -1,5 +1,5 @@
 import * as WalkService from "../../services/WalkService";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Link from "next/link";
@@ -7,13 +7,26 @@ import styles from "@/styles/Home.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const book = () => {
-  const [dogName, setDogName] = useState("");
-  const [date, setDate] = useState("");
-  const [pickUpLocation, setPickUpLocation] = useState("");
+type Walk = {
+  _id?: string;
+  ownerID: string;
+  dogName: string;
+  date: Date;
+  pickUpLocation: string;
+  walkerID?: string;
+  imageURL?: string[];
+  coordinates?: number[];
+  didPee?: boolean;
+  didPoo?: boolean;
+};
+
+const book = (): JSX.Element => {
+  const [dogName, setDogName] = useState<string>("");
+  const [date, setDate] = useState<Date>();
+  const [pickUpLocation, setPickUpLocation] = useState<string>("");
   const ownerID = localStorage.getItem("userId");
 
-  const postWalk = async (walk) => {
+  const postWalk = async (walk: Walk) => {
     const output = await WalkService.postWalk(walk);
     if (!output.error) {
       const successToast = () => toast("Your walky has been booked!");
@@ -24,11 +37,11 @@ const book = () => {
     }
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     postWalk({ ownerID, dogName, date, pickUpLocation });
     setDogName("");
-    setDate("");
+    setDate(null);
     setPickUpLocation("");
   };
 
@@ -64,8 +77,8 @@ const book = () => {
             showTimeSelect
             required
             selected={date}
-            onSelect={(date) => setDate(date)} //when day is clicked
-            onChange={(date) => setDate(date)} //only when value has changed
+            onSelect={(date: SetStateAction<Date>) => setDate(date)} //when day is clicked
+            onChange={(date: SetStateAction<Date>) => setDate(date)} //only when value has changed
             dateFormat="Pp"
           />
         </div>

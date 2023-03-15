@@ -1,19 +1,19 @@
-import WalkList from "@/components/Walklist";
+import WalkList from "../../components/walklist";
 import { useState, useEffect } from "react";
-import styles from "@/styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ownerhistory = () => {
+const walkerhistory = () => {
   const [pastWalks, setPastWalks] = useState([]);
-  const userId = localStorage.getItem("userId");
+  const walkerID = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
       const filteredWalks = walks.past.filter(
-        (walk) => walk.ownerID === userId
+        (walk) => walk.walkerID === walkerID
       );
       setPastWalks(filteredWalks);
     });
@@ -35,26 +35,22 @@ const ownerhistory = () => {
   return (
     <>
       <div className="myaccount">
-        <Link href="/owneraccount/book">
-          <button className={styles.button}>Book a walk</button>
+        <Link href="/walkeraccount/find">
+          <button className={styles.button}>Find a Walk</button>
         </Link>
-        <Link href="/owneraccount/ownerhistory">
+        <Link href="/walkeraccount/scheduled">
+          <button className={styles.button}>Scheduled Walks</button>
+        </Link>
+        <Link href="/walkeraccount/walkerhistory">
           <button className={styles.buttonselected}>
             View My Walk History
           </button>
         </Link>
-        <Link href="/owneraccount/upcoming">
-          <button className={styles.button}>Upcoming Walks</button>
-        </Link>
       </div>
-      <WalkList
-        walks={pastWalks}
-        formPath="/formuser/"
-        onDelete={deleteWalk}
-        ownerHistory={true}
-      />
+      <WalkList walks={pastWalks} formPath="/formuser/" onDelete={deleteWalk} />
+      ;
     </>
   );
 };
 
-export default ownerhistory;
+export default walkerhistory;

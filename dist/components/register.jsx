@@ -47,7 +47,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import React, { useState } from "react";
 import auth from "../utils/auth";
-import * as userService from "../Services/UserService";
+import * as userService from "../services/UserService";
 import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
@@ -87,7 +87,6 @@ var Register = function () {
                     return [4 /*yield*/, userService.register(user)];
                 case 1:
                     res = _a.sent();
-                    console.log(res);
                     errorToast = function () { return toast(res.message); };
                     if (res.error) {
                         errorToast();

@@ -46,7 +46,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import React, { useState } from "react";
-import * as userService from "../Services/UserService";
+import * as userService from "../services/UserService";
 import { useRouter } from "next/router";
 var initialState = {
     username: "",

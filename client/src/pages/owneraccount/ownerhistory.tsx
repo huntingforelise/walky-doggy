@@ -1,4 +1,4 @@
-import WalkList from "@/components/Walklist";
+import WalkList from "../../components/walklist";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
@@ -6,20 +6,33 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const walkerhistory = () => {
+type Walk = {
+  _id?: string;
+  ownerID: string;
+  dogName: string;
+  date: Date;
+  pickUpLocation: string;
+  walkerID?: string;
+  imageURL?: string[];
+  coordinates?: number[];
+  didPee?: boolean;
+  didPoo?: boolean;
+};
+
+const ownerhistory = () => {
   const [pastWalks, setPastWalks] = useState([]);
-  const walkerID = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
       const filteredWalks = walks.past.filter(
-        (walk) => walk.walkerID === walkerID
+        (walk: Walk) => walk.ownerID === userId
       );
       setPastWalks(filteredWalks);
     });
   }, []);
 
-  const deleteWalk = async (_id) => {
+  const deleteWalk = async (_id: string) => {
     const output = await WalkService.deleteWalk(_id);
     if (!output.error) {
       const successToast = () => toast(output.res);
@@ -35,22 +48,26 @@ const walkerhistory = () => {
   return (
     <>
       <div className="myaccount">
-        <Link href="/walkeraccount/find">
-          <button className={styles.button}>Find a Walk</button>
+        <Link href="/owneraccount/book">
+          <button className={styles.button}>Book a walk</button>
         </Link>
-        <Link href="/walkeraccount/scheduled">
-          <button className={styles.button}>Scheduled Walks</button>
-        </Link>
-        <Link href="/walkeraccount/walkerhistory">
+        <Link href="/owneraccount/ownerhistory">
           <button className={styles.buttonselected}>
             View My Walk History
           </button>
         </Link>
+        <Link href="/owneraccount/upcoming">
+          <button className={styles.button}>Upcoming Walks</button>
+        </Link>
       </div>
-      <WalkList walks={pastWalks} formPath="/formuser/" onDelete={deleteWalk} />
-      ;
+      <WalkList
+        walks={pastWalks}
+        formPath="/formuser/"
+        onDelete={deleteWalk}
+        ownerHistory={true}
+      />
     </>
   );
 };
 
-export default walkerhistory;
+export default ownerhistory;

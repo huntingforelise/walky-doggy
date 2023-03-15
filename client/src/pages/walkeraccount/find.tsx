@@ -1,6 +1,6 @@
-import WalkList from "../../components/Walklist";
+import WalkList from "../../components/walklist";
 import { useState, useEffect } from "react";
-import styles from "@/styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 import Link from "next/link";
 import { toast } from "react-toastify";
@@ -12,12 +12,14 @@ const find = () => {
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
-      const unassignedWalks = walks.future.filter((walk) => !walk.walkerID);
+      const unassignedWalks = walks.future.filter(
+        (walk: { walkerID: string }) => !walk.walkerID
+      );
       setFutureWalks(unassignedWalks);
     });
   }, []);
 
-  const joinWalk = async (walkId) => {
+  const joinWalk = async (walkId: string) => {
     const output = await WalkService.joinWalk(walkId, walkerID);
     if (!output.error) {
       const successToast = () => toast("Wahoo! You'll walky this doggy!");

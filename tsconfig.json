@@ -10,5 +10,10 @@
     "moduleResolution": "node"
   },
   "include": ["./client/src/**/*"],
-  "exclude": ["./server/node_modules", "./client/node_modules", "./dist"]
+  "exclude": [
+    "server/node_modules",
+    "client/node_modules",
+    "./dist",
+    "node_modules"
+  ]
 }

@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import auth from "../utils/auth";
-import * as userService from "../Services/UserService";
+import * as userService from "../services/UserService";
 import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const initialState = {
+type State = {
+  username: string;
+  email: string;
+  password: string;
+  isOwner: boolean;
+  isWalker: boolean;
+};
+
+const initialState: State = {
   username: "",
   email: "",
   password: "",
@@ -18,7 +26,7 @@ const Register = () => {
   const router = useRouter();
   const [state, setState] = useState(initialState);
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
     setState((prevState) => ({
       ...prevState,
@@ -26,7 +34,9 @@ const Register = () => {
     }));
   };
 
-  const handleCheckChange = (e) => {
+  const handleCheckChange = (e: {
+    target: { name: string; checked: boolean };
+  }) => {
     const { name, checked } = e.target;
     setState((prevState) => ({
       ...prevState,
@@ -34,18 +44,16 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const { isOwner, isWalker, username, email, password } = state;
     const user = { isOwner, isWalker, username, email, password };
     const res = await userService.register(user);
-    console.log(res);
     const errorToast = () => toast(res.message);
     if (res.error) {
       errorToast();
       setState(initialState);
     } else {
-      // localStorage.setItem("userId", res.userId);
       const userId = res._id;
       const isOwner = res.isOwner;
       const isWalker = res.isWalker;

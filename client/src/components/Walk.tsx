@@ -3,16 +3,16 @@ import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 
 type Walk = {
-  _id: string;
+  _id?: string;
   ownerID: string;
   dogName: string;
   date: Date;
   pickUpLocation: string;
-  walkerID: string;
-  imageURL: string[];
-  coordinates: number[];
-  didPee: boolean;
-  didPoo: boolean;
+  walkerID?: string;
+  imageURL?: string[];
+  coordinates?: number[];
+  didPee?: boolean;
+  didPoo?: boolean;
 };
 
 type WalkProps = {

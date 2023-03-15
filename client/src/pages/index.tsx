@@ -1,21 +1,21 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "@/styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 import { useState } from "react";
-import Login from "../components/Login";
-import Register from "../components/Register";
+import Login from "../components/login";
+import Register from "../components/register";
 
-const initialState = {
-  username: "",
-  email: "",
-  password: "",
-  isOwner: false,
-  isWalker: false,
-};
+// const initialState = {
+//   username: "",
+//   email: "",
+//   password: "",
+//   isOwner: false,
+//   isWalker: false,
+// };
 
 export default function Home() {
   const [currentTab, setCurrentTab] = useState("login");
-  const [isAuthenticated, setIsAuthenticated] = useState(initialState);
+  // const [isAuthenticated, setIsAuthenticated] = useState(initialState);
 
   const handleTabChange = (tab) => {
     setCurrentTab(tab);
@@ -64,13 +64,7 @@ export default function Home() {
                 Register
               </button>
             </div>
-            <div>
-              {currentTab === "login" ? (
-                <Login setIsAuthenticated={setIsAuthenticated} />
-              ) : (
-                <Register setIsAuthenticated={setIsAuthenticated} />
-              )}
-            </div>
+            <div>{currentTab === "login" ? <Login /> : <Register />}</div>
           </div>
         </div>
       </div>

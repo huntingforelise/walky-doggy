@@ -1,5 +1,5 @@
 import React from "react";
-import * as userService from "../Services/UserService";
+import * as userService from "../services/UserService";
 import { useRouter } from "next/router";
 
 const Logout = () => {

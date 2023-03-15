@@ -1,4 +1,4 @@
-import WalkList from "../../components/Walklist";
+import WalkList from "../../components/walklist";
 import { useState, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
@@ -6,20 +6,20 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const scheduled = () => {
+const upcoming = () => {
   const [futureWalks, setFutureWalks] = useState([]);
-  const walkerID = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
       const filteredWalks = walks.future.filter(
-        (walk) => walk.walkerID === walkerID
+        (walk: { ownerID: string }) => walk.ownerID === userId
       );
       setFutureWalks(filteredWalks);
     });
   }, []);
 
-  const deleteWalk = async (_id) => {
+  const deleteWalk = async (_id: string) => {
     const output = await WalkService.deleteWalk(_id);
     if (!output.error) {
       const successToast = () => toast(output.res);
@@ -35,19 +35,24 @@ const scheduled = () => {
   return (
     <>
       <div className="myaccount">
-        <Link href="/walkeraccount/find">
-          <button className={styles.button}>Find a Walk</button>
+        <Link href="/owneraccount/book">
+          <button className={styles.button}>Book a walk</button>
         </Link>
-        <Link href="/walkeraccount/scheduled">
-          <button className={styles.buttonselected}>Scheduled Walks</button>
-        </Link>
-        <Link href="/walkeraccount/walkerhistory">
+        <Link href="/owneraccount/ownerhistory">
           <button className={styles.button}>View My Walk History</button>
         </Link>
+        <Link href="/owneraccount/upcoming">
+          <button className={styles.buttonselected}>Upcoming Walks</button>
+        </Link>
       </div>
-      <WalkList walks={futureWalks} onDelete={deleteWalk} formPath="/form/" />
+      <WalkList
+        walks={futureWalks}
+        onDelete={deleteWalk}
+        formPath="/form/"
+        ownerUpcoming={true}
+      />
     </>
   );
 };
 
-export default scheduled;
+export default upcoming;

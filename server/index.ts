@@ -3,7 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const app = express();
 const cors = require("cors");
-const router = require("./router");
+const routerSetUp = require("./router");
 const mongoConnection = require("./models/index");
 
 const corsConfig = {
@@ -28,12 +28,15 @@ app.use(
   })
 );
 
-app.use(router);
-app.get("*", (req, res) => {
-  res.status(404).send("Sorry, not found 😞");
-});
+app.use(routerSetUp);
+app.get(
+  "*",
+  (res: { status: (arg0: number) => { send: { (arg0: string): void } } }) => {
+    res.status(404).send("Sorry, not found 😞");
+  }
+);
 
-app.listen(config.PORT, (err) => {
+app.listen(config.PORT, (err: any) => {
   if (err) {
     console.log(`😞 Sorry, something went wrong! ${err}`);
   } else {

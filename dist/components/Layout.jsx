@@ -4,7 +4,7 @@ var Layout = function (_a) {
     var children = _a.children;
     return (<div className="content">
       <Navbar />
-
+      {children}
       <Footer />
     </div>);
 };

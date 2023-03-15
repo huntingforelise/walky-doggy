@@ -1,19 +1,19 @@
-import WalkList from "../../components/Walklist";
+import WalkList from "../../components/walklist";
 import { useState, useEffect } from "react";
-import styles from "@/styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const upcoming = () => {
+const scheduled = () => {
   const [futureWalks, setFutureWalks] = useState([]);
-  const userId = localStorage.getItem("userId");
+  const walkerID = localStorage.getItem("userId");
 
   useEffect(() => {
     WalkService.getWalks().then((walks) => {
       const filteredWalks = walks.future.filter(
-        (walk) => walk.ownerID === userId
+        (walk) => walk.walkerID === walkerID
       );
       setFutureWalks(filteredWalks);
     });
@@ -35,24 +35,19 @@ const upcoming = () => {
   return (
     <>
       <div className="myaccount">
-        <Link href="/owneraccount/book">
-          <button className={styles.button}>Book a walk</button>
+        <Link href="/walkeraccount/find">
+          <button className={styles.button}>Find a Walk</button>
         </Link>
-        <Link href="/owneraccount/ownerhistory">
+        <Link href="/walkeraccount/scheduled">
+          <button className={styles.buttonselected}>Scheduled Walks</button>
+        </Link>
+        <Link href="/walkeraccount/walkerhistory">
           <button className={styles.button}>View My Walk History</button>
         </Link>
-        <Link href="/owneraccount/upcoming">
-          <button className={styles.buttonselected}>Upcoming Walks</button>
-        </Link>
       </div>
-      <WalkList
-        walks={futureWalks}
-        onDelete={deleteWalk}
-        formPath="/form/"
-        ownerUpcoming={true}
-      />
+      <WalkList walks={futureWalks} onDelete={deleteWalk} formPath="/form/" />
     </>
   );
 };
 
-export default upcoming;
+export default scheduled;

@@ -1,29 +1,34 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
 import * as WalkService from "../../services/WalkService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface WalkRecord {
   eventId: string;
-  pee: boolean;
-  poo: boolean;
+  pee?: boolean;
+  poo?: boolean;
 }
 
-const form = () => {
+const form = (): JSX.Element => {
   const router = useRouter();
   const { _id } = router.query;
   const [image, setImage] = useState<File | null>(null);
-  const [pee, setPee] = useState<boolean>(false);
-  const [poo, setPoo] = useState<boolean>(false);
+  // const [pee, setPee] = useState<boolean>(false);
+  // const [poo, setPoo] = useState<boolean>(false);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    console.log("form current target pee checked", e.currentTarget.pee.checked);
+    const pee = e.currentTarget.pee.checked;
+    console.log("form current target poo checked", e.currentTarget.poo.checked);
+    const poo = e.currentTarget.poo.checked;
     addRecord({ eventId: _id as string, pee, poo });
-    setPee(false);
-    setPoo(false);
+    // setPee(false);
+    // setPoo(false);
     router.push("/walkeraccount");
   };
+  // const [location, setLocation] = useState([]);
 
   const addRecord = async (record: WalkRecord): Promise<void> => {
     const output = await WalkService.updateWalkRecord(record);
@@ -85,27 +90,25 @@ const form = () => {
   // };
 
   const uploadImage = (): void => {
-    if (image) {
-      const data = new FormData();
-      data.append("file", image);
-      data.append("upload_preset", "geixym3t");
-      data.append("cloud_name", "dljhj1szz");
-      fetch("https://api.cloudinary.com/v1_1/dljhj1szz/image/upload", {
-        method: "POST",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((data) => addImage(data.url, _id as string))
-        .catch((error) => console.log(error));
-    }
-  }
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "geixym3t");
+    data.append("cloud_name", "dljhj1szz");
+    fetch("https://api.cloudinary.com/v1_1/dljhj1szz/image/upload", {
+      method: "POST",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => addImage(data.url, _id as string))
+      .catch((error) => console.log(error));
+  };
 
   return (
     <>
       <div className="addform">
         <form className="add-form" onSubmit={onSubmit}>
           <div className="submit-form-title">
-            <h1>POO/PEE RECORD</h1>
+            <h1>Bla bla bla POO/PEE RECORD</h1>
           </div>
           <div>
             <div>
@@ -114,8 +117,9 @@ const form = () => {
                 <input
                   type="checkbox"
                   name="pee"
-                  value={pee}
-                  onChange={(e) => setPee(e.target.checked)}
+
+                  // value={pee}
+                  // onChange={(e) => setPee(e.target.checked)}
                 />
               </div>
               <div>
@@ -124,8 +128,9 @@ const form = () => {
                   <input
                     type="checkbox"
                     name="poo"
-                    value={poo}
-                    onChange={(e) => setPoo(e.target.checked)}
+
+                    // value={poo}
+                    // onChange={(e) => setPoo(e.target.checked)}
                   />
                 </div>
               </div>
@@ -169,11 +174,8 @@ const form = () => {
           </div>
         </div>
       </div>
-      </>
+    </>
   );
 };
 
 export default form;
-
-
-
