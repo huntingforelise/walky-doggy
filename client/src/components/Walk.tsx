@@ -36,7 +36,7 @@ const Walk = ({
 }: WalkProps) => {
   return (
     walk && (
-      <div className="walk-div">
+      <div className="walk-div" data-testid="walk-component">
         <div id="walk-list">
           <div className="left">
             <div className="walk-day-month">
@@ -64,6 +64,7 @@ const Walk = ({
                     <button className="btn">View this walky</button>
                   </Link>
                   <FaTrash
+                    data-testid="delete-button"
                     className="dele-btn"
                     onClick={() => onDelete(walk._id)}
                   />
@@ -81,6 +82,7 @@ const Walk = ({
                     <button className="btn">Update this walky</button>
                   </Link>
                   <FaTrash
+                    data-testid="delete-button"
                     className="dele-btn"
                     onClick={() => onDelete(walk._id)}
                   />
