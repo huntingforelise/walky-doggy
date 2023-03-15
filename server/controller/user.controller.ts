@@ -12,7 +12,8 @@ exports.login = async (
         (arg0: { res?: string; error: boolean; message?: string }): void;
       };
     };
-  }
+  },
+  next: any
 ) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -42,7 +43,8 @@ exports.create = async (
     status: (arg0: number) => {
       send: { (arg0: { error: boolean; message: string }): void };
     };
-  }
+  },
+  next: any
 ) => {
   const { email, username } = req.body;
   const userEmail = await User.findOne({ email: email });
@@ -74,7 +76,8 @@ exports.profile = async (
         (arg0: { res?: string; error: boolean; message?: string }): void;
       };
     };
-  }
+  },
+  next: any
 ) => {
   try {
     const username = req.params.user;
@@ -98,7 +101,8 @@ exports.logout = (
       send: { (arg0: { error: boolean; message: string }): void };
     };
     clearCookie: (arg0: string) => void;
-  }
+  },
+  next: any
 ) => {
   req.session.destroy((error: any) => {
     if (error) {

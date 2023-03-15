@@ -1,3 +1,4 @@
+// import { Types } from "mongoose";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,6 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var BASE_URL = "http://localhost:3001";
+// interface WalkRecord {
+//   eventId: Types.ObjectId;
+// }
 export var getWalk = function (id) {
     return fetch("".concat(BASE_URL, "/walk/").concat(id))
         .then(function (res) { return (res.status <= 400 ? res : Promise.reject(res)); })

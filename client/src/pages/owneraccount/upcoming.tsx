@@ -1,6 +1,6 @@
 import WalkList from "../../components/walklist";
 import { useState, useEffect } from "react";
-import styles from "@/styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import * as WalkService from "../../services/WalkService";
 import Link from "next/link";
 import { toast } from "react-toastify";

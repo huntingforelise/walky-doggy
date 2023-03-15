@@ -117,7 +117,7 @@ var Register = function () {
     };
     return (<section>
       <div className="form-control" style={{ textAlign: "center" }}>
-        <form className="add-form" onSubmit={handleSubmit}>
+        <form aria-label="form" className="add-form" onSubmit={handleSubmit}>
           <label style={{ display: "inline-block", textAlign: "center" }}>
             Dog Owner
             <input type="checkbox" name="isOwner" checked={state.isOwner} onChange={handleCheckChange}/>

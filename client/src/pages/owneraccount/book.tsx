@@ -3,7 +3,7 @@ import { SetStateAction, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Link from "next/link";
-import styles from "@/styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

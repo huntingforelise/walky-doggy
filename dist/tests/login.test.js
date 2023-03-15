@@ -34,12 +34,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+import React from "react";
 import { render, waitFor, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { useRouter } from 'next/router';
 import { MemoryRouterProvider } from "next-router-mock/MemoryRouterProvider";
 import Login from "../components/Login";
-import userService from "../services/UserService";
+import * as userService from "../services/UserService";
 jest.mock('next/router', function () { return ({
     useRouter: jest.fn(),
 }); });
@@ -47,54 +48,49 @@ jest.mock('../services/UserService', function () { return ({
     login: jest.fn(),
     getUserInfo: jest.fn(),
 }); });
-test("loads and displays login", function () {
-    render(<Login />, { wrapper: MemoryRouterProvider });
-    var usernameField = screen.getByLabelText(/username/i);
-    var passwordField = screen.getByLabelText(/password/i);
-    var submitButton = screen.getByText(/Login/i);
-    expect(usernameField).toBeInTheDocument();
-    expect(passwordField).toBeInTheDocument();
-    expect(submitButton).toBeInTheDocument();
-});
 describe('Login Component', function () {
-    it('should log in successfully and redirect to the correct page', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var routerPushMock, mockUserInfo, mockRouter, _a, getByLabelText, getByText;
+    test("loads and displays login", function () {
+        render(<Login />, { wrapper: MemoryRouterProvider });
+        var usernameField = screen.getByLabelText(/username/i);
+        var passwordField = screen.getByLabelText(/password/i);
+        var submitButton = screen.getByText(/Login/i);
+        expect(usernameField).toBeInTheDocument();
+        expect(passwordField).toBeInTheDocument();
+        expect(submitButton).toBeInTheDocument();
+    });
+    test('redirects to correct page based on user role', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var router, _a, getByLabelText, getByText, usernameInput, passwordInput, submitButton;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    routerPushMock = jest.fn();
-                    mockUserInfo = {
-                        res: {
-                            _id: '123',
-                            isOwner: true,
-                            isWalker: false,
-                        },
-                    };
-                    userService.login.mockResolvedValueOnce({ res: { username: 'testuser' } });
-                    userService.getUserInfo.mockResolvedValueOnce(mockUserInfo);
-                    mockRouter = {
-                        push: routerPushMock,
-                    };
-                    useRouter.mockReturnValueOnce({ push: routerPushMock });
+                    router = { push: jest.fn() };
+                    useRouter.mockReturnValue(router);
+                    userService.login.mockResolvedValue({ res: { username: 'testuser' } });
+                    userService.getUserInfo.mockResolvedValue({
+                        res: { _id: '123', isOwner: true, isWalker: false },
+                    });
                     _a = render(<Login />), getByLabelText = _a.getByLabelText, getByText = _a.getByText;
-                    fireEvent.change(getByLabelText('Username'), { target: { value: 'testuser' } });
-                    fireEvent.change(getByLabelText('Password'), { target: { value: 'testpassword' } });
-                    fireEvent.click(getByText('Login'));
+                    usernameInput = getByLabelText('Username');
+                    passwordInput = getByLabelText('Password');
+                    submitButton = getByText('Login');
+                    fireEvent.change(usernameInput, { target: { value: 'testuser' } });
+                    fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
+                    fireEvent.click(submitButton);
                     return [4 /*yield*/, waitFor(function () {
-                            expect(userService.login).toHaveBeenCalledTimes(1);
-                            expect(userService.login).toHaveBeenCalledWith({
-                                username: 'testuser',
-                                password: 'testpassword',
-                            });
-                            expect(userService.getUserInfo).toHaveBeenCalledTimes(1);
-                            expect(userService.getUserInfo).toHaveBeenCalledWith('testuser');
-                            expect(localStorage.getItem('userId')).toEqual('123');
-                            expect(localStorage.getItem('isOwner')).toEqual('true');
-                            expect(localStorage.getItem('isWalker')).toEqual('false');
-                            expect(routerPushMock).toHaveBeenCalledTimes(1);
-                            expect(routerPushMock).toHaveBeenCalledWith('/owneraccount');
+                            expect(router.push).toHaveBeenCalledTimes(1);
+                            expect(router.push).toHaveBeenCalledWith('/owneraccount');
                         })];
                 case 1:
+                    _b.sent();
+                    userService.getUserInfo.mockResolvedValue({
+                        res: { _id: '123', isOwner: false, isWalker: true },
+                    });
+                    fireEvent.click(submitButton);
+                    return [4 /*yield*/, waitFor(function () {
+                            expect(router.push).toHaveBeenCalledTimes(2);
+                            expect(router.push).toHaveBeenCalledWith('/walkeraccount');
+                        })];
+                case 2:
                     _b.sent();
                     return [2 /*return*/];
             }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 var Walk = function (_a) {
     var walk = _a.walk, onDelete = _a.onDelete, formPath = _a.formPath, findWalks = _a.findWalks, ownerHistory = _a.ownerHistory, ownerUpcoming = _a.ownerUpcoming, onJoin = _a.onJoin;
-    return (walk && (<div className="walk-div">
+    return (walk && (<div className="walk-div" data-testid="walk-component">
         <div id="walk-list">
           <div className="left">
             <div className="walk-day-month">
@@ -27,14 +27,14 @@ var Walk = function (_a) {
                   <Link href={"".concat(formPath).concat(walk._id)}>
                     <button className="btn">View this walky</button>
                   </Link>
-                  <FaTrash className="dele-btn" onClick={function () { return onDelete(walk._id); }}/>
+                  <FaTrash data-testid="delete-button" className="dele-btn" onClick={function () { return onDelete(walk._id); }}/>
                 </div>
               </>) : ownerUpcoming ? (<FaTrash className="dele-btn" onClick={function () { return onDelete(walk._id); }}/>) : (<>
                 <div className="btn-dev">
                   <Link href={"".concat(formPath).concat(walk._id)}>
                     <button className="btn">Update this walky</button>
                   </Link>
-                  <FaTrash className="dele-btn" onClick={function () { return onDelete(walk._id); }}/>
+                  <FaTrash data-testid="delete-button" className="dele-btn" onClick={function () { return onDelete(walk._id); }}/>
                 </div>
               </>)}
           </div>

@@ -1,9 +1,14 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import OwnerAccount from "../pages/owneraccount/index.js";
-test("renders OwnerAccount component", function () {
-    render(<OwnerAccount />);
-    var ownerAccountElement = screen.getByText(/Owner/i);
-    expect(ownerAccountElement).toBeInTheDocument();
+describe("OwnerAccount component", function () {
+    test("renders 3 buttons with correct text", function () {
+        var _a = render(<OwnerAccount />), getAllByRole = _a.getAllByRole, getByText = _a.getByText;
+        var buttons = getAllByRole("button");
+        expect(buttons.length).toBe(3);
+        expect(getByText("Book a walk")).toBeInTheDocument();
+        expect(getByText("View My Walk History")).toBeInTheDocument();
+        expect(getByText("Upcoming Walks")).toBeInTheDocument();
+    });
 });
 //# sourceMappingURL=owneraccount-index.test.js.map

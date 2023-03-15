@@ -1,7 +1,7 @@
 const walk = require("../models/walk");
 
 type Walk = {
-  _id: string;
+  _id?: string;
   ownerID: string;
   dogName: string;
   date: Date;
@@ -20,26 +20,28 @@ exports.getWalk = async (
       send: { (arg0: Walk): void };
     };
     sendStatus: (arg0: number) => void;
-  }
+  },
+  next: any
 ) => {
   try {
     const ID = req.params.id;
     const walkInstance = await walk.findById(ID);
-    res.status(200).send(walkInstance);
+    return res.status(200).send(walkInstance);
   } catch (error) {
     console.log(error);
-    res.sendStatus(500);
+    return res.sendStatus(500);
   }
 };
 
 exports.getWalks = async (
-  // req: any,
+  req: any,
   res: {
     status: (arg0: number) => {
       send: { (arg0: { past: Walk[]; future: Walk[] }): void };
     };
     sendStatus: (arg0: number) => void;
-  }
+  },
+  next: any
 ) => {
   try {
     const pastWalks = await walk
@@ -48,10 +50,10 @@ exports.getWalks = async (
     const futureWalks = await walk
       .find({ date: { $gte: new Date().toISOString() } })
       .sort({ date: 1 });
-    res.status(200).send({ past: pastWalks, future: futureWalks });
+    return res.status(200).send({ past: pastWalks, future: futureWalks });
   } catch (error) {
     console.log(error);
-    res.sendStatus(500);
+    return res.sendStatus(500);
   }
 };
 
@@ -61,13 +63,14 @@ exports.postWalk = async (
     status: (arg0: number) => {
       send: { (arg0: { res: any; error: boolean }): void };
     };
-  }
+  },
+  next: any
 ) => {
   try {
     const newWalk = await walk.create(req.body);
-    res.status(201).send({ res: newWalk, error: false });
+    return res.status(201).send({ res: newWalk, error: false });
   } catch (error) {
-    res.status(500).send({ res: "Internal server error", error: true });
+    return res.status(500).send({ res: "Internal server error", error: true });
   }
 };
 
@@ -77,18 +80,19 @@ exports.deleteWalk = async (
     status: (arg0: number) => {
       send: { (arg0: { res: string; error: boolean }): void };
     };
-  }
+  },
+  next: any
 ) => {
   try {
     const output = await walk.deleteOne({ _id: req.params.id });
     if (output.deletedCount === 1) {
-      res
+      return res
         .status(200)
         .send({ res: "Your walky has been deleted", error: false });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send({ res: "Internal server error", error: true });
+    return res.status(500).send({ res: "Internal server error", error: true });
   }
 };
 
@@ -98,7 +102,8 @@ exports.joinWalk = async (
     status: (arg0: number) => {
       send: { (arg0: { res: any; error: boolean }): void };
     };
-  }
+  },
+  next: any
 ) => {
   try {
     const ID = req.params.id;
@@ -106,10 +111,10 @@ exports.joinWalk = async (
     const walkToBeUpdated = await walk.findByIdAndUpdate(ID, {
       walkerID: walkerID,
     });
-    res.status(200).send({ res: walkToBeUpdated, error: false });
+    return res.status(200).send({ res: walkToBeUpdated, error: false });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ res: "Internal server error", error: true });
+    return res.status(500).send({ res: "Internal server error", error: true });
   }
 };
 
@@ -121,7 +126,8 @@ exports.updateWalkRecord = async (
     status: (arg0: number) => {
       send: { (arg0: { res: any; error: boolean }): void };
     };
-  }
+  },
+  next: any
 ) => {
   try {
     const ID = req.params.id;
@@ -129,10 +135,10 @@ exports.updateWalkRecord = async (
       didPee: req.body.pee,
       didPoo: req.body.poo,
     });
-    res.status(200).send({ res: walkToBeUpdated, error: false });
+    return res.status(200).send({ res: walkToBeUpdated, error: false });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ res: "Internal server error", error: true });
+    return res.status(500).send({ res: "Internal server error", error: true });
   }
 };
 
@@ -142,7 +148,8 @@ exports.updateWalkImage = async (
     status: (arg0: number) => {
       send: { (arg0: { res: any; error: boolean }): void };
     };
-  }
+  },
+  next: any
 ) => {
   try {
     const ID = req.params.id;
@@ -150,10 +157,10 @@ exports.updateWalkImage = async (
     const walkToBeUpdated = await walk.findByIdAndUpdate(ID, {
       $addToSet: { imageURL: URL },
     });
-    res.status(200).send({ res: walkToBeUpdated, error: false });
+    return res.status(200).send({ res: walkToBeUpdated, error: false });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ res: "Internal server error", error: true });
+    return res.status(500).send({ res: "Internal server error", error: true });
   }
 };
 
