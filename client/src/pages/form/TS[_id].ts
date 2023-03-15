@@ -98,7 +98,7 @@ const form = () => {
         .then((data) => addImage(data.url, _id as string))
         .catch((error) => console.log(error));
     }
-  };
+  }
 
   return (
     <>
