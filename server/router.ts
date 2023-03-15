@@ -9,7 +9,7 @@ router.post("/login", userController.login);
 router.get("/user/:user/info", userController.profile);
 router.post("/logout", userController.logout);
 
-router.get("/walk/:id", walkController.getWalks);
+router.get("/walk/:id", walkController.getWalk);
 router.get("/walks", walkController.getWalks);
 router.post("/walk", walkController.postWalk);
 router.put("/walk/:id", walkController.updateWalkRecord);

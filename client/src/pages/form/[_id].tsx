@@ -108,7 +108,7 @@ const form = (): JSX.Element => {
       <div className="addform">
         <form className="add-form" onSubmit={onSubmit}>
           <div className="submit-form-title">
-            <h1>Bla bla bla POO/PEE RECORD</h1>
+            <h1>POO/PEE RECORD</h1>
           </div>
           <div>
             <div>

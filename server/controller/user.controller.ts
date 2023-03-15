@@ -81,7 +81,6 @@ exports.profile = async (
 ) => {
   try {
     const username = req.params.user;
-    console.log("req params: " + username);
     const findUser = await User.findOne({ username: username });
     if (findUser) {
       res.status(200).send({ res: findUser, error: false });

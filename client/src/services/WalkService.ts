@@ -1,10 +1,6 @@
-// import { Types } from "mongoose";
+import { Types } from "mongoose";
 
 const BASE_URL = "http://localhost:3001";
-
-// interface WalkRecord {
-//   eventId: Types.ObjectId;
-// }
 
 export const getWalk = (id: string): Promise<any> =>
   fetch(`${BASE_URL}/walk/${id}`)
