@@ -1,7 +1,19 @@
 "use strict";
 const User = require("../models/user.js");
 
-exports.login = async (req, res) => {
+exports.login = async (
+  req: {
+    body: { username: string; password: string };
+    session: { uid: string };
+  },
+  res: {
+    status: (arg0: number) => {
+      send: {
+        (arg0: { res?: string; error: boolean; message?: string }): void;
+      };
+    };
+  }
+) => {
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).send({ res: "Missing fields!", error: true });
@@ -24,7 +36,14 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.create = async (req, res) => {
+exports.create = async (
+  req: { body: { email: string; username: string }; session: { uid: string } },
+  res: {
+    status: (arg0: number) => {
+      send: { (arg0: { error: boolean; message: string }): void };
+    };
+  }
+) => {
   const { email, username } = req.body;
   const userEmail = await User.findOne({ email: email });
   const userUsername = await User.findOne({ username: username });
@@ -47,7 +66,16 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.profile = async (req, res) => {
+exports.profile = async (
+  req: { params: { user: string } },
+  res: {
+    status: (arg0: number) => {
+      send: {
+        (arg0: { res?: string; error: boolean; message?: string }): void;
+      };
+    };
+  }
+) => {
   try {
     const username = req.params.user;
     console.log("req params: " + username);
@@ -63,8 +91,16 @@ exports.profile = async (req, res) => {
   }
 };
 
-exports.logout = (req, res) => {
-  req.session.destroy((error) => {
+exports.logout = (
+  req: { session: { destroy: (arg0: (error: any) => void) => void } },
+  res: {
+    status: (arg0: number) => {
+      send: { (arg0: { error: boolean; message: string }): void };
+    };
+    clearCookie: (arg0: string) => void;
+  }
+) => {
+  req.session.destroy((error: any) => {
     if (error) {
       res
         .status(500)

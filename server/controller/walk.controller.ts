@@ -1,6 +1,27 @@
 const walk = require("../models/walk");
 
-exports.getWalk = async (req, res) => {
+type Walk = {
+  _id: string;
+  ownerID: string;
+  dogName: string;
+  date: Date;
+  pickUpLocation: string;
+  walkerID?: string;
+  imageURL?: string[];
+  coordinates?: number[];
+  didPee?: boolean;
+  didPoo?: boolean;
+};
+
+exports.getWalk = async (
+  req: { params: { id: string } },
+  res: {
+    status: (arg0: number) => {
+      send: { (arg0: Walk): void };
+    };
+    sendStatus: (arg0: number) => void;
+  }
+) => {
   try {
     const ID = req.params.id;
     const walkInstance = await walk.findById(ID);
@@ -11,7 +32,15 @@ exports.getWalk = async (req, res) => {
   }
 };
 
-exports.getWalks = async (req, res) => {
+exports.getWalks = async (
+  // req: any,
+  res: {
+    status: (arg0: number) => {
+      send: { (arg0: { past: Walk[]; future: Walk[] }): void };
+    };
+    sendStatus: (arg0: number) => void;
+  }
+) => {
   try {
     const pastWalks = await walk
       .find({ date: { $lte: new Date().toISOString() } })
@@ -26,7 +55,14 @@ exports.getWalks = async (req, res) => {
   }
 };
 
-exports.postWalk = async (req, res) => {
+exports.postWalk = async (
+  req: { body: Walk },
+  res: {
+    status: (arg0: number) => {
+      send: { (arg0: { res: any; error: boolean }): void };
+    };
+  }
+) => {
   try {
     const newWalk = await walk.create(req.body);
     res.status(201).send({ res: newWalk, error: false });
@@ -35,7 +71,14 @@ exports.postWalk = async (req, res) => {
   }
 };
 
-exports.deleteWalk = async (req, res) => {
+exports.deleteWalk = async (
+  req: { params: { id: string } },
+  res: {
+    status: (arg0: number) => {
+      send: { (arg0: { res: string; error: boolean }): void };
+    };
+  }
+) => {
   try {
     const output = await walk.deleteOne({ _id: req.params.id });
     if (output.deletedCount === 1) {
@@ -49,7 +92,14 @@ exports.deleteWalk = async (req, res) => {
   }
 };
 
-exports.joinWalk = async (req, res) => {
+exports.joinWalk = async (
+  req: { params: { id: string }; body: { walkerID: string } },
+  res: {
+    status: (arg0: number) => {
+      send: { (arg0: { res: any; error: boolean }): void };
+    };
+  }
+) => {
   try {
     const ID = req.params.id;
     const { walkerID } = req.body;
@@ -65,7 +115,14 @@ exports.joinWalk = async (req, res) => {
 
 //we could also include another function that makes it possible for a walker to unsubscribe, this would be a PUT
 
-exports.updateWalkRecord = async (req, res) => {
+exports.updateWalkRecord = async (
+  req: { params: { id: string }; body: { pee: boolean; poo: boolean } },
+  res: {
+    status: (arg0: number) => {
+      send: { (arg0: { res: any; error: boolean }): void };
+    };
+  }
+) => {
   try {
     const ID = req.params.id;
     const walkToBeUpdated = await walk.findByIdAndUpdate(ID, {
@@ -79,7 +136,14 @@ exports.updateWalkRecord = async (req, res) => {
   }
 };
 
-exports.updateWalkImage = async (req, res) => {
+exports.updateWalkImage = async (
+  req: { params: { id: string }; body: { URL: string } },
+  res: {
+    status: (arg0: number) => {
+      send: { (arg0: { res: any; error: boolean }): void };
+    };
+  }
+) => {
   try {
     const ID = req.params.id;
     const URL = req.body.URL;
