@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import OwnerAccount from "../pages/owneraccount/index.js";
+import OwnerAccount from "../pages/owneraccount/index";
 
 describe("OwnerAccount component", () => {
   test("renders 3 buttons with correct text", () => {

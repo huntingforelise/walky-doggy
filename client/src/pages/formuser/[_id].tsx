@@ -33,8 +33,10 @@ const formuser = (): JSX.Element => {
       <div className="record-div-outer">
         {walkRecord !== undefined ? (
           <div className="record-div">
-            <label>POO : {walkRecord.didPoo} </label>
-            <label> PEE: {walkRecord.didPee} </label>
+              <label>POO : {walkRecord.didPoo ? "Yes" : "No"} </label>
+              <p></p>
+              <label>PEE : {walkRecord.didPee ? "Yes" : "No"} </label>
+              <p></p>
             {walkRecord.imageURL
               ? walkRecord.imageURL.map((img) => <img src={img} key={img} />)
               : null}

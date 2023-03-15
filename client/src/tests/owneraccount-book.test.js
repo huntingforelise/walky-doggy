@@ -2,9 +2,9 @@ import { render, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Book from "../pages/owneraccount/book";
 import "@testing-library/jest-dom/extend-expect";
-import * as WalkService from "../services/WalkServiceDEL";
+import * as WalkService from "../services/WalkService";
 
-jest.mock("../services/WalkServiceDEL", () => {
+jest.mock("../services/WalkService", () => {
   return {
     postWalk: jest.fn(() => Promise.resolve({})),
   };
