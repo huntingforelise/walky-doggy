@@ -29,7 +29,7 @@ const form = (): JSX.Element => {
   const router = useRouter();
   const { _id } = router.query;
   const [image, setImage] = useState<File | null>(null);
-  const [fullWalk, setFullWalk] = useState<Walk>({});
+  const [fullWalk, setFullWalk] = useState<Walk>();
   const [peed, setPeed] = useState(false);
   const [pood, setPood] = useState(false);
 
