@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useAuth } from '../utils/AuthContext';
+import { useAuth } from "../utils/AuthContext";
 
 type State = {
   username: string;
@@ -59,10 +59,12 @@ const Register = () => {
       const userId = res._id;
       const isOwner = res.isOwner;
       const isWalker = res.isWalker;
-      setAuthState(userId, isOwner, isWalker)
+      setAuthState(userId, isOwner, isWalker);
       localStorage.setItem("userId", userId);
       localStorage.setItem("isOwner", isOwner);
       localStorage.setItem("isWalker", isWalker);
+      const successToast = () => toast("User created!");
+      successToast();
       if (res.isOwner) {
         auth.login(() => router.push("/owneraccount"));
       } else auth.login(() => router.push("/walkeraccount"));

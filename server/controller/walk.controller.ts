@@ -1,3 +1,5 @@
+"use strict";
+
 const walk = require("../models/walk");
 
 type Walk = {
