@@ -37,7 +37,7 @@ const Logout = () => {
         </button>
         <button
           color="error"
-          className="btn-login"
+          className="btn-clicked"
           onClick={handleClick}
         >
           Yes
