@@ -2,6 +2,7 @@ import React from "react";
 import * as userService from "../services/UserService";
 import { useRouter } from "next/router";
 import { useAuth } from '../utils/AuthContext';
+import styles from "../styles/Home.module.css";
 
 const Logout = () => {
   const router = useRouter();
@@ -18,29 +19,30 @@ const Logout = () => {
   };
 
   return (
-    <div>
-      <h2>Are you sure you want to log out?</h2>
-      <button
-        // variant="contained"
-        className="confirm-btn"
-        onClick={() => {
-          if (isOwner === "true") {
-            router.push("/owneraccount");
-          } else {
-            router.push("/walkeraccount");
-          }
-        }}
-      >
-        No
-      </button>
-      <button
-        // variant="contained"
-        color="error"
-        className="confirm-btn"
-        onClick={handleClick}
-      >
-        Yes
-      </button>
+    <div className="container">
+      <p className={styles.text}>
+        <h2>Are you sure you want to log out?</h2>
+        <br></br>
+        <button
+          className="btn-login"
+          onClick={() => {
+            if (isOwner === "true") {
+              router.push("/owneraccount");
+            } else {
+              router.push("/walkeraccount");
+            }
+          }}
+        >
+          No
+        </button>
+        <button
+          color="error"
+          className="btn-clicked"
+          onClick={handleClick}
+        >
+          Yes
+        </button>
+      </p>
     </div>
   );
 };
