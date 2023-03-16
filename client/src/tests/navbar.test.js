@@ -14,31 +14,13 @@ describe("Navbar", () => {
     expect(logo).toBeInTheDocument();
   });
 
-  test("renders links to home, owner account, and walker account pages", () => {
+  test("renders links to Login account", () => {
     render(
       <MemoryRouter>
         <Navbar />
       </MemoryRouter>
     );
-    const homeLink = screen.getByText("Home");
-    const ownerLink = screen.getByText("Owner");
-    const walkerLink = screen.getByText("Walker");
-    expect(homeLink).toBeInTheDocument();
-    expect(ownerLink).toBeInTheDocument();
-    expect(walkerLink).toBeInTheDocument();
-  });
-
-  test("navigates to the correct pages when links are clicked", () => {
-    render(
-      <MemoryRouter>
-        <Navbar />
-      </MemoryRouter>
-    );
-    const homeLink = screen.getByText("Home");
-    const ownerLink = screen.getByText("Owner");
-    const walkerLink = screen.getByText("Walker");
-    expect(homeLink.getAttribute("href")).toBe("/");
-    expect(ownerLink.getAttribute("href")).toBe("/owneraccount/index");
-    expect(walkerLink.getAttribute("href")).toBe("/walkeraccount/index");
+    const LoginLink = screen.getByText("Login");
+    expect(LoginLink).toBeInTheDocument();
   });
 });
