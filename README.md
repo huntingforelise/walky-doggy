@@ -8,6 +8,20 @@ First, install the dependency packages from terminal using npm:
 npm install
 ```
 
+You will need to create a Cloudinary account to save photos and see them on Walky-Doggy.
+
+In the client folder, create a file called .env:
+
+```bash
+touch .env
+```
+
+In this file you will need to store your upload_preset and cloud_name IDs.
+
+UPLOAD_PRESET='xxxxxxxx'
+CLOUD_NAME='xxxxxxxxx'
+
+
 
 
 Left template here so we can reuse MarkUp language thingy
