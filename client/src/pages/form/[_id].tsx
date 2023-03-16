@@ -118,7 +118,7 @@ const form = (): JSX.Element => {
           </div>
           <div>
             <div className="submit-form-control">
-              <label className="adjustfont">POO</label>
+              <label className="adjustfont">POO 💩</label>
               <input
                 type="checkbox"
                 name="poo"

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from '../utils/AuthContext';
 
 type State = {
   username: string;
@@ -25,6 +26,7 @@ const initialState: State = {
 const Register = () => {
   const router = useRouter();
   const [state, setState] = useState(initialState);
+  const { setAuthState } = useAuth();
 
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
@@ -57,6 +59,7 @@ const Register = () => {
       const userId = res._id;
       const isOwner = res.isOwner;
       const isWalker = res.isWalker;
+      setAuthState(userId, isOwner, isWalker)
       localStorage.setItem("userId", userId);
       localStorage.setItem("isOwner", isOwner);
       localStorage.setItem("isWalker", isWalker);
@@ -68,7 +71,8 @@ const Register = () => {
 
   const validateForm = () => {
     return (
-      !(state.isOwner || state.isWalker) ||
+      (!state.isOwner && !state.isWalker) ||
+      (state.isOwner && state.isWalker) ||
       !state.username ||
       !state.email ||
       !state.password

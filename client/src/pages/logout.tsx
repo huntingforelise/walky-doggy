@@ -20,9 +20,9 @@ const Logout = () => {
 
   return (
     <div className="container">
-      <p className={styles.text}>
-        <h2>Are you sure you want to log out?</h2>
+        <h2 className={styles.text}>Are you sure you want to log out?</h2>
         <br></br>
+        <p className={styles.text}>
         <button
           className="btn-login"
           onClick={() => {

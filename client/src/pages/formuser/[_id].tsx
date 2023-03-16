@@ -50,14 +50,14 @@ const formuser = (): JSX.Element => {
               <strong>Date:</strong>
               {moment(walkRecord.date).format("MMM Do YY")}
             </p>
-            <p>
+            {/* <p>
               <strong>WalkerID:</strong> {walkRecord.walkerID}
-            </p>
+            </p> */}
             <p>
               <strong>Pick-up location:</strong> {walkRecord.pickUpLocation}
             </p>
             <p>
-              <strong>POO:</strong> {walkRecord.didPoo ? "Yes" : "No"}
+              <strong>POO 💩:</strong> {walkRecord.didPoo ? "Yes" : "No"}
             </p>
             <p>
               <strong>PEE:</strong> {walkRecord.didPee ? "Yes" : "No"}

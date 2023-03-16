@@ -88,6 +88,7 @@ const book = (): JSX.Element => {
             type="text"
             name="venue"
             placeholder="pick up address"
+            autoComplete="off"
             required
             value={pickUpLocation}
             onChange={(e) => setPickUpLocation(e.target.value)}

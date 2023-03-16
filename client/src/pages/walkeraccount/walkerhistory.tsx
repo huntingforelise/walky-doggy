@@ -47,7 +47,7 @@ const walkerhistory = () => {
           </button>
         </Link>
       </div>
-      <WalkList walks={pastWalks} formPath="/form/" onDelete={deleteWalk} />;
+      <WalkList walks={pastWalks} formPath="/form/" onDelete={deleteWalk} />
     </>
   );
 };
