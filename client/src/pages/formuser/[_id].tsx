@@ -22,9 +22,6 @@ const formuser = (): JSX.Element => {
   const router = useRouter();
   const { _id } = router.query;
   const [walkRecord, setWalkRecord] = useState<Walk>();
-  // if (walkRecord) {
-  //   const date = moment(walkRecord.date).format("MMM Do YY");
-  // }
 
   useEffect(() => {
     WalkService.getWalk(_id as string).then((walk: Walk) =>

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as WalkService from "../../services/WalkService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +16,11 @@ const form = (): JSX.Element => {
   const router = useRouter();
   const { _id } = router.query;
   const [image, setImage] = useState<File | null>(null);
+  const [fullWalk, setFullWalk] = useState({});
+
+  useEffect(() => {
+    WalkService.getWalk(_id as string).then((walk) => setFullWalk(walk));
+  }, []);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
