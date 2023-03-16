@@ -12,24 +12,44 @@ interface WalkRecord {
   poo?: boolean;
 }
 
+type Walk = {
+  _id?: string;
+  ownerID: string;
+  dogName: string;
+  date: Date;
+  pickUpLocation: string;
+  walkerID?: string;
+  imageURL?: string[];
+  coordinates?: number[];
+  didPee?: boolean;
+  didPoo?: boolean;
+};
+
 const form = (): JSX.Element => {
   const router = useRouter();
   const { _id } = router.query;
   const [image, setImage] = useState<File | null>(null);
-  const [fullWalk, setFullWalk] = useState({});
+  const [fullWalk, setFullWalk] = useState<Walk>({});
+  const [peed, setPeed] = useState(false);
+  const [pood, setPood] = useState(false);
 
   useEffect(() => {
-    WalkService.getWalk(_id as string).then((walk) => setFullWalk(walk));
+    WalkService.getWalk(_id as string).then((walk) => {
+      setFullWalk(walk);
+    });
   }, []);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log("form current target pee checked", e.currentTarget.pee.checked);
     const pee = e.currentTarget.pee.checked;
-    console.log("form current target poo checked", e.currentTarget.poo.checked);
     const poo = e.currentTarget.poo.checked;
     addRecord({ eventId: _id as string, pee, poo });
     router.push("/walkeraccount");
+  };
+
+  const handleChange = () => {
+    setPeed((current) => !current);
+    setPood((current) => !current);
   };
 
   const addRecord = async (record: WalkRecord): Promise<void> => {
@@ -59,10 +79,13 @@ const form = (): JSX.Element => {
     data.append("file", image);
     data.append("upload_preset", process.env.NEXT_PUBLIC_UPLOAD_PRESET);
     data.append("cloud_name", process.env.NEXT_PUBLIC_CLOUD_NAME);
-    fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload`, {
-      method: "POST",
-      body: data,
-    })
+    fetch(
+      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload`,
+      {
+        method: "POST",
+        body: data,
+      }
+    )
       .then((res) => res.json())
       .then((data) => addImage(data.url, _id as string))
       .catch((error) => console.log(error));
@@ -86,12 +109,22 @@ const form = (): JSX.Element => {
         <form onSubmit={onSubmit}>
           <div className="submit-form-control">
             <label className="adjustfont">PEE</label>
-            <input type="checkbox" name="pee" />
+            <input
+              type="checkbox"
+              name="pee"
+              onChange={handleChange}
+              defaultChecked={fullWalk.didPee}
+            />
           </div>
           <div>
             <div className="submit-form-control">
               <label className="adjustfont">POO</label>
-              <input type="checkbox" name="poo" />
+              <input
+                type="checkbox"
+                name="poo"
+                onChange={handleChange}
+                defaultChecked={fullWalk.didPoo}
+              />
             </div>
           </div>
           <div>

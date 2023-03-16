@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { useAuth } from '../utils/AuthContext';
+import Link from "next/link";
+import Image from "next/image";
+import { useAuth } from "../utils/AuthContext";
 
 const Navbar = () => {
   const { userId, isOwner, isWalker } = useAuth();
@@ -16,7 +16,6 @@ const Navbar = () => {
           priority
         />
       </div>
-      {/* <Link href="/">Home</Link> */}
       {isOwner && <Link href="/owneraccount/">Owner</Link>}
       {isWalker && <Link href="/walkeraccount/">Walker</Link>}
       {userId ? (
