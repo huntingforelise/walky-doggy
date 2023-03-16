@@ -5,17 +5,8 @@ import { useState } from "react";
 import Login from "../components/login";
 import Register from "../components/register";
 
-// const initialState = {
-//   username: "",
-//   email: "",
-//   password: "",
-//   isOwner: false,
-//   isWalker: false,
-// };
-
 export default function Home() {
   const [currentTab, setCurrentTab] = useState("login");
-  // const [isAuthenticated, setIsAuthenticated] = useState(initialState);
 
   const handleTabChange = (tab) => {
     setCurrentTab(tab);

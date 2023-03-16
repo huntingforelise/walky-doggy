@@ -12,14 +12,17 @@ body {
   color: #333;
   font-family: "Urbanist";
 }
+
 a {
   color: #333;
   text-decoration: none;
 }
+
 .content {
   max-width: 960px;
   margin: 0 auto;
 }
+
 nav {
   margin: 10px auto 20px;
   padding: 5px 0;
@@ -28,12 +31,15 @@ nav {
   align-items: flex-end;
   border-bottom: 1px solid #ddd;
 }
+
 nav a {
   margin-left: 12px;
 }
+
 nav .logo {
   margin-right: auto;
 }
+
 footer {
   display: block;
   text-align: center;
@@ -43,7 +49,10 @@ footer {
   border-top: 1px solid #eaeaea;
 }
 
-/*booking form */
+h2 {
+  padding: 15px;
+}
+
 .container {
   max-width: 500px;
   margin: 30px auto;
@@ -77,10 +86,6 @@ label {
   font-weight: 800;
 }
 
-.add-form {
-  margin-bottom: 40px;
-}
-
 .form-control {
   margin: 20px 0;
 }
@@ -96,7 +101,6 @@ label {
   padding: 3px 7px;
   font-size: 17px;
 }
-/*walker's event list*/
 */ #list {
   display: flex;
   align-content: center;
@@ -134,29 +138,6 @@ label {
   text-align: center;
 }
 
-.event-div {
-  display: flex;
-  justify-content: center;
-}
-
-.date-month {
-  font-size: 35px;
-  font-weight: 700;
-}
-
-.event-day-month {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 110px;
-  background-color: #292928;
-  color: #f4f4f4;
-  text-align: center;
-  font-size: 25px;
-}
-
 h1 {
   font-size: 25px;
 }
@@ -171,20 +152,13 @@ h6 {
   text-align: left;
 }
 
-.first-day,
-.first-venue {
-  font-size: 5px;
-  font-weight: lighter;
-  color: #f4f4f4;
-  text-align: center;
-}
-
 .left {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 15px;
   border-radius: 5px;
+  margin-top: 20px;
 }
 
 .btn {
@@ -207,27 +181,26 @@ h6 {
 }
 
 .btn-dev {
+  align-items: center;
   display: flex;
 }
 
 .dele-btn {
   font-size: 40px;
-  margin-right: 10px;
-  margin-left: 3px;
+  margin-left: 5px;
 }
 
 .dele-btn:hover {
   cursor: pointer;
 }
 
-/** upload form */
 .upload-form {
   font-size: 1em;
   padding: 1em;
   border: none;
   border-radius: 0.5em;
 }
-*/ .button {
+.button {
   color: white;
   font-size: 1em;
   background-color: rgb(73, 72, 74);
@@ -242,7 +215,7 @@ h6 {
   padding: 0 2rem;
   margin: 0 auto;
 }
-/**home page*/
+
 .pic-home {
   display: flex;
   justify-content: center;
@@ -254,16 +227,16 @@ h6 {
   border: 5px solid rgb(73, 72, 74);
 }
 
-/**my account home*/
 .myaccount {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/**walker-record form*/
-
 .addform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 400px;
   height: 200px;
   margin: 5px auto;
@@ -272,21 +245,9 @@ h6 {
   border-radius: 5px;
 }
 
-.submit-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .submit-form-control {
   margin: 5px;
   align-content: center;
-}
-.submit-form-control label {
-  display: inline-block;
-  margin-right: 100px;
-  margin-left: 20px;
-  border-left: 20px;
 }
 
 .adjustfont {
@@ -295,13 +256,9 @@ h6 {
 }
 
 .submit-form-control input {
+  margin-left: 10px;
   width: 30px;
   height: 30px;
-}
-
-.submit-form-title {
-  margin-bottom: 10px;
-  margin-top: 5px;
 }
 
 .btn-record {
@@ -315,27 +272,8 @@ h6 {
   border-radius: 10px;
 }
 
-.gpsbutton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 4px solid rgb(73, 72, 74);
-  border-radius: 5px;
-  width: 400px;
-  height: 100px;
-}
-
-.gpslabel {
-  display: inline-block;
-  margin-right: 100px;
-  margin-left: 20px;
-  border-left: 20px;
-}
-
-.gpsouter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.btn-record:hover {
+  cursor: pointer;
 }
 
 .upload-container-outer {
@@ -346,18 +284,12 @@ h6 {
 }
 
 .upload-container {
-  display: grid;
-  grid-template-rows: 1fr auto;
   padding: 0 2rem;
-  margin: 0 auto;
   border: 4px solid rgb(73, 72, 74);
   border-radius: 5px;
+  padding: 20px;
   width: 400px;
   height: 100px;
-}
-
-.uploadlabel {
-  margin-bottom: 5px;
 }
 
 .record-div-outer {
@@ -370,11 +302,9 @@ h6 {
   font-size: 30px;
 }
 
-.record-label {
-  display: inline-block;
-  margin-right: 30px;
-  margin-left: 20px;
-  border-left: 20px;
+.record-div img {
+  margin-top: 20px;
+  max-width: 30vw;
 }
 
 .walk-path-outer {
@@ -397,13 +327,6 @@ ul {
 
 .map-header {
   text-align: center;
-}
-
-/**map*/
-
-.map-container {
-  width: 600px;
-  height: 400px;
 }
 
 .login-container {

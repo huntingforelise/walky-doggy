@@ -3,6 +3,7 @@ import styles from "../../styles/Home.module.css";
 import { useEffect, useState } from "react";
 import * as WalkService from "../../services/WalkService";
 import Link from "next/link";
+import moment from "moment";
 
 type Walk = {
   _id?: string;
@@ -21,6 +22,9 @@ const formuser = (): JSX.Element => {
   const router = useRouter();
   const { _id } = router.query;
   const [walkRecord, setWalkRecord] = useState<Walk>();
+  // if (walkRecord) {
+  //   const date = moment(walkRecord.date).format("MMM Do YY");
+  // }
 
   useEffect(() => {
     WalkService.getWalk(_id as string).then((walk: Walk) =>
@@ -30,7 +34,7 @@ const formuser = (): JSX.Element => {
 
   return (
     <>
-          <div className="myaccount">
+      <div className="myaccount">
         <Link href="/owneraccount/book">
           <button className={styles.button}>Book a walk</button>
         </Link>
@@ -45,10 +49,22 @@ const formuser = (): JSX.Element => {
       <div className="record-div-outer">
         {walkRecord !== undefined ? (
           <div className="record-div">
-              <label>POO : {walkRecord.didPoo ? "Yes" : "No"} </label>
-              <p></p>
-              <label>PEE : {walkRecord.didPee ? "Yes" : "No"} </label>
-              <p></p>
+            <p>
+              <strong>Date:</strong>
+              {moment(walkRecord.date).format("MMM Do YY")}
+            </p>
+            <p>
+              <strong>WalkerID:</strong> {walkRecord.walkerID}
+            </p>
+            <p>
+              <strong>Pick-up location:</strong> {walkRecord.pickUpLocation}
+            </p>
+            <p>
+              <strong>POO:</strong> {walkRecord.didPoo ? "Yes" : "No"}
+            </p>
+            <p>
+              <strong>PEE:</strong> {walkRecord.didPee ? "Yes" : "No"}
+            </p>
             {walkRecord.imageURL
               ? walkRecord.imageURL.map((img) => <img src={img} key={img} />)
               : null}
