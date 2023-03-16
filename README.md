@@ -13,10 +13,10 @@ You will need to create a [Cloudinary](https://cloudinary.com) account to save p
 In the client folder, create a file called .env:
 
 ```bash
-touch .env
+touch .env.local
 ```
 
-In this file you will need to store your upload_preset and cloud_name IDs.
+In this file you will need to store your Cloudinary upload_preset and cloud_name IDs:
 
 ```bash
 NEXT_PUBLIC_UPLOAD_PRESET='xxxxxxxx'
