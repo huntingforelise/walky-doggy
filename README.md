@@ -19,8 +19,8 @@ touch .env
 In this file you will need to store your upload_preset and cloud_name IDs.
 
 ```bash
-UPLOAD_PRESET='xxxxxxxx'
-CLOUD_NAME='xxxxxxxxx'
+NEXT_PUBLIC_UPLOAD_PRESET='xxxxxxxx'
+NEXT_PUBLIC_CLOUD_NAME='xxxxxxxxx'
 ```
 
 ## Running Walky-Doggy

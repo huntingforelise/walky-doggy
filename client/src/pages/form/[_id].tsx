@@ -57,9 +57,9 @@ const form = (): JSX.Element => {
   const uploadImage = (): void => {
     const data = new FormData();
     data.append("file", image);
-    data.append("upload_preset", "geixym3t");
-    data.append("cloud_name", "dljhj1szz");
-    fetch("https://api.cloudinary.com/v1_1/dljhj1szz/image/upload", {
+    data.append("upload_preset", process.env.NEXT_PUBLIC_UPLOAD_PRESET);
+    data.append("cloud_name", process.env.NEXT_PUBLIC_CLOUD_NAME);
+    fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload`, {
       method: "POST",
       body: data,
     })
