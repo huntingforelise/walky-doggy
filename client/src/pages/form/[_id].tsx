@@ -3,6 +3,8 @@ import { useState } from "react";
 import * as WalkService from "../../services/WalkService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
+import styles from "../../styles/Home.module.css";
 
 interface WalkRecord {
   eventId: string;
@@ -105,6 +107,17 @@ const form = (): JSX.Element => {
 
   return (
     <>
+          <div className="myaccount">
+        <Link href="/walkeraccount/find">
+          <button className={styles.button}>Find a Walk</button>
+        </Link>
+        <Link href="/walkeraccount/scheduled">
+          <button className={styles.button}>Scheduled Walks</button>
+        </Link>
+        <Link href="/walkeraccount/walkerhistory">
+          <button className={styles.button}>View My Walk History</button>
+        </Link>
+      </div>
       <div className="addform">
         <form className="add-form" onSubmit={onSubmit}>
           <div className="submit-form-title">

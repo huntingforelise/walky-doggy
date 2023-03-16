@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import styles from "../../styles/Home.module.css";
 import { useEffect, useState } from "react";
 import * as WalkService from "../../services/WalkService";
+import Link from "next/link";
 
 type Walk = {
   _id?: string;
@@ -29,6 +30,17 @@ const formuser = (): JSX.Element => {
 
   return (
     <>
+          <div className="myaccount">
+        <Link href="/owneraccount/book">
+          <button className={styles.button}>Book a walk</button>
+        </Link>
+        <Link href="/owneraccount/upcoming">
+          <button className={styles.button}>Upcoming Walks</button>
+        </Link>
+        <Link href="/owneraccount/ownerhistory">
+          <button className={styles.button}>View My Walk History</button>
+        </Link>
+      </div>
       <h2 className={styles.title}> Walk Record </h2>
       <div className="record-div-outer">
         {walkRecord !== undefined ? (

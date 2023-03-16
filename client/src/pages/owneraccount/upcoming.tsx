@@ -38,11 +38,11 @@ const upcoming = () => {
         <Link href="/owneraccount/book">
           <button className={styles.button}>Book a walk</button>
         </Link>
-        <Link href="/owneraccount/ownerhistory">
-          <button className={styles.button}>View My Walk History</button>
-        </Link>
         <Link href="/owneraccount/upcoming">
           <button className={styles.buttonselected}>Upcoming Walks</button>
+        </Link>
+        <Link href="/owneraccount/ownerhistory">
+          <button className={styles.button}>View My Walk History</button>
         </Link>
       </div>
       <WalkList

@@ -51,11 +51,11 @@ const book = (): JSX.Element => {
         <Link href="/owneraccount/book">
           <button className={styles.buttonselected}>Book a walk</button>
         </Link>
-        <Link href="/owneraccount/ownerhistory">
-          <button className={styles.button}>View My Walk History</button>
-        </Link>
         <Link href="/owneraccount/upcoming">
           <button className={styles.button}>Upcoming Walks</button>
+        </Link>
+        <Link href="/owneraccount/ownerhistory">
+          <button className={styles.button}>View My Walk History</button>
         </Link>
       </div>
       <form className="add-form" onSubmit={onSubmit}>

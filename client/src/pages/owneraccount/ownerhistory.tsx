@@ -51,13 +51,13 @@ const ownerhistory = () => {
         <Link href="/owneraccount/book">
           <button className={styles.button}>Book a walk</button>
         </Link>
+        <Link href="/owneraccount/upcoming">
+          <button className={styles.button}>Upcoming Walks</button>
+        </Link>
         <Link href="/owneraccount/ownerhistory">
           <button className={styles.buttonselected}>
             View My Walk History
           </button>
-        </Link>
-        <Link href="/owneraccount/upcoming">
-          <button className={styles.button}>Upcoming Walks</button>
         </Link>
       </div>
       <WalkList

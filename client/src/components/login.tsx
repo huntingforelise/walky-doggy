@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as userService from "../services/UserService";
 import { useRouter } from "next/router";
+import { useAuth } from '../utils/AuthContext';
 
 type State = { username: string; password: string };
 const initialState: State = {
@@ -9,6 +10,7 @@ const initialState: State = {
 };
 
 const Login = () => {
+  const { setAuthState } = useAuth();
   const router = useRouter();
   const [state, setState] = useState(initialState);
 
@@ -34,6 +36,7 @@ const Login = () => {
       const userId = userInfo.res._id;
       const isOwner = userInfo.res.isOwner;
       const isWalker = userInfo.res.isWalker;
+      setAuthState(userId, isOwner, isWalker)
       localStorage.setItem("userId", userId);
       localStorage.setItem("isOwner", isOwner);
       localStorage.setItem("isWalker", isWalker);

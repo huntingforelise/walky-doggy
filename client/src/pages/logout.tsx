@@ -1,13 +1,16 @@
 import React from "react";
 import * as userService from "../services/UserService";
 import { useRouter } from "next/router";
+import { useAuth } from '../utils/AuthContext';
 
 const Logout = () => {
   const router = useRouter();
+  const { setAuthState } = useAuth();
   const isOwner = localStorage.getItem("isOwner");
 
   const handleClick = () => {
     userService.logout();
+    setAuthState(null, false, false);
     localStorage.setItem("userId", "");
     localStorage.setItem("isOwner", "");
     localStorage.setItem("isWalker", "");

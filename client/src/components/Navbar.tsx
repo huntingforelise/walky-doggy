@@ -1,7 +1,10 @@
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import { useAuth } from '../utils/AuthContext';
 
 const Navbar = () => {
+  const { userId, isOwner, isWalker } = useAuth();
+
   return (
     <nav>
       <div className="logo">
@@ -13,9 +16,14 @@ const Navbar = () => {
           priority
         />
       </div>
-      <Link href="/">Home</Link>
-      <Link href="/owneraccount/index">Owner</Link>
-      <Link href="/walkeraccount/index">Walker</Link>
+      {/* <Link href="/">Home</Link> */}
+      {isOwner && <Link href="/owneraccount/">Owner</Link>}
+      {isWalker && <Link href="/walkeraccount/">Walker</Link>}
+      {userId ? (
+        <Link href="/logout">Logout</Link>
+      ) : (
+        <Link href="/">Login</Link>
+      )}
     </nav>
   );
 };
