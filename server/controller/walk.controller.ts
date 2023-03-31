@@ -120,8 +120,6 @@ exports.joinWalk = async (
   }
 };
 
-//we could also include another function that makes it possible for a walker to unsubscribe, this would be a PUT
-
 exports.updateWalkRecord = async (
   req: { params: { id: string }; body: { pee: boolean; poo: boolean } },
   res: {
@@ -165,25 +163,3 @@ exports.updateWalkImage = async (
     return res.status(500).send({ res: "Internal server error", error: true });
   }
 };
-
-// exports.updateWalkLocation = async (req, res) => {
-//   //this is a walker only function
-//   console.log("controller", req.body);
-//   try {
-//     const ID = req.params.id;
-//     const walkToBeUpdated = await walk.findById(ID);
-//     await walk.updateOne(walkToBeUpdated, { coordinates: req.body });
-//     const updatedWalk = await walk.findById(ID);
-//     console.log(updatedWalk);
-//     res.status(200).send(updatedWalk);
-//   } catch (error) {
-//     console.log(error);
-//     res.sendStatus(500);
-//   }
-// };
-
-// I will complete this once we've got the rest working
-// exports.deleteImage = async (req, res) => {
-//   //console.log("From DELETE:" + JSON.stringify(req.params));
-//   imageModel.deleteOne({ _id: req.params["id"] }).then(res.json(req.params));
-// };

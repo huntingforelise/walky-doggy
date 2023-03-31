@@ -24,8 +24,6 @@ const find = () => {
     if (!output.error) {
       const successToast = () => toast("Wahoo! You'll walky this doggy!");
       successToast();
-      // const unassignedWalks = futureWalks.filter((walk) => !walk.walkerID);
-      // setFutureWalks(unassignedWalks);
     } else {
       const errorToast = () => toast(output.res);
       errorToast();

@@ -78,17 +78,3 @@ export const deleteWalk = (id: string): Promise<any> => {
     .then((res) => res.json())
     .catch((err) => console.log(err));
 };
-
-// export const updateWalkLocation = (location: object, id: number): Promise<any> => {
-//   console.log("walkservice", location);
-//   const ID = id;
-//   return fetch(`${BASE_URL}/walk/${ID}/location`, {
-//     method: "PUT",
-//     credentials: "include",
-//     mode: "cors",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(location),
-//   })
-//     .then((res) => res.json())
-//     .catch((err) => console.log(err));
-// };
